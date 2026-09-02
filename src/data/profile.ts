@@ -9,6 +9,7 @@ export type Project = {
   overview: string;
   details: string[];
   tools: string[];
+  demoUrl?: string;
 };
 
 export const profile = {
@@ -17,11 +18,11 @@ export const profile = {
   role: 'Product / AI / Systems',
   location: 'Guangzhou, China',
   status: 'Open to product opportunities',
-  intro: '把复杂业务规则、用户问题和 AI 能力，整理成可验证的产品方案。',
+  intro: '把模糊的业务规则、用户问题和 AI 能力，整理成可以被验证的产品方案。',
   englishIntro:
     'I turn ambiguous user problems, business rules and AI capabilities into product decisions that can be tested.',
   about:
-    '我有 AI 产品实习、0到1原型搭建与科研训练背景。我关心的不只是功能“能不能做”，而是用户为什么需要它、系统在什么边界下工作，以及如何用指标判断它是否真的有效。',
+    '我有 AI 产品实习、0→1 原型搭建与科研训练的背景。比起功能「能不能做」，我更关心三件事：用户为什么需要它、系统在什么边界下工作、用什么指标判断它真的有效。',
   currently: [
     ['Seeking', '产品经理 / AI 产品 / 内容产品岗位'],
     ['Building', '可以被招聘方快速验证的产品案例集'],
@@ -45,15 +46,33 @@ export const profile = {
 
 export const projects: Project[] = [
   {
-    id: 'dragonpass',
+    id: 'auralis',
     number: '01',
+    title: 'Auralis',
+    type: 'AI Product / Audio Workflow',
+    summary: '把小说片段变成可编辑、可审阅、可试听的 AI 音频剧制作流程。',
+    tags: ['AI Workflow', 'Product', 'Audio', 'Vibe Coding'],
+    accent: 'coral',
+    overview:
+      'Auralis 是一个面向音频剧创作者的工作台：从文本解析、人物设计、台本审阅，到逐句配音和时间线导出，让生成式 AI 进入一条可被人类确认的生产线。',
+    details: [
+      '把“生成一个音频”拆解为文本理解、角色确认、脚本审阅和逐句制作四个可检查阶段。',
+      '保留人物卡、台本草稿和音频 take 等中间结果，让用户可以编辑、比较、重试，而不是接受一次性黑盒输出。',
+      '当前公开 Demo 使用本地模拟数据，不需要 API key；真实应用由 Vue、FastAPI、SQLAlchemy 和可配置的 LLM/TTS provider 支撑。',
+    ],
+    tools: ['Vue 3', 'FastAPI', 'SQLAlchemy', 'LLM / TTS', 'FFmpeg'],
+    demoUrl: '/auralis-demo/',
+  },
+  {
+    id: 'dragonpass',
+    number: '02',
     title: 'DragonPass AI Customer Service',
     type: 'AI Product Internship',
-    summary: '从 FAQ 问答到 Multi-Agent 任务型服务的产品流程与质量评估。',
+    summary: '把客服 SOP 翻译成 Multi-Agent 对话流程，并用 CSAT、转人工率验证体验。',
     tags: ['AI', 'Multi-Agent', 'Service', 'Delivery'],
     accent: 'lavender',
     overview:
-      '围绕会员服务咨询场景，参与 DragonPass Global App 与 Email 渠道 AI 客服迭代，将业务 SOP 转译为可实现、可测试、有兜底的对话流程。',
+      '在 DragonPass 会员服务场景里，参与 App 与邮件渠道的 AI 客服迭代：把业务 SOP 翻译成可实现、可测试、有兜底的对话流程。',
     details: [
       '负责休息室查询与 ID&V 身份验证场景，梳理用户意图、字段、业务规则、对话分支与异常路径。',
       '参与需求澄清、Review、UI 对接与研发/测试对齐，推动相关场景进入 UK 产品与业务验收。',
@@ -63,14 +82,14 @@ export const projects: Project[] = [
   },
   {
     id: 'knowledge-world',
-    number: '02',
+    number: '03',
     title: 'Knowledge World',
     type: 'AI Product / 0–1',
-    summary: '从多源内容采集到总结、对话与知识图谱的个人知识工作流。',
+    summary: '一个 AI 个人知识操作系统：采集、总结、对话、图谱，端到端跑通。',
     tags: ['Knowledge', 'AI', 'RAG', 'Product'],
     accent: 'sage',
     overview:
-      '针对用户在公众号、小红书、B 站等平台摄入信息后难以沉淀、复盘和复用的问题，设计 AI 驱动的个人知识操作系统。',
+      '多平台刷到的内容存不下来、想不起来、用不上——针对这个问题，设计并搭建了 AI 驱动的个人知识操作系统。',
     details: [
       '拆解“内容采集 - 结构化处理 - 总结复盘 - 对话交互 - 图谱展示”完整链路。',
       '设计 URL 解析、元数据抽取与去重，并规划“时间维 + 主题维”增量总结。',
@@ -80,14 +99,14 @@ export const projects: Project[] = [
   },
   {
     id: 'drink-diy',
-    number: '03',
+    number: '04',
     title: '饮 DIY',
     type: 'Consumer Product / Prototype',
-    summary: '把口味偏好、营养约束和用户反馈变成可调整的配方参数。',
+    summary: '把口味偏好和营养约束变成可调参数，让 DIY 饮品有透明的决策过程。',
     tags: ['Consumer', 'AI', 'Health', 'UGC'],
     accent: 'peach',
     overview:
-      '一个 AI 驱动的个性化饮品设计工具，探索如何在 DIY 的参与感、口味与健康约束之间建立透明的决策过程。',
+      '一个 AI 驱动的个性化饮品设计工具：在 DIY 的参与感、口味偏好和健康约束之间，建立透明的决策过程。',
     details: [
       '构建“生成 → 反馈 → 参数化优化”核心闭环。',
       '将组合/分层调饮、实时营养计算与减脂/控糖预警放在同一决策界面。',
@@ -97,14 +116,14 @@ export const projects: Project[] = [
   },
   {
     id: 'geneembedllm',
-    number: '04',
+    number: '05',
     title: 'GeneEmbedLLM',
     type: 'Research / AI / Bioinformatics',
-    summary: '用多源生物医学文本学习近 2 万基因的语义表示。',
+    summary: '用近 2 万基因的多源生物医学语料，训练可复用的基因语义表示。',
     tags: ['LLM', 'Embedding', 'Research', 'Evidence'],
     accent: 'blue',
     overview:
-      '一个将分散生物医学知识转化为统一基因表示的科研项目，也是我处理数据、实验与证据边界的方法训练。',
+      '把分散在五个权威数据库里的生物医学知识，转成统一的基因语义表示——也是我处理数据、实验与证据边界的方法训练。',
     details: [
       '整合 5 个权威数据库，构建近 2 万基因的结构化语料。',
       '基于 Longformer 进行长文本建模，引入属性感知机制与对比学习。',
@@ -117,6 +136,6 @@ export const projects: Project[] = [
 export const research = {
   title: 'GeneEmbedLLM',
   description:
-    '探索如何把生物医学文本中的知识转换为可用于下游发现的基因语义表示。',
+    '探索如何把生物医学文本中的知识，转换为可用于下游发现的基因语义表示。',
   concepts: ['Gene Representation', 'Contrastive Learning', 'Longformer', 'Evidence Boundary'],
 };
