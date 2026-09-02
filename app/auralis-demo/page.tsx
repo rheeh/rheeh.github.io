@@ -59,9 +59,9 @@ export default function AuralisDemoPage() {
 
   return <div className="auralis-demo-shell">
     <header className="auralis-demo-topbar">
-      <Link className="auralis-demo-brand" href="/"><span className="demo-brand-mark">Z.</span><span>Auralis <small>/ static demo</small></span></Link>
+      <Link className="auralis-demo-brand" href="/" prefetch={false}><span className="demo-brand-mark">Z.</span><span>Auralis <small>/ static demo</small></span></Link>
       <div className="demo-top-status"><i />无需 API · 本地模拟</div>
-      <Link className="demo-back-link" href="/">返回 Portfolio <span>↗</span></Link>
+      <Link className="demo-back-link" href="/" prefetch={false}>返回 Portfolio <span>↗</span></Link>
     </header>
 
     <main>

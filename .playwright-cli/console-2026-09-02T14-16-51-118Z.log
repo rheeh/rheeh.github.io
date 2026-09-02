@@ -1,0 +1,4 @@
+[    2082ms] [ERROR] [vinext] RSC prefetch setup error: TypeError: f is not a function
+    at https://rheeh.github.io/_next/static/chunks/page-DbJXukMn.js:2:4840 @ https://rheeh.github.io/_next/static/chunks/page-DbJXukMn.js:1
+[    2082ms] [ERROR] [vinext] RSC prefetch setup error: TypeError: f is not a function
+    at https://rheeh.github.io/_next/static/chunks/page-DbJXukMn.js:2:4840 @ https://rheeh.github.io/_next/static/chunks/page-DbJXukMn.js:1
