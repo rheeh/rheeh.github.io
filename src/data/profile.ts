@@ -61,7 +61,7 @@ export const projects: Project[] = [
       '当前公开 Demo 使用本地模拟数据，不需要 API key；真实应用由 Vue、FastAPI、SQLAlchemy 和可配置的 LLM/TTS provider 支撑。',
     ],
     tools: ['Vue 3', 'FastAPI', 'SQLAlchemy', 'LLM / TTS', 'FFmpeg'],
-    demoUrl: '/auralis-demo/',
+    demoUrl: '/projects/auralis/',
   },
   {
     id: 'dragonpass',
