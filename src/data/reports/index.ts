@@ -1,7 +1,9 @@
 export { eggyPartyReport } from './eggy-party';
 export { knowledgeWorldReport } from './knowledge-world';
 export { platformDistributionReport } from './platform-distribution';
+export { analysisShowcases } from './showcases';
 export type {
+  AnalysisShowcase,
   EvidenceLabel,
   Report,
   ReportBlock,

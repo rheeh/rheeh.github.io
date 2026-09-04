@@ -235,7 +235,6 @@ export function ReportArticle({ report }: { report: Report }) {
             <div className="report-kicker">
               <span>{report.number}</span>
               <span>{report.category}</span>
-              <span>{report.date}</span>
             </div>
             <h1>{report.title}</h1>
             <p className="report-summary">{report.summary}</p>
@@ -309,7 +308,7 @@ export function ReportArticle({ report }: { report: Report }) {
                     <small>SOURCES &amp; LIMITATIONS</small>
                     <h2>来源与限制</h2>
                     <p>
-                      所有页面均于 {report.date.replaceAll('.', '-')} 访问。第三方调研口径可能随时间、样本与统计方法变化；本报告不将公开资料解释为平台内部完整数据或因果证明。
+                      第三方调研口径可能随时间、样本与统计方法变化；本报告不将公开资料解释为平台内部完整数据或因果证明。
                     </p>
                   </div>
                 </div>
@@ -321,9 +320,7 @@ export function ReportArticle({ report }: { report: Report }) {
                         <a href={source.url} target="_blank" rel="noreferrer">
                           {source.title} <i>↗</i>
                         </a>
-                        <p>
-                          {source.publisher} · 访问于 {source.accessed}
-                        </p>
+                        <p>{source.publisher}</p>
                         {source.note && <small>{source.note}</small>}
                       </div>
                     </li>
@@ -335,7 +332,7 @@ export function ReportArticle({ report }: { report: Report }) {
         </article>
       </main>
       <footer className="report-footer container">
-        <span>© 2026 Z. / Product Notes</span>
+        <span>Z. / Product Notes</span>
         <a href="/reports">返回报告目录 ↗</a>
       </footer>
     </>

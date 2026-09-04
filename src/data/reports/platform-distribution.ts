@@ -8,7 +8,6 @@ export const platformDistributionReport: Report = {
   shortTitle: '小红书 × 抖音',
   summary:
     '不把“流量密码”当结论，而是从官方算法公示、公开用户数据与产品界面出发，分析两个平台如何把内容连到消费决策。',
-  date: '2026.08.30',
   readTime: '12 min read',
   accent: 'red',
   heroImages: [

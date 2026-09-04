@@ -8,7 +8,6 @@ export const knowledgeWorldReport: Report = {
   shortTitle: 'Knowledge World',
   summary:
     '比较 Notion、Readwise Reader、Cubox 与 mymind 的采集、阅读、组织与 AI 能力，为一个个人 AI 知识产品确定更聚焦的差异化切口和 MVP。',
-  date: '2026.08.30',
   readTime: '14 min read',
   accent: 'lavender',
   heroImages: [

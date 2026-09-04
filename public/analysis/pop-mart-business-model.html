@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POP MART 泡泡玛特 · 品牌与潮玩商业模式</title>
+<style>
+:root{
+  --ink:#17131F;
+  --ink-2:#4A4257;
+  --cream:#FFF6E9;
+  --paper:#FFFDF8;
+  --yellow:#FFD400;
+  --pink:#FF4D8D;
+  --blue:#2B5BFF;
+  --mint:#00CFA0;
+  --orange:#FF7A1A;
+  --purple:#8B5CF6;
+  --red:#E8203A;
+  --line:rgba(23,19,31,.12);
+  --shadow:0 10px 0 rgba(23,19,31,.10), 0 22px 44px rgba(23,19,31,.13);
+  --shadow-sm:0 5px 0 rgba(23,19,31,.08), 0 10px 22px rgba(23,19,31,.10);
+  --r:26px;
+  --font:"Segoe UI Variable Display","Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:var(--font);
+  background:
+    radial-gradient(circle at 12% 10%, #FFE7B8 0%, transparent 42%),
+    radial-gradient(circle at 88% 8%, #FFD6E7 0%, transparent 40%),
+    radial-gradient(circle at 80% 92%, #D6E4FF 0%, transparent 44%),
+    radial-gradient(circle at 8% 88%, #D7F7EC 0%, transparent 40%),
+    var(--cream);
+  color:var(--ink);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============ STAGE ============ */
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{
+  width:1280px;height:720px;position:relative;transform-origin:center center;
+  flex:none;
+}
+.slide{
+  position:absolute;inset:0;
+  background:var(--paper);
+  border:5px solid var(--ink);
+  border-radius:40px;
+  box-shadow:var(--shadow);
+  padding:44px 54px;
+  opacity:0;visibility:hidden;
+  transform:translateY(26px) scale(.97);
+  transition:opacity .42s cubic-bezier(.2,.8,.25,1), transform .42s cubic-bezier(.2,.8,.25,1), visibility .42s;
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.slide::before{
+  content:"";position:absolute;inset:0;border-radius:34px;pointer-events:none;
+  background:
+    radial-gradient(circle at 105% -8%, rgba(255,212,0,.30) 0 180px, transparent 181px),
+    radial-gradient(circle at -6% 108%, rgba(43,91,255,.16) 0 190px, transparent 191px);
+}
+.slide>*{position:relative;z-index:2}
+
+/* ============ COMMON TYPE ============ */
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink);background:var(--yellow);
+  border:3px solid var(--ink);border-radius:999px;
+  padding:6px 16px;box-shadow:0 4px 0 var(--ink);
+  margin-bottom:14px;
+}
+.kicker.b{background:var(--mint)} .kicker.p{background:var(--pink);color:#fff}
+.kicker.bl{background:var(--blue);color:#fff} .kicker.o{background:var(--orange)}
+h1{font-size:70px;line-height:1.02;letter-spacing:-.02em;font-weight:900}
+h2{font-size:40px;line-height:1.12;letter-spacing:-.015em;font-weight:900}
+h2 .hl{position:relative;display:inline-block}
+h2 .hl::after{content:"";position:absolute;left:-3px;right:-3px;bottom:.06em;height:.42em;background:var(--yellow);z-index:-1;border-radius:4px;transform:rotate(-.6deg)}
+h3{font-size:20px;font-weight:900;letter-spacing:-.01em}
+.sub{font-size:17px;color:var(--ink-2);line-height:1.6;font-weight:600}
+.small{font-size:12.5px;color:var(--ink-2);line-height:1.55;font-weight:500}
+.num{font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pill{
+  display:inline-block;font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:999px;
+  border:2px solid var(--ink);background:#fff;white-space:nowrap;
+}
+.pill.up{background:#FFE3E3;color:var(--red)}      /* 中国习惯：涨=红 */
+.pill.dn{background:#D9F7EA;color:#00795C}          /* 跌=绿 */
+.pill.y{background:var(--yellow)} .pill.b{background:#DCE6FF}
+.pill.m{background:#D6F7EC} .pill.g{background:#EEE9FF}
+
+/* ============ COVER ============ */
+#s1{display:flex;align-items:center;gap:40px;background:
+   linear-gradient(115deg,#FFFDF8 0 55%, #FFF2D6 55% 100%)}
+.cover-l{flex:1.15}
+.cover-r{flex:.85;display:flex;align-items:center;justify-content:center;position:relative;height:100%}
+.logo-row{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.logo-mark{
+  width:60px;height:60px;border:5px solid var(--ink);border-radius:20px;
+  background:var(--pink);display:grid;place-items:center;transform:rotate(-6deg);
+  box-shadow:0 6px 0 var(--ink);
+}
+.logo-mark span{font-size:26px;font-weight:900;color:#fff}
+.logo-txt b{font-size:36px;font-weight:900;letter-spacing:-.02em;display:block;line-height:1}
+.logo-txt i{font-style:normal;font-size:15px;font-weight:800;letter-spacing:.3em;color:var(--ink-2)}
+#s1 h1{font-size:62px;margin-bottom:16px}
+#s1 h1 em{font-style:normal;color:var(--pink)}
+.cover-lead{font-size:19px;line-height:1.62;font-weight:600;color:var(--ink-2);max-width:600px;margin-bottom:24px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  font-size:14px;font-weight:800;padding:9px 16px;border:3px solid var(--ink);border-radius:999px;
+  background:#fff;box-shadow:0 4px 0 var(--ink);
+}
+.chip.y{background:var(--yellow)} .chip.p{background:var(--pink);color:#fff}
+.chip.b{background:var(--blue);color:#fff} .chip.m{background:var(--mint)}
+.cover-foot{position:absolute;left:54px;bottom:34px;font-size:12px;color:var(--ink-2);font-weight:600}
+
+/* ---- CSS blind box ---- */
+.bb-stage{position:relative;display:grid;place-items:center}
+.bb{
+  --bw:250px;
+  width:var(--bw);height:calc(var(--bw)*.96);position:relative;
+  animation:bob 3.4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-16px) rotate(2deg)}}
+.bb-lid{
+  position:absolute;top:0;left:0;right:0;height:34%;
+  background:linear-gradient(160deg,var(--pink) 0%,#FF7FB0 100%);
+  border:5px solid var(--ink);border-radius:22px 22px 14px 14px;
+  box-shadow:0 7px 0 var(--ink);z-index:3;overflow:hidden;
+}
+.bb-lid::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 12px, transparent 12px 24px);
+}
+.bb-body{
+  position:absolute;top:30%;left:4%;right:4%;bottom:0;
+  background:linear-gradient(170deg,#FFE9A8 0%,var(--yellow) 100%);
+  border:5px solid var(--ink);border-radius:16px 16px 24px 24px;
+  box-shadow:0 10px 0 rgba(23,19,31,.22);
+  display:grid;place-items:center;z-index:2;overflow:hidden;
+}
+.bb-slot{
+  position:absolute;top:10px;left:12%;right:12%;height:12px;
+  background:var(--ink);border-radius:999px;opacity:.85;
+}
+.bb-q{
+  font-size:104px;font-weight:900;color:var(--ink);line-height:1;
+  text-shadow:5px 5px 0 var(--pink);
+  transform:translateY(6px);
+}
+.bb-band{
+  position:absolute;top:0;bottom:0;left:47%;width:16%;
+  background:var(--blue);z-index:4;box-shadow:inset 0 0 0 4px var(--ink);
+}
+.bb-band::before,.bb-band::after{
+  content:"";position:absolute;left:-9px;right:-9px;height:14px;background:var(--ink);border-radius:4px;
+}
+.bb-band::before{top:-5px} .bb-band::after{bottom:-5px}
+.bb-shadow{
+  position:absolute;left:12%;right:12%;bottom:-26px;height:26px;border-radius:50%;
+  background:rgba(23,19,31,.20);filter:blur(9px);
+}
+.bubbles i{
+  position:absolute;border-radius:50%;border:4px solid var(--ink);display:block;
+  animation:float 5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+.bubbles i:nth-child(1){width:44px;height:44px;background:var(--mint);top:6%;left:2%;animation-delay:.1s}
+.bubbles i:nth-child(2){width:26px;height:26px;background:var(--blue);top:70%;left:8%;animation-delay:.8s}
+.bubbles i:nth-child(3){width:34px;height:34px;background:var(--purple);top:14%;right:6%;animation-delay:.4s}
+.bubbles i:nth-child(4){width:20px;height:20px;background:var(--orange);bottom:12%;right:16%;animation-delay:1.2s}
+.bubbles i:nth-child(5){width:16px;height:16px;background:var(--pink);top:44%;right:-2%;animation-delay:.6s}
+
+/* ============ ONE-LINER ============ */
+#s2{display:flex;flex-direction:column;justify-content:center}
+.oneline{
+  font-size:44px;font-weight:900;line-height:1.28;letter-spacing:-.02em;
+  max-width:1080px;margin:6px 0 30px;
+}
+.oneline mark{background:var(--yellow);padding:0 .12em;border-radius:6px;box-decoration-break:clone}
+.oneline .u{color:var(--pink)}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tcard{
+  border:4px solid var(--ink);border-radius:var(--r);padding:22px 24px;background:#fff;
+  box-shadow:0 7px 0 var(--ink);
+}
+.tcard:nth-child(1){background:#FFF7D6} .tcard:nth-child(2){background:#FFE6EF}
+.tcard:nth-child(3){background:#E2EAFF}
+.tcard .tn{font-size:13px;font-weight:900;letter-spacing:.18em;color:var(--ink-2);margin-bottom:10px}
+.tcard h3{margin-bottom:8px;font-size:22px}
+.tcard p{font-size:14.5px;line-height:1.62;color:var(--ink-2);font-weight:600}
+
+/* ============ SNAPSHOT ============ */
+.grid-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}
+.kpi{
+  border:4px solid var(--ink);border-radius:22px;padding:16px 18px;background:#fff;
+  box-shadow:0 6px 0 var(--ink);
+}
+.kpi:nth-child(4n+1){background:#FFF6D9} .kpi:nth-child(4n+2){background:#FFE6EF}
+.kpi:nth-child(4n+3){background:#E2EAFF} .kpi:nth-child(4n+4){background:#DDF7ED}
+.kpi .k-lab{font-size:12.5px;font-weight:800;color:var(--ink-2);margin-bottom:8px;display:flex;justify-content:space-between;gap:6px}
+.kpi .k-val{font-size:30px;font-weight:900;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.kpi .k-val span{font-size:15px;font-weight:800;margin-left:3px}
+.kpi .k-sub{font-size:12px;font-weight:700;color:var(--ink-2);margin-top:7px}
+.tl{display:flex;gap:0;margin-top:24px;align-items:flex-start}
+.tl-item{flex:1;position:relative;padding-top:34px;text-align:center}
+.tl-item::before{
+  content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);
+  width:22px;height:22px;border-radius:50%;border:4px solid var(--ink);background:#fff;z-index:2;
+}
+.tl-item::after{content:"";position:absolute;top:19px;left:50%;height:4px;background:var(--ink);opacity:.18;width:100%}
+.tl-item:last-child::after{display:none}
+.tl-item:nth-child(1)::before{background:var(--yellow)} .tl-item:nth-child(2)::before{background:var(--pink)}
+.tl-item:nth-child(3)::before{background:var(--mint)} .tl-item:nth-child(4)::before{background:var(--blue)}
+.tl-item:nth-child(5)::before{background:var(--purple)}
+.tl-y{font-size:14px;font-weight:900;margin-bottom:3px}
+.tl-t{font-size:12.5px;font-weight:700;color:var(--ink-2);line-height:1.45;padding:0 6px}
+
+/* ============ BLIND BOX MECHANICS ============ */
+#s4{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:start}
+.bb-anat{display:flex;flex-direction:column;align-items:center;gap:16px}
+.bb-mini{width:180px;height:172px;position:relative}
+.anat-list{display:flex;flex-direction:column;gap:9px;width:100%}
+.anat-row{display:flex;gap:10px;align-items:flex-start;border:3px solid var(--ink);border-radius:16px;padding:9px 12px;background:#FFFDF6}
+.anat-row b{display:block;font-size:13.5px;font-weight:900;margin-bottom:2px}
+.anat-row p{font-size:11.5px;color:var(--ink-2);font-weight:600;line-height:1.5}
+.dot-tag{width:24px;height:24px;flex:none;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;font-size:12px;font-weight:900;color:#fff}
+.prob-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.prob-head h3{font-size:22px}
+.axis-note{font-size:11.5px;font-weight:800;color:var(--ink-2)}
+.pbar{margin-bottom:13px}
+.pbar .p-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;gap:10px}
+.pbar .p-name{font-size:15px;font-weight:900}
+.pbar .p-name i{font-style:normal;font-size:12px;font-weight:800;color:var(--ink-2);margin-left:7px}
+.pbar .p-vals{font-size:13px;font-weight:900;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pbar .p-vals b{font-size:17px;margin-right:4px}
+.track{height:26px;border:3px solid var(--ink);border-radius:999px;background:#F1ECE2;overflow:hidden;position:relative}
+.fill{height:100%;border-radius:999px;position:relative;width:0;transition:width 1s cubic-bezier(.2,.8,.25,1)}
+.fill::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.34) 0 10px,transparent 10px 20px)}
+.f1{background:linear-gradient(90deg,#FFD400,#FFB300)}
+.f2{background:linear-gradient(90deg,#FF4D8D,#E8203A)}
+.f3{background:linear-gradient(90deg,#8B5CF6,#5B21B6)}
+.dotgrid{
+  display:grid;grid-template-columns:repeat(24,1fr);gap:4px;
+  border:3px solid var(--ink);border-radius:16px;padding:11px;background:#FFFDF6;margin-top:4px;
+}
+.dotgrid i{aspect-ratio:1;border-radius:3px;background:#E6DFD2;display:block}
+.dotgrid i.hit{background:var(--red);box-shadow:0 0 0 2px var(--ink);transform:scale(1.25)}
+.grid-cap{font-size:11.5px;font-weight:800;color:var(--ink-2);margin-top:7px;text-align:center}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:14px}
+.why div{border:3px solid var(--ink);border-radius:16px;padding:11px 13px;background:#fff}
+.why div b{display:block;font-size:13.5px;font-weight:900;margin-bottom:4px}
+.why div p{font-size:11.5px;color:var(--ink-2);font-weight:600;line-height:1.5}
+.disclaimer{
+  margin-top:12px;font-size:11px;font-weight:700;color:#7A6F85;line-height:1.55;
+  border-left:4px solid var(--purple);padding-left:10px;
+}
+
+/* ============ IP MATRIX ============ */
+.ipgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.ipcard{
+  border:4px solid var(--ink);border-radius:28px;padding:18px 16px 16px;background:#fff;
+  box-shadow:0 7px 0 var(--ink);position:relative;overflow:hidden;
+}
+.ipcard .glow{position:absolute;top:-40px;right:-40px;width:130px;height:130px;border-radius:50%;opacity:.28}
+.ipcard h3{font-size:19px;letter-spacing:.02em}
+.ipcard .ip-tag{font-size:11px;font-weight:800;color:var(--ink-2);margin-top:2px;margin-bottom:12px}
+.ipcard .rev{font-size:27px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.ipcard .rev span{font-size:14px;margin-left:2px}
+.ipcard .yoy{font-size:12px;font-weight:800;margin-top:6px}
+.ipcard .desc{font-size:12px;font-weight:600;color:var(--ink-2);line-height:1.55;margin-top:10px;padding-top:10px;border-top:2px dashed rgba(23,19,31,.18)}
+.ip-rest{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.mini-ip{
+  flex:1;min-width:150px;border:3px solid var(--ink);border-radius:18px;padding:10px 14px;background:#fff;
+  display:flex;align-items:center;gap:10px;
+}
+.mini-ip .m-name{font-size:14px;font-weight:900}
+.mini-ip .m-rev{font-size:12.5px;font-weight:800;color:var(--ink-2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+/* ---- CSS character avatars ---- */
+.avatar{width:96px;height:96px;position:relative;margin:0 auto 4px;display:grid;place-items:center}
+.av-head{
+  width:78px;height:74px;border:5px solid var(--ink);border-radius:50% 50% 46% 46%;
+  position:relative;background:var(--c1);box-shadow:0 5px 0 rgba(23,19,31,.18);
+  display:grid;place-items:center;
+}
+.av-eye{position:absolute;top:26px;width:13px;height:15px;background:var(--ink);border-radius:50%}
+.av-eye.l{left:17px} .av-eye.r{right:17px}
+.av-eye::after{content:"";position:absolute;top:3px;left:3px;width:4px;height:4px;background:#fff;border-radius:50%}
+.av-mouth{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);background:var(--ink)}
+.av-mouth.smile{width:22px;height:11px;border-radius:0 0 22px 22px}
+.av-mouth.grin{width:26px;height:13px;border-radius:0 0 26px 26px;background:#fff;border:3px solid var(--ink);border-top:0}
+.av-mouth.oh{width:14px;height:14px;border-radius:50%}
+.av-ear{position:absolute;width:26px;height:34px;background:var(--c1);border:5px solid var(--ink);border-radius:50%;z-index:-1}
+.av-ear.l{left:-6px;top:-16px;transform:rotate(-22deg)}
+.av-ear.r{right:-6px;top:-16px;transform:rotate(22deg)}
+.av-tuft{position:absolute;top:-22px;left:50%;transform:translateX(-50%) rotate(-8deg);background:var(--c2);border:5px solid var(--ink);border-radius:50% 50% 40% 40%;width:34px;height:26px;z-index:-1}
+.av-hair{position:absolute;top:-6px;left:-2px;right:-2px;height:30px;background:var(--c2);border:5px solid var(--ink);border-radius:50% 50% 0 0;z-index:2}
+.av-patch{position:absolute;top:12px;width:26px;height:24px;background:var(--ink);border-radius:50%;opacity:.9}
+.av-patch.l{left:8px;transform:rotate(-10deg)} .av-patch.r{right:8px;transform:rotate(10deg)}
+.av-horn{position:absolute;top:-20px;width:9px;height:22px;background:var(--c2);border:4px solid var(--ink);border-radius:999px;z-index:-1}
+.av-horn.l{left:24px;transform:rotate(-16deg)} .av-horn.r{right:24px;transform:rotate(16deg)}
+.av-star{position:absolute;top:-16px;right:-2px;width:22px;height:22px;background:var(--c2);border:4px solid var(--ink);
+  clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+.av-cloud{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:56px;height:24px;background:#fff;border:4px solid var(--ink);border-radius:999px;z-index:3}
+
+/* ============ FLYWHEEL ============ */
+#s6{display:grid;grid-template-columns:1fr 1.02fr;gap:26px;align-items:center}
+.fly{position:relative;width:480px;height:480px;margin:0 auto}
+.ring{
+  position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--yellow),var(--pink),var(--purple),var(--blue),var(--mint),var(--yellow));
+  animation:spin 22s linear infinite;opacity:.9;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring2{position:absolute;inset:44px;border-radius:50%;background:var(--paper);box-shadow:inset 0 0 0 5px var(--ink)}
+.core{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:180px;height:180px;border-radius:50%;background:var(--yellow);
+  border:5px solid var(--ink);display:grid;place-items:center;text-align:center;z-index:4;
+  box-shadow:0 8px 0 var(--ink);
+}
+.core b{font-size:26px;font-weight:900;line-height:1.1;display:block}
+.core span{font-size:12px;font-weight:800;color:var(--ink-2)}
+.node{
+  position:absolute;width:132px;padding:11px 12px;border:4px solid var(--ink);border-radius:20px;
+  background:#fff;text-align:center;box-shadow:0 5px 0 var(--ink);z-index:5;
+}
+.node b{display:block;font-size:14px;font-weight:900;margin-bottom:3px}
+.node span{font-size:11px;font-weight:700;color:var(--ink-2);line-height:1.45;display:block}
+.node .idx{position:absolute;top:-13px;left:-13px;width:28px;height:28px;border-radius:50%;border:3px solid var(--ink);
+  display:grid;place-items:center;font-size:13px;font-weight:900;color:#fff}
+.fly-steps{display:flex;flex-direction:column;gap:11px}
+.fs{display:flex;gap:13px;align-items:flex-start;border:3px solid var(--ink);border-radius:18px;padding:12px 15px;background:#fff}
+.fs:nth-child(odd){background:#FFF7E4}
+.fs .fsn{width:30px;height:30px;flex:none;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;font-size:14px;font-weight:900;color:#fff}
+.fs b{display:block;font-size:14.5px;font-weight:900;margin-bottom:3px}
+.fs p{font-size:12px;font-weight:600;color:var(--ink-2);line-height:1.55}
+
+/* ============ CHANNEL ============ */
+.chan{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.ch{border:4px solid var(--ink);border-radius:24px;padding:16px;background:#fff;box-shadow:0 6px 0 var(--ink);position:relative;overflow:hidden}
+.ch:nth-child(1){background:#FFE6EF} .ch:nth-child(2){background:#E2EAFF}
+.ch:nth-child(3){background:#DDF7ED} .ch:nth-child(4){background:#FFF6D9}
+.ch .ch-ic{width:52px;height:52px;border:4px solid var(--ink);border-radius:16px;background:#fff;margin-bottom:12px;position:relative}
+.ch h3{font-size:17px;margin-bottom:6px}
+.ch .ch-pct{font-size:32px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.ch .ch-pct span{font-size:16px}
+.ch p{font-size:11.5px;font-weight:600;color:var(--ink-2);line-height:1.5;margin-top:7px}
+.ch-bar{height:14px;border:3px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden;margin-top:10px}
+.ch-bar i{display:block;height:100%;width:0;transition:width .9s cubic-bezier(.2,.8,.25,1)}
+/* icons */
+.ic-store::before,.ic-store::after{content:"";position:absolute;background:var(--ink)}
+.ic-store::before{left:9px;right:9px;top:26px;height:16px;border-radius:2px 2px 0 0}
+.ic-store::after{left:13px;right:13px;top:11px;height:15px;background:var(--pink);border-radius:3px}
+.ic-online{display:grid;place-items:center}
+.ic-online::before{content:"";width:26px;height:18px;border:4px solid var(--ink);border-radius:4px;position:absolute;top:12px}
+.ic-online::after{content:"";width:12px;height:12px;border:4px solid var(--ink);border-top:0;border-right:0;position:absolute;top:22px;transform:rotate(-45deg)}
+.ic-bot::before{content:"";position:absolute;left:12px;right:12px;top:9px;bottom:9px;border:4px solid var(--ink);border-radius:8px;background:var(--mint)}
+.ic-bot::after{content:"";position:absolute;left:20px;right:20px;top:18px;height:10px;background:#fff;border-radius:3px}
+.ic-wh::before{content:"";position:absolute;left:10px;right:10px;top:14px;height:11px;background:var(--yellow);border:2px solid var(--ink);border-radius:2px}
+.ic-wh::after{content:"";position:absolute;left:10px;right:10px;top:27px;height:11px;background:#fff;border:2px solid var(--ink);border-radius:2px}
+.newbiz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.nb{border:3px dashed var(--ink);border-radius:20px;padding:12px 14px;background:#fff}
+.nb b{font-size:14.5px;font-weight:900;display:block;margin-bottom:4px}
+.nb p{font-size:11.5px;font-weight:600;color:var(--ink-2);line-height:1.5}
+
+/* ============ GLOBAL ============ */
+#s8{display:grid;grid-template-columns:1.05fr .95fr;gap:24px}
+.reg{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.reg.compact{gap:8px;margin-top:10px}
+.reg.compact .reg-row{padding:7px 14px;border-radius:16px}
+.reg.compact .rg-bar{height:17px}
+.reg.compact .rg-amt b{font-size:16px}
+.reg-row{border:4px solid var(--ink);border-radius:20px;padding:10px 15px;background:#fff;display:flex;align-items:center;gap:13px}
+.reg-row .rg-name{width:104px;flex:none;font-size:15px;font-weight:900}
+.reg-row .rg-bar{flex:1;height:24px;border:3px solid var(--ink);border-radius:999px;background:#F1ECE2;overflow:hidden}
+.reg-row .rg-bar i{display:block;height:100%;width:0;transition:width 1s cubic-bezier(.2,.8,.25,1)}
+.reg-row .rg-amt{width:132px;flex:none;text-align:right}
+.reg-row .rg-amt b{font-size:19px;font-weight:900;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
+.reg-row .rg-amt span{font-size:11.5px;font-weight:800;color:var(--ink-2)}
+.glob-right{display:flex;flex-direction:column;gap:12px}
+.factbox{border:4px solid var(--ink);border-radius:24px;padding:15px 18px;background:#FFF7E4;box-shadow:0 6px 0 var(--ink)}
+.factbox h3{font-size:17px;margin-bottom:9px}
+.factbox ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.factbox li{font-size:12.5px;font-weight:600;color:var(--ink-2);line-height:1.5;padding-left:18px;position:relative}
+.factbox li::before{content:"";position:absolute;left:0;top:6px;width:9px;height:9px;border-radius:50%;border:2px solid var(--ink);background:var(--pink)}
+.factbox li b{color:var(--ink);font-weight:900}
+.mapdots{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+
+/* ============ GROWTH ============ */
+.formula{
+  border:5px solid var(--ink);border-radius:26px;background:var(--yellow);
+  padding:16px 22px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  box-shadow:0 7px 0 var(--ink);margin-bottom:16px;
+}
+.formula .fm{font-size:23px;font-weight:900;letter-spacing:-.02em}
+.formula .op{font-size:26px;font-weight:900}
+.formula .fm i{font-style:normal;display:block;font-size:11.5px;font-weight:800;color:#6B5E2E;text-align:center;margin-top:2px}
+.drv{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.dv{border:4px solid var(--ink);border-radius:22px;padding:13px 16px;background:#fff;display:flex;gap:13px;align-items:flex-start;box-shadow:0 5px 0 var(--ink)}
+.dv:nth-child(1){background:#FFE6EF} .dv:nth-child(2){background:#E2EAFF}
+.dv:nth-child(3){background:#DDF7ED} .dv:nth-child(4){background:#FFF6D9}
+.dv .dvn{width:34px;height:34px;flex:none;border-radius:50%;border:4px solid var(--ink);display:grid;place-items:center;font-size:15px;font-weight:900;color:#fff;background:var(--pink)}
+.dv:nth-child(2) .dvn{background:var(--blue)} .dv:nth-child(3) .dvn{background:var(--mint)}
+.dv:nth-child(4) .dvn{background:var(--orange)}
+.dv b{font-size:15px;font-weight:900;display:block;margin-bottom:4px}
+.dv p{font-size:12px;font-weight:600;color:var(--ink-2);line-height:1.55}
+.dv p em{font-style:normal;color:var(--ink);font-weight:900}
+
+/* ============ RISK ============ */
+#s10{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.col-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.col-h .dot{width:16px;height:16px;border-radius:50%;border:3px solid var(--ink)}
+.col-h.r .dot{background:var(--red)} .col-h.g .dot{background:var(--mint)}
+.col-h h3{font-size:22px}
+.rlist{display:flex;flex-direction:column;gap:9px}
+.risk{border:4px solid var(--ink);border-radius:20px;padding:11px 15px;background:#fff;display:flex;gap:12px;align-items:flex-start}
+.risk .rnum{width:28px;height:28px;flex:none;border-radius:50%;border:3px solid var(--ink);background:var(--red);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:900}
+.risk b{font-size:14px;font-weight:900;display:block;margin-bottom:3px}
+.risk p{font-size:11.5px;font-weight:600;color:var(--ink-2);line-height:1.5}
+.risk p em{font-style:normal;color:var(--red);font-weight:900}
+.ok{border:4px solid var(--ink);border-radius:20px;padding:11px 15px;background:#fff;display:flex;gap:12px;align-items:flex-start}
+.ok:nth-child(odd){background:#EDFBF5}
+.ok .rnum{width:28px;height:28px;flex:none;border-radius:50%;border:3px solid var(--ink);background:var(--mint);display:grid;place-items:center;font-size:14px;font-weight:900}
+.ok b{font-size:14px;font-weight:900;display:block;margin-bottom:3px}
+.ok p{font-size:11.5px;font-weight:600;color:var(--ink-2);line-height:1.5}
+.ok p em{font-style:normal;color:#00795C;font-weight:900}
+
+/* ============ END ============ */
+#s11{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(150deg,#FFFDF8 0 40%,#FFEFD2 40% 100%)}
+#s11 h2{font-size:50px;max-width:920px;line-height:1.24}
+#s11 h2 em{font-style:normal;color:var(--pink)}
+.end-lead{font-size:18px;font-weight:700;color:var(--ink-2);margin-top:16px;max-width:760px;line-height:1.6}
+.srcbox{margin-top:26px;border:4px solid var(--ink);border-radius:22px;background:#fff;padding:15px 20px;max-width:1020px;box-shadow:0 6px 0 var(--ink)}
+.srcbox h4{font-size:13px;font-weight:900;letter-spacing:.14em;margin-bottom:9px;color:var(--ink-2)}
+.srcbox ol{list-style:none;display:flex;flex-direction:column;gap:5px;text-align:left;counter-reset:c}
+.srcbox li{font-size:11.5px;font-weight:600;color:var(--ink-2);line-height:1.5;padding-left:20px;position:relative}
+.srcbox li::before{content:counter(c);counter-increment:c;position:absolute;left:0;top:2px;width:14px;height:14px;border-radius:50%;background:var(--yellow);border:2px solid var(--ink);font-size:8px;font-weight:900;color:var(--ink);display:grid;place-items:center}
+.end-bb{display:flex;gap:22px;margin-top:22px;align-items:flex-end}
+
+/* ============ CHROME ============ */
+#chrome{
+  position:fixed;left:0;right:0;bottom:0;height:62px;z-index:60;
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  background:rgba(255,253,248,.86);backdrop-filter:blur(10px);
+  border-top:3px solid var(--line);
+}
+.btn{
+  width:40px;height:40px;border:3px solid var(--ink);border-radius:50%;background:#fff;cursor:pointer;
+  display:grid;place-items:center;font-size:16px;font-weight:900;color:var(--ink);
+  box-shadow:0 3px 0 var(--ink);transition:transform .12s, background .12s;font-family:var(--font);
+}
+.btn:hover{background:var(--yellow);transform:translateY(-2px)}
+.btn:active{transform:translateY(1px);box-shadow:0 1px 0 var(--ink)}
+.dots{display:flex;gap:7px;align-items:center}
+.dots i{width:11px;height:11px;border-radius:50%;border:2.5px solid var(--ink);background:#fff;cursor:pointer;transition:all .2s}
+.dots i.on{background:var(--pink);transform:scale(1.35)}
+.dots i.done{background:var(--yellow)}
+#pageno{font-size:13px;font-weight:900;font-variant-numeric:tabular-nums;min-width:56px;text-align:center}
+#bar{position:fixed;left:0;top:0;height:5px;background:linear-gradient(90deg,var(--pink),var(--yellow),var(--mint),var(--blue));z-index:70;width:0;transition:width .35s ease;border-radius:0 999px 999px 0}
+#hint{position:fixed;right:16px;bottom:70px;font-size:11px;font-weight:800;color:var(--ink-2);z-index:60;
+  background:#fff;border:2.5px solid var(--ink);border-radius:999px;padding:5px 12px;box-shadow:0 3px 0 var(--ink)}
+#fsmark{position:fixed;left:16px;bottom:70px;z-index:60}
+#fsmark .btn{width:auto;border-radius:999px;padding:0 14px;font-size:12px;height:34px}
+
+@media print{
+  body{overflow:visible;background:#fff}
+  #wrap{position:static}
+  .slide{opacity:1!important;visibility:visible!important;transform:none!important;page-break-after:always;box-shadow:none}
+  #chrome,#bar,#hint,#fsmark{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<div id="wrap">
+<div id="stage">
+
+<!-- ============ 1 · COVER ============ -->
+<section class="slide" id="s1">
+  <div class="cover-l">
+    <div class="logo-row">
+      <div class="logo-mark"><span>PM</span></div>
+      <div class="logo-txt"><b>POP MART</b><i>泡泡玛特 09992.HK</i></div>
+    </div>
+    <h1>从一只<em>盲盒</em><br>到全球潮玩 IP 平台</h1>
+    <p class="cover-lead">
+      以艺术家 IP 为内核、以盲盒为获客引擎、以全渠道为放大器——
+      拆解泡泡玛特的品牌叙事与潮玩商业模式。
+    </p>
+    <div class="chips">
+      <span class="chip y">2025 营收 371.2 亿元</span>
+      <span class="chip p">同比 +184.7%</span>
+      <span class="chip b">海外收入占比 43.8%</span>
+      <span class="chip m">全球 20+ 国家 / 地区</span>
+      <span class="chip">全球注册会员 &gt; 1 亿</span>
+    </div>
+  </div>
+  <div class="cover-r">
+    <div class="bubbles"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="bb-stage">
+      <div class="bb">
+        <div class="bb-lid"></div>
+        <div class="bb-band"></div>
+        <div class="bb-body"><div class="bb-slot"></div><div class="bb-q">?</div></div>
+        <div class="bb-shadow"></div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-foot">财务数据口径：2025 年年度业绩（2026-03-25 披露）与 2026 年半年报（2026-08-20 披露）。详见末页来源。</div>
+</section>
+
+<!-- ============ 2 · ONE LINER ============ -->
+<section class="slide" id="s2">
+  <span class="kicker p">One-liner</span>
+  <h2>用一句话概括这家公司</h2>
+  <div class="oneline">
+    泡泡玛特不是一家<mark>玩具公司</mark>，而是一家<span class="u">以 IP 为核心资产</span>、
+    用盲盒做<span class="u">随机性获客引擎</span>的<mark>全球化潮流文化平台</mark>。
+  </div>
+  <div class="three">
+    <div class="tcard">
+      <div class="tn">01 / 上游</div>
+      <h3>签约艺术家，买断"形象"</h3>
+      <p>全球挖掘潮玩设计师并签约，把艺术形象转化为可长期运营的 IP 资产，而非一次性商品。</p>
+    </div>
+    <div class="tcard">
+      <div class="tn">02 / 中游</div>
+      <h3>工业化产品化能力</h3>
+      <p>把 IP 快速转化为盲盒、手办、毛绒、衍生品，用供应链把创意变成可规模复制的消费品。</p>
+    </div>
+    <div class="tcard">
+      <div class="tn">03 / 下游</div>
+      <h3>全渠道 + 社群放大</h3>
+      <p>门店、机器人商店、线上小程序协同，叠加会员体系与二手流通生态，形成高频复购闭环。</p>
+    </div>
+  </div>
+  <p class="small" style="margin-top:18px">官方表述：公司围绕"全球艺术家挖掘、IP 孵化运营、消费者触达、潮玩文化推广、关联产业投资整合"五大领域构建全产业链运营平台（来源：泡泡玛特官网）。</p>
+</section>
+
+<!-- ============ 3 · SNAPSHOT ============ -->
+<section class="slide" id="s3">
+  <span class="kicker b">Company Snapshot</span>
+  <h2>公司速览：三年走完<em style="font-style:normal">十倍</em>路</h2>
+  <div class="grid-kpi">
+    <div class="kpi">
+      <div class="k-lab"><span>2025 年营收</span><span class="pill up">+184.7%</span></div>
+      <div class="k-val">371.20<span>亿元</span></div>
+      <div class="k-sub">2024 年：130.38 亿元</div>
+    </div>
+    <div class="kpi">
+      <div class="k-lab"><span>2025 年归母净利</span><span class="pill up">+308.8%</span></div>
+      <div class="k-val">127.76<span>亿元</span></div>
+      <div class="k-sub">经调整纯利 130.84 亿元 · +284.5%</div>
+    </div>
+    <div class="kpi">
+      <div class="k-lab"><span>2025 年毛利率</span><span class="pill y">72.1%</span></div>
+      <div class="k-val">72.1<span>%</span></div>
+      <div class="k-sub">2026H1 回落至 69.7%</div>
+    </div>
+    <div class="kpi">
+      <div class="k-lab"><span>2026 上半年营收</span><span class="pill up">+23.8%</span></div>
+      <div class="k-val">171.7<span>亿元</span></div>
+      <div class="k-sub">经调整净利 51.6 亿元 · 净利率 30%</div>
+    </div>
+    <div class="kpi">
+      <div class="k-lab"><span>全球门店</span><span class="pill b">2026.6.30</span></div>
+      <div class="k-val">676<span>家</span></div>
+      <div class="k-sub">上半年净增 46 家</div>
+    </div>
+    <div class="kpi">
+      <div class="k-lab"><span>机器人商店</span><span class="pill b">2026.6.30</span></div>
+      <div class="k-val">2,827<span>台</span></div>
+      <div class="k-sub">上半年净增 190 台</div>
+    </div>
+    <div class="kpi">
+      <div class="k-lab"><span>全球累计注册会员</span><span class="pill m">1 亿+</span></div>
+      <div class="k-val">&gt;1<span>亿</span></div>
+      <div class="k-sub">中国内地 8,244 万（2026.6.30）</div>
+    </div>
+    <div class="kpi">
+      <div class="k-lab"><span>全球员工</span><span class="pill g">2026H1</span></div>
+      <div class="k-val">12,000<span>+人</span></div>
+      <div class="k-sub">2025 年底：&gt;11,000 人</div>
+    </div>
+  </div>
+  <div class="tl">
+    <div class="tl-item"><div class="tl-y">2010</div><div class="tl-t">北京泡泡玛特成立</div></div>
+    <div class="tl-item"><div class="tl-y">2020.12.11</div><div class="tl-t">港交所主板上市（9992）</div></div>
+    <div class="tl-item"><div class="tl-y">2023.09</div><div class="tl-t">首个 IP 主题乐园 POP LAND 开园</div></div>
+    <div class="tl-item"><div class="tl-y">2025</div><div class="tl-t">LABUBU 全球爆红，营收首破 300 亿</div></div>
+    <div class="tl-item"><div class="tl-y">2026.06</div><div class="tl-t">LABUBU 亮相美加墨世界杯开幕式</div></div>
+  </div>
+  <p class="small" style="margin-top:16px">来源：泡泡玛特《截至 2025 年 12 月 31 日止年度的年度业绩公布》（港交所，2026-03-25）；2026 年半年报（2026-08-20），引自上海证券报 / 中国证券报 / 经济参考报 / 光明网。</p>
+</section>
+
+<!-- ============ 4 · BLIND BOX ============ -->
+<section class="slide" id="s4">
+  <div>
+    <span class="kicker">Blind Box Mechanics</span>
+    <h2 style="font-size:34px">盲盒模式解析：<span style="color:var(--pink)">确定的惊喜，随机的生意</span></h2>
+    <div class="bb-anat" style="margin-top:14px">
+      <div class="bb-mini">
+        <div class="bb" style="--bw:180px">
+          <div class="bb-lid"></div><div class="bb-band"></div>
+          <div class="bb-body"><div class="bb-slot"></div><div class="bb-q" style="font-size:74px">?</div></div>
+          <div class="bb-shadow"></div>
+        </div>
+      </div>
+      <div class="anat-list">
+        <div class="anat-row"><span class="dot-tag" style="background:var(--pink)">1</span><div><b>整端（Set）= 12 盒</b><p>一个未拆封整端内为 12 个<strong>不重复</strong>的基础款；若其中一盒被替换为隐藏款，则会少一个基础款。</p></div></div>
+        <div class="anat-row"><span class="dot-tag" style="background:var(--yellow);color:var(--ink)">2</span><div><b>整箱（Case）= 12 端 = 144 盒</b><p>隐藏款生产配比 1:144，但概率基于<strong>全系列生产总量</strong>制定，整箱购买<strong>不保证</strong>含隐藏款。</p></div></div>
+        <div class="anat-row"><span class="dot-tag" style="background:var(--blue)">3</span><div><b>稀缺性 → 社交货币</b><p>隐藏款的稀缺预期驱动二手流通、晒盒改娃、换娃社群，形成<strong>零成本的内容传播</strong>。</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="prob-head">
+      <h3>抽盒概率条</h3>
+      <span class="axis-note">概率刻度：0 — 10%（以官方公示的 12 常规款 + 1 隐藏款系列为例）</span>
+    </div>
+
+    <div class="pbar">
+      <div class="p-top">
+        <div class="p-name">常规款（单个指定款）<i>1 / 12</i></div>
+        <div class="p-vals"><b>8.33%</b><span>整端内 12 款不重复</span></div>
+      </div>
+      <div class="track"><div class="fill f1" data-w="83.3"></div></div>
+    </div>
+
+    <div class="pbar">
+      <div class="p-top">
+        <div class="p-name">隐藏款 Secret<i>生产配比 1 : 144</i></div>
+        <div class="p-vals"><b>0.69%</b><span>约每 144 个出 1 个</span></div>
+      </div>
+      <div class="track"><div class="fill f2" data-w="6.9"></div></div>
+    </div>
+
+    <div class="pbar">
+      <div class="p-top">
+        <div class="p-name">特别隐藏款<i>玩家口径 1 : 720</i></div>
+        <div class="p-vals"><b>0.14%</b><span>非统一公示项，仅作参考</span></div>
+      </div>
+      <div class="track"><div class="fill f3" data-w="1.4"></div></div>
+    </div>
+
+    <div class="dotgrid" id="dg"></div>
+    <div class="grid-cap">144 格 = 1 整箱 · <span style="color:var(--red)">红色 1 格</span> = 隐藏款期望出现量（概率独立，实际不保证每箱必出）</div>
+
+    <div class="why">
+      <div><b>低门槛 × 高频</b><p>单件定价亲民，随机性把"买一个"变成"再来一个"。</p></div>
+      <div><b>端盒提客单</b><p>整端/整箱销售提升单次客单价，并降低消费者端的不确定性。</p></div>
+      <div><b>零边际传播</b><p>抽盒、晒盒、换娃构成 UGC 内容流，替代部分营销投放。</p></div>
+    </div>
+    <p class="disclaimer">
+      合规提示：截至本页制作时，中国内地尚无全国性法规强制要求公示盲盒概率；深圳消委会曾提出"未明确隐藏款抽中概率涉嫌侵害消费者知情权"，成都市市场监管局亦倡导经营者明示概率。本页概率为泡泡玛特官方商品页公示的生产配比口径，非投资建议，亦不构成对二手市场价格的任何预期。
+    </p>
+  </div>
+</section>
+
+<!-- ============ 5 · IP MATRIX ============ -->
+<section class="slide" id="s5">
+  <span class="kicker p">IP Matrix</span>
+  <h2>头部 IP 矩阵：<span style="color:var(--pink)">一超多强，梯队正在成型</span></h2>
+  <div class="ipgrid">
+
+    <div class="ipcard">
+      <div class="glow" style="background:var(--pink)"></div>
+      <div class="avatar" style="--c1:#FFE3A8;--c2:#E8203A">
+        <div class="av-head">
+          <div class="av-hair"></div>
+          <div class="av-eye l"></div><div class="av-eye r"></div>
+          <div class="av-mouth oh"></div>
+        </div>
+      </div>
+      <h3>MOLLY</h3>
+      <div class="ip-tag">经典常青 · 公司标志性 IP</div>
+      <div class="rev">28.97<span>亿元</span></div>
+      <div class="yoy"><span class="pill up">2025 同比 +38.4%</span></div>
+      <div class="desc">2025 年营收 28.97 亿元；2026 年迎来形象诞生 20 周年，上半年营收 9.0 亿元。增速低于集团均值，承担"品牌资产"角色。</div>
+    </div>
+
+    <div class="ipcard" style="box-shadow:0 7px 0 var(--ink), 0 0 0 5px var(--yellow)">
+      <div class="glow" style="background:var(--yellow)"></div>
+      <div class="avatar" style="--c1:#F2C89B;--c2:#F2C89B">
+        <div class="av-head">
+          <div class="av-ear l"></div><div class="av-ear r"></div>
+          <div class="av-eye l"></div><div class="av-eye r"></div>
+          <div class="av-mouth grin"></div>
+        </div>
+      </div>
+      <h3>THE MONSTERS<span style="font-size:13px;color:var(--pink)"> / LABUBU</span></h3>
+      <div class="ip-tag">现象级爆款 · 全球破圈</div>
+      <div class="rev">141.61<span>亿元</span></div>
+      <div class="yoy"><span class="pill up">2025 同比 +365.7%</span></div>
+      <div class="desc">首个营收破百亿的 IP 家族，占集团总营收 38.1%。2026 上半年营收 44.5 亿元，占比降至 26%。</div>
+    </div>
+
+    <div class="ipcard">
+      <div class="glow" style="background:var(--blue)"></div>
+      <div class="avatar" style="--c1:#DCEBFF;--c2:#2B5BFF">
+        <div class="av-head">
+          <div class="av-cloud"></div>
+          <div class="av-eye l"></div><div class="av-eye r"></div>
+          <div class="av-mouth smile"></div>
+        </div>
+      </div>
+      <h3>DIMOO</h3>
+      <div class="ip-tag">梦境治愈系</div>
+      <div class="rev">27.77<span>亿元</span></div>
+      <div class="yoy"><span class="pill up">2025 同比 +205.3%</span></div>
+      <div class="desc">2025 年营收 27.77 亿元，增速跑赢集团大盘（+184.7%）；2026 上半年 16.2 亿元，同比 +46.5%。</div>
+    </div>
+
+    <div class="ipcard">
+      <div class="glow" style="background:var(--purple)"></div>
+      <div class="avatar" style="--c1:#EDE9FE;--c2:#8B5CF6">
+        <div class="av-head">
+          <div class="av-horn l"></div><div class="av-horn r"></div>
+          <div class="av-patch l"></div><div class="av-patch r"></div>
+          <div class="av-eye l" style="top:20px"></div><div class="av-eye r" style="top:20px"></div>
+          <div class="av-mouth smile"></div>
+        </div>
+      </div>
+      <h3>SKULLPANDA</h3>
+      <div class="ip-tag">暗黑潮流 · 第二支柱</div>
+      <div class="rev">35.40<span>亿元</span></div>
+      <div class="yoy"><span class="pill up">2025 同比 +170.6%</span></div>
+      <div class="desc">2025 年营收 35.40 亿元，在爆款之外稳居第二位；2026 上半年 15.5 亿元，同比 +27.1%。</div>
+    </div>
+  </div>
+
+  <div class="ip-rest">
+    <div class="mini-ip"><span class="dot-tag" style="background:var(--orange)">+</span><span class="m-name">CRYBABY</span><span class="m-rev">29.29 亿 · +151.4%</span></div>
+    <div class="mini-ip"><span class="dot-tag" style="background:var(--yellow);color:var(--ink)">★</span><span class="m-name">星星人</span><span class="m-rev">20.56 亿 · +1602%</span></div>
+    <div class="mini-ip"><span class="dot-tag" style="background:var(--mint)">H</span><span class="m-name">HIRONO 小野</span><span class="m-rev">17.35 亿</span></div>
+    <div class="mini-ip"><span class="dot-tag" style="background:var(--ink)">17</span><span class="m-name">艺术家 IP 过亿</span><span class="m-rev">2025 全年 17 个</span></div>
+  </div>
+  <p class="small" style="margin-top:12px">注：人物图形为抽象化 CSS 示意绘制，非 IP 官方形象复刻。营收数据为 2025 全年口径（人民币），来源：泡泡玛特 2025 年度业绩公布（2026-03-25）及 21 世纪经济报道、中国经济时报、中国经济网等媒体报道；2026 上半年数据来自 2026 年半年报（2026-08-20）。</p>
+</section>
+
+<!-- ============ 6 · FLYWHEEL ============ -->
+<section class="slide" id="s6">
+  <div>
+    <span class="kicker bl">IP Flywheel</span>
+    <h2 style="font-size:34px">IP 运营飞轮：<span style="color:var(--blue)">从"抽一次"到"爱十年"</span></h2>
+    <div class="fly">
+      <div class="ring"></div>
+      <div class="ring2"></div>
+      <div class="node" style="top:6px;left:50%;transform:translateX(-50%)">
+        <span class="idx" style="background:var(--pink)">1</span>
+        <b>挖掘艺术家</b><span>全球签约设计师</span>
+      </div>
+      <div class="node" style="top:118px;right:4px">
+        <span class="idx" style="background:var(--purple)">2</span>
+        <b>IP 孵化 + 内容</b><span>世界观、演艺、音乐</span>
+      </div>
+      <div class="node" style="bottom:104px;right:14px">
+        <span class="idx" style="background:var(--blue)">3</span>
+        <b>产品化</b><span>盲盒 / 毛绒 / 衍生品</span>
+      </div>
+      <div class="node" style="bottom:16px;left:50%;transform:translateX(-50%)">
+        <span class="idx" style="background:var(--mint)">4</span>
+        <b>全渠道触达</b><span>门店 / 机器人 / 线上</span>
+      </div>
+      <div class="node" style="bottom:104px;left:14px">
+        <span class="idx" style="background:var(--orange)">5</span>
+        <b>社群 · 二手 · 乐园</b><span>情感沉淀与复购</span>
+      </div>
+      <div class="node" style="top:118px;left:4px">
+        <span class="idx" style="background:var(--yellow);color:var(--ink)">6</span>
+        <b>数据反哺</b><span>会员行为指导开发</span>
+      </div>
+      <div class="core"><div><b>IP 价值</b><span>越转越厚</span></div></div>
+    </div>
+  </div>
+  <div class="fly-steps">
+    <div class="fs"><span class="fsn" style="background:var(--pink)">1</span><div><b>供给端：把艺术家变成长期资产</b><p>公司围绕"全球艺术家挖掘"构建上游，签约 Kenny、毕奇、龙家升等设计师（来源：泡泡玛特官网）。</p></div></div>
+    <div class="fs"><span class="fsn" style="background:var(--purple)">2</span><div><b>内容端：给形象补上叙事</b><p>POP LAND 团队为星星人打造的首支单曲全平台播放超 1,500 万次；2025 年"星星好友"外出举办 40 场特别活动（来源：2025 年度业绩公布）。</p></div></div>
+    <div class="fs"><span class="fsn" style="background:var(--blue)">3</span><div><b>产品端：品类迁移打开天花板</b><p>毛绒品类 2025 年营收 187.1 亿元、同比 +560.6%，首次成为第一大品类；2026 上半年 98.2 亿元、同比 +60%。</p></div></div>
+    <div class="fs"><span class="fsn" style="background:var(--mint)">4</span><div><b>渠道端：密度即心智</b><p>截至 2026 年 6 月 30 日，全球 676 家门店 + 2,827 台机器人商店，覆盖超 20 个国家和地区。</p></div></div>
+    <div class="fs"><span class="fsn" style="background:var(--orange)">5</span><div><b>留存端：会员是护城河</b><p>2026 上半年会员贡献销售额占比 92.9%、复购率 51.6%；2025 年会员复购率为 55.7%。</p></div></div>
+    <div class="fs"><span class="fsn" style="background:var(--yellow);color:var(--ink)">6</span><div><b>反哺端：用数据决定下一个 IP</b><p>会员与销售数据回流到开发环节，缩短新品验证周期，形成"孵化—验证—放大"的循环。</p></div></div>
+  </div>
+</section>
+
+<!-- ============ 7 · CHANNEL ============ -->
+<section class="slide" id="s7">
+  <span class="kicker m">Channel Mix</span>
+  <h2>渠道矩阵：<span style="color:var(--mint)">线下做体验，线上做效率</span></h2>
+  <div class="chan">
+    <div class="ch">
+      <div class="ch-ic ic-store"></div>
+      <h3>零售门店</h3>
+      <div class="ch-pct">46.48<span>%</span></div>
+      <div class="ch-bar"><i data-w="46.48" style="background:linear-gradient(90deg,#FF4D8D,#E8203A)"></i></div>
+      <p>品牌形象与沉浸式体验主阵地，承载新品首发与限定款。</p>
+    </div>
+    <div class="ch">
+      <div class="ch-ic ic-online"></div>
+      <h3>线上渠道</h3>
+      <div class="ch-pct">44.27<span>%</span></div>
+      <div class="ch-bar"><i data-w="44.27" style="background:linear-gradient(90deg,#2B5BFF,#7C4DFF)"></i></div>
+      <p>小程序抽盒机、电商与社群运营，承担高频复购与数据沉淀。</p>
+    </div>
+    <div class="ch">
+      <div class="ch-ic ic-bot"></div>
+      <h3>机器人商店</h3>
+      <div class="ch-pct">4.55<span>%</span></div>
+      <div class="ch-bar"><i data-w="4.55" style="background:linear-gradient(90deg,#00CFA0,#009E79)"></i></div>
+      <p>2,827 台（2026.6.30）。低成本点位，用于商圈渗透与需求测试。</p>
+    </div>
+    <div class="ch">
+      <div class="ch-ic ic-wh"></div>
+      <h3>批发及其他</h3>
+      <div class="ch-pct">4.69<span>%</span></div>
+      <div class="ch-bar"><i data-w="4.69" style="background:linear-gradient(90deg,#FFD400,#FF7A1A)"></i></div>
+      <p>经销商与海外批发网络，覆盖自有渠道暂未触达的市场。</p>
+    </div>
+  </div>
+  <div class="newbiz">
+    <div class="nb">
+      <b>POP LAND · 城市乐园</b>
+      <p>2023 年 9 月开园，占地约 4 万㎡。2025 年在仅开放约三分之一区域的情况下客流同比增长超 70%；非亲子家庭游客占 59%、非本地游客占 58%。2026 年 4 月 30 日新区域开放、7 月 30 日全面开放，2027 年启动二期。</p>
+    </div>
+    <div class="nb">
+      <b>POPOP · 饰品</b>
+      <p>2025 年 5 月上海首店试运营、6 月推出独立珠宝品牌，覆盖足金串珠、吊坠、金条与摆件；截至 2026 年 7 月全国已布局 8 家门店。把 IP 从"被收藏"变成"可佩戴"。</p>
+    </div>
+    <div class="nb">
+      <b>POP BAKERY · 甜品</b>
+      <p>2025 年在多个核心城市举办 10 余场主题快闪；2026 年 6 月 19 日首店落地秦皇岛阿那亚，涵盖烘焙面包、蛋糕、饮品。用高频消费提升 IP 曝光频次。</p>
+    </div>
+  </div>
+  <p class="small" style="margin-top:12px">渠道占比为 2025 年度业绩口径（按收入构成拆分）。乐园、饰品、甜品数据来源：2025 年度业绩公布、上海证券报、国泰海通证券《潮玩品类创新趋势》、中国经济时报。</p>
+</section>
+
+<!-- ============ 8 · GLOBAL ============ -->
+<section class="slide" id="s8">
+  <div>
+    <span class="kicker bl">Global Expansion</span>
+    <h2 style="font-size:34px">全球化扩张：<span style="color:var(--blue)">从中国潮玩到世界 IP</span></h2>
+    <div class="reg">
+      <div class="reg-row">
+        <div class="rg-name">中国</div>
+        <div class="rg-bar"><i data-w="56.2" style="background:linear-gradient(90deg,#FF4D8D,#E8203A)"></i></div>
+        <div class="rg-amt"><b>208.5 亿</b><span>56.2% · +134.6%</span></div>
+      </div>
+      <div class="reg-row">
+        <div class="rg-name">亚太</div>
+        <div class="rg-bar"><i data-w="21.6" style="background:linear-gradient(90deg,#FFD400,#FF7A1A)"></i></div>
+        <div class="rg-amt"><b>80.1 亿</b><span>21.6% · +157.6%</span></div>
+      </div>
+      <div class="reg-row">
+        <div class="rg-name">美洲</div>
+        <div class="rg-bar"><i data-w="18.3" style="background:linear-gradient(90deg,#2B5BFF,#7C4DFF)"></i></div>
+        <div class="rg-amt"><b>68.1 亿</b><span>18.3% · +748.4%</span></div>
+      </div>
+      <div class="reg-row">
+        <div class="rg-name">欧洲及其他</div>
+        <div class="rg-bar"><i data-w="3.9" style="background:linear-gradient(90deg,#00CFA0,#009E79)"></i></div>
+        <div class="rg-amt"><b>14.5 亿</b><span>3.9% · +506.3%</span></div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px">2025 年全年分区域收入及同比。四大区域均实现三位数增长，<strong>海外收入合计占比 43.8%</strong>。</p>
+    <div class="reg compact">
+      <div class="reg-row" style="background:#FFF7E4">
+        <div class="rg-name" style="width:118px">2026H1 中国</div>
+        <div class="rg-bar"><i data-w="71" style="background:linear-gradient(90deg,#FF4D8D,#E8203A)"></i></div>
+        <div class="rg-amt"><b>122 亿</b><span>455 家店 · +47.3%</span></div>
+      </div>
+      <div class="reg-row" style="background:#FFF7E4">
+        <div class="rg-name" style="width:118px">2026H1 亚太</div>
+        <div class="rg-bar"><i data-w="15" style="background:linear-gradient(90deg,#FFD400,#FF7A1A)"></i></div>
+        <div class="rg-amt"><b>25.8 亿</b><span>90 家店</span></div>
+      </div>
+      <div class="reg-row" style="background:#FFF7E4">
+        <div class="rg-name" style="width:118px">2026H1 美洲</div>
+        <div class="rg-bar"><i data-w="11" style="background:linear-gradient(90deg,#2B5BFF,#7C4DFF)"></i></div>
+        <div class="rg-amt"><b>18.9 亿</b><span>86 家店</span></div>
+      </div>
+      <div class="reg-row" style="background:#FFF7E4">
+        <div class="rg-name" style="width:118px">2026H1 欧洲及其他</div>
+        <div class="rg-bar"><i data-w="3" style="background:linear-gradient(90deg,#00CFA0,#009E79)"></i></div>
+        <div class="rg-amt"><b>5.1 亿</b><span>45 家店</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="glob-right">
+    <div class="factbox">
+      <h3>扩张动作（2025 — 2026）</h3>
+      <ul>
+        <li>2025 年新进入<b>丹麦、德国、菲律宾、加拿大</b>，并进入柏林、罗马、哥本哈根、多伦多等 <b>30 多座城市</b>。</li>
+        <li>截至 2025 年底在 <b>20 个国家和地区</b>运营 <b>630 家门店</b>与 <b>2,637 台机器人商店</b>，全年净增门店 109 家。</li>
+        <li>北美现运营 <b>72 家门店</b>，预计 <b>2026 年底超 100 家</b>；纽约时代广场与第五大道旗舰店计划于第四季度开业。</li>
+        <li>已在 <b>20 个国家和地区</b>设立办公室，洛杉矶、伦敦、新加坡设区域总部。2025 年底全球员工超 <b>11,000 人</b>，其中近 <b>4,000 名</b>为非中国籍员工。</li>
+        <li>供应链：<b>6 大生产基地</b>；印尼、柬埔寨、墨西哥的合作工厂已于 <b>2026 年 1 月</b>开始出货。</li>
+      </ul>
+    </div>
+    <div class="factbox" style="background:#E2EAFF">
+      <h3>文化破圈事件</h3>
+      <ul>
+        <li>THE MONSTERS 参与<b>梅西百货感恩节大游行</b>及跨年演出。</li>
+        <li>LABUBU 于 <b>2026 年 6 月 12 日</b>亮相美加墨世界杯开幕式表演。</li>
+        <li>星星人作为特邀嘉宾亮相<b>英国国王生日派对</b>（2026 年 6 月 11 日）。</li>
+        <li>与<b>索尼影业</b>合作的 LABUBU 电影项目处于剧本创作阶段。</li>
+      </ul>
+    </div>
+    <div class="mapdots">
+      <span class="pill y">🇨🇳 中国 455 店</span>
+      <span class="pill b">亚太 90 店</span>
+      <span class="pill g">美洲 86 店</span>
+      <span class="pill m">欧洲及其他 45 店</span>
+      <span class="pill">合计 676 店（2026.6.30）</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · GROWTH ============ -->
+<section class="slide" id="s9">
+  <span class="kicker o">Growth Logic</span>
+  <h2>增长驱动逻辑：<span style="color:var(--orange)">四个乘数，一起放大</span></h2>
+  <div class="formula">
+    <div class="fm">IP 数量<i>可孵化资产池</i></div>
+    <div class="op">×</div>
+    <div class="fm">单 IP 产出<i>品类 × 频次 × 客单</i></div>
+    <div class="op">×</div>
+    <div class="fm">渠道密度<i>门店 + 机器人 + 线上</i></div>
+    <div class="op">×</div>
+    <div class="fm">会员复购<i>留存与生命周期</i></div>
+    <div class="op">=</div>
+    <div class="fm" style="color:var(--pink)">营收规模<i>2025：371.20 亿元</i></div>
+  </div>
+  <div class="drv">
+    <div class="dv">
+      <div class="dvn">1</div>
+      <div><b>IP 扩列：从单点依赖到梯队</b>
+      <p>2025 年 <em>17 个</em>艺术家 IP 收入过亿，SKULLPANDA、CRYBABY、MOLLY、DIMOO、星星人等 IP 营收均突破 <em>20 亿元</em>；2026 上半年 <em>6 个</em> IP 营收破 10 亿、<em>11 个</em>过亿。新锐 IP 星星人 2025 年 <em>+1602%</em>、2026 上半年 <em>+580.6%</em>。</p></div>
+    </div>
+    <div class="dv">
+      <div class="dvn">2</div>
+      <div><b>品类延展：把 IP 戴在身上</b>
+      <p>毛绒品类 2025 年营收 <em>187.1 亿元</em>（+560.6%），占比 <em>50.4%</em>，首次超越手办成为第一大品类；手办占比降至 <em>23.7%</em>。品类边界从"摆件"扩到"随身物"。</p></div>
+    </div>
+    <div class="dv">
+      <div class="dvn">3</div>
+      <div><b>会员复购：把流量变成留量</b>
+      <p>中国内地注册会员从 2025 年底 <em>7,258 万</em>增至 2026 年 6 月末 <em>8,244 万</em>；2025 年复购率 <em>55.7%</em>，2026 上半年会员贡献销售额占比 <em>92.9%</em>、复购率 <em>51.6%</em>。</p></div>
+    </div>
+    <div class="dv">
+      <div class="dvn">4</div>
+      <div><b>第二曲线：乐园 · 饰品 · 甜品 · 影视</b>
+      <p>POP LAND 客流 2025 年同比 <em>+70%</em>；POPOP 截至 2026 年 7 月 <em>8 家</em>门店；POP BAKERY 2026 年 6 月开出首店；LABUBU 电影与索尼影业合作推进中。</p></div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:14px">数据来源：泡泡玛特 2025 年度业绩公布（2026-03-25）、2026 年半年报（2026-08-20，上海证券报 / 中国证券报 / 光明网）、国泰海通证券《潮玩品类创新趋势》、泡泡玛特官网新闻。</p>
+</section>
+
+<!-- ============ 10 · RISK ============ -->
+<section class="slide" id="s10">
+  <div>
+    <div class="col-h r"><span class="dot"></span><h3>风险：热度能有多长</h3></div>
+    <div class="rlist">
+      <div class="risk"><span class="rnum">1</span><div><b>单 IP 依赖</b><p>THE MONSTERS 占 2025 年总营收 <em>38.1%</em>。虽有缓释（2026 上半年降至 <em>26%</em>），但仍缺乏 50 亿—100 亿级的过渡性 IP 接棒（券商与行业专家观点）。</p></div></div>
+      <div class="risk"><span class="rnum">2</span><div><b>增速与毛利率同步回落</b><p>营收增速从 2025 全年 <em>+184.7%</em> 回落至 2026 上半年 <em>+23.8%</em>；毛利率从 <em>72.1%</em> 降至 <em>69.7%</em>。</p></div></div>
+      <div class="risk"><span class="rnum">3</span><div><b>二级市场剧烈波动</b><p>2026 年 3 月 25 日年报发布后，港股泡泡玛特午后直线跳水、盘中跌超 <em>20%</em>，报约 <em>170.2 港元</em>，总市值不足 <em>2,300 亿港元</em>（中国经济网 / 界面新闻）。</p></div></div>
+      <div class="risk"><span class="rnum">4</span><div><b>稀缺性被稀释</b><p>2026 年 6 月出现新品发售半小时即降价超 <em>30%</em> 的罕见"破发"现象（中国经济网），二手溢价预期走弱会反噬盲盒的随机性吸引力。</p></div></div>
+      <div class="risk"><span class="rnum">5</span><div><b>盲盒合规与舆论</b><p>概率机制长期处于监管关注与消费者争议中；"黄牛""二次销售""未成年消费"等议题构成持续的舆论风险。</p></div></div>
+      <div class="risk"><span class="rnum">6</span><div><b>跨文化与供应链</b><p>海外收入占比已达 43.8%，本地化审美差异、关税与物流、海外产能爬坡（印尼 / 柬埔寨 / 墨西哥工厂）均需时间验证。</p></div></div>
+    </div>
+  </div>
+  <div>
+    <div class="col-h g"><span class="dot"></span><h3>展望：从爆红到长红</h3></div>
+    <div class="rlist">
+      <div class="ok"><span class="rnum">1</span><div><b>管理层定调：不低于 20% 增长</b><p>创始人王宁表示 2026 年目标是保持 <em>不低于 20%</em> 的增长，聚焦"可持续、有利润的增长"，而非追求短期数字。</p></div></div>
+      <div class="ok"><span class="rnum">2</span><div><b>首次公布大额回购计划</b><p>未来六个月内启动不低于 <em>20 亿元</em>、不高于 <em>50 亿元</em>的股份回购。2026 年 1 月及 3 月 26 日—4 月 2 日期间已分别回购约 <em>3.48 亿港元</em>与 <em>13.97 亿港元</em>。</p></div></div>
+      <div class="ok"><span class="rnum">3</span><div><b>北美继续加密</b><p>北美门店 2026 年底预计超 <em>100 家</em>；纽约时代广场与第五大道旗舰店计划于第四季度开业。</p></div></div>
+      <div class="ok"><span class="rnum">4</span><div><b>乐园扩容</b><p>POP LAND 新区域 2026 年 4 月 30 日开放、7 月 30 日全面开放；<em>2027 年</em>启动二期建设，新增 SKULLPANDA 与星星人主题场景。</p></div></div>
+      <div class="ok"><span class="rnum">5</span><div><b>内容化：从形象到叙事</b><p>与索尼影业合作的 LABUBU 电影处于剧本阶段；乐园原创音乐、演艺与城市级主题展持续为 IP 补充世界观。</p></div></div>
+      <div class="ok"><span class="rnum">6</span><div><b>组织与中台升级</b><p>2026 上半年聚焦"集团健康度"，重组组织架构与职能设置，强化中台赋能与全球协同；全球员工超 <em>12,000 人</em>。</p></div></div>
+    </div>
+    <p class="small" style="margin-top:11px">本页面不构成任何投资建议。数据来源：2026 年半年报及业绩电话会（2026-08-20，经济参考报 / 上海证券报 / 中国证券报）、2025 年度业绩公布、中国经济网（2026-03-26、2026-06-26）、光明网（2026-03-27）。</p>
+  </div>
+</section>
+
+<!-- ============ 11 · END ============ -->
+<section class="slide" id="s11">
+  <span class="kicker">Thank You</span>
+  <h2>泡泡玛特真正卖的不是塑料小人，<br>而是<em>拆开之前那三秒钟的心跳</em>。</h2>
+  <p class="end-lead">
+    把随机性做成产品，把稀缺性做成社群，把 IP 做成可以被反复讲述的故事——
+    这门生意的上限，取决于它能否让下一个 IP 也活过十年。
+  </p>
+  <div class="end-bb">
+    <div class="bb" style="--bw:96px;animation-delay:.2s"><div class="bb-lid"></div><div class="bb-band"></div><div class="bb-body"><div class="bb-slot" style="height:6px"></div><div class="bb-q" style="font-size:38px">?</div></div></div>
+    <div class="bb" style="--bw:96px;animation-delay:.9s"><div class="bb-lid" style="background:linear-gradient(160deg,#2B5BFF,#7C4DFF)"></div><div class="bb-band" style="background:var(--yellow)"></div><div class="bb-body" style="background:linear-gradient(170deg,#D6F7EC,#00CFA0)"><div class="bb-slot" style="height:6px"></div><div class="bb-q" style="font-size:38px">?</div></div></div>
+    <div class="bb" style="--bw:96px;animation-delay:1.5s"><div class="bb-lid" style="background:linear-gradient(160deg,#FF7A1A,#FFD400)"></div><div class="bb-band" style="background:var(--pink)"></div><div class="bb-body" style="background:linear-gradient(170deg,#FFE6EF,#FF4D8D)"><div class="bb-slot" style="height:6px"></div><div class="bb-q" style="font-size:38px">?</div></div></div>
+  </div>
+  <div class="srcbox">
+    <h4>DATA SOURCES · 数据来源</h4>
+    <ol>
+      <li>泡泡玛特国际集团《截至 2025 年 12 月 31 日止年度的年度业绩公布》（港交所披露易，2026-03-25，股份代号 9992）——营收、毛利、净利、毛利率、分区域收入、门店与机器人商店数、会员数、POP LAND 与 POPOP / POP BAKERY 进展。</li>
+      <li>泡泡玛特 2026 年半年报 / 中期业绩（2026-08-20）——营收 171.7 亿元、经调整净利 51.6 亿元、毛利率 69.7%、676 家门店与 2,827 台机器人商店、分区域门店与收入、各 IP 上半年收入、回购计划。转载引自上海证券报·中国证券网、中国证券报、经济参考报、光明网。</li>
+      <li>Guangming Online（en.gmw.cn，2026-03-27）2025 年度业绩发布会报道——海外收入占比 43.8%、员工结构、六大生产基地、北美门店规划。</li>
+      <li>21 世纪经济报道、中国经济时报·中时财经、中国经济网（2026-03-26 / 2026-06-26）——分 IP 营收明细、品类结构、股价与"破发"事件。</li>
+      <li>国泰海通证券《潮玩品类创新趋势：毛绒占比升至 50.4% 超手办》（三个皮匠报告转载）——品类占比、POPOP / POP BAKERY / POP LAND 业态数据。</li>
+      <li>盲盒概率：泡泡玛特官方商品页公示口径（常规 12 款 / 隐藏款生产配比 1:144，概率基于全系列生产总量制定）；媒体印证见人民日报客户端、蓝鲸财经（2021-12-27）及行业媒体报道。</li>
+      <li>本演示中的人物图形、盲盒与图标均为 CSS 手绘抽象示意，未使用任何官方 IP 形象或图片素材。</li>
+    </ol>
+  </div>
+</section>
+
+</div>
+</div>
+
+<div id="chrome">
+  <button class="btn" id="prev" title="上一页">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="btn" id="next" title="下一页">›</button>
+  <span id="pageno">1 / 11</span>
+</div>
+<div id="fsmark"><button class="btn" id="fs">全屏</button></div>
+<div id="hint">← → 翻页 · F 全屏</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var n = slides.length, cur = 0;
+  var dots = document.getElementById('dots');
+  var pageno = document.getElementById('pageno');
+  var bar = document.getElementById('bar');
+
+  // dots
+  slides.forEach(function(_, i){
+    var d = document.createElement('i');
+    d.addEventListener('click', function(){ go(i); });
+    dots.appendChild(d);
+  });
+  var dotEls = Array.prototype.slice.call(dots.children);
+
+  function fillGrid(){
+    var g = document.getElementById('dg');
+    if(!g || g.childElementCount) return;
+    for(var i=0;i<144;i++){
+      var s = document.createElement('i');
+      if(i===57) s.className = 'hit';
+      g.appendChild(s);
+    }
+  }
+  fillGrid();
+
+  function animateBars(slide){
+    slide.querySelectorAll('[data-w]').forEach(function(el){
+      var w = el.getAttribute('data-w');
+      el.style.width = '0%';
+      setTimeout(function(){ el.style.width = w + '%'; }, 120);
+    });
+  }
+
+  function go(i){
+    i = Math.max(0, Math.min(n-1, i));
+    if(i === cur && slides[i].classList.contains('active')) return;
+    slides[cur].classList.remove('active');
+    cur = i;
+    var s = slides[cur];
+    s.classList.add('active');
+    animateBars(s);
+    dotEls.forEach(function(d, k){
+      d.classList.toggle('on', k === cur);
+      d.classList.toggle('done', k < cur);
+    });
+    pageno.textContent = (cur+1) + ' / ' + n;
+    bar.style.width = ((cur+1)/n*100) + '%';
+    if(location.hash !== '#'+(cur+1)) history.replaceState(null,'','#'+(cur+1));
+  }
+  window.go = go;
+
+  document.getElementById('next').addEventListener('click', function(){ go(cur+1); });
+  document.getElementById('prev').addEventListener('click', function(){ go(cur-1); });
+
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    if(k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter'){ e.preventDefault(); go(cur+1); }
+    else if(k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace'){ e.preventDefault(); go(cur-1); }
+    else if(k === 'Home'){ go(0); }
+    else if(k === 'End'){ go(n-1); }
+    else if(k === 'f' || k === 'F'){ toggleFs(); }
+  });
+
+  var fsBtn = document.getElementById('fs');
+  function toggleFs(){
+    if(!document.fullscreenElement){ document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+    else { document.exitFullscreen && document.exitFullscreen(); }
+  }
+  fsBtn.addEventListener('click', toggleFs);
+
+  // touch swipe
+  var tx = 0, ty = 0;
+  document.addEventListener('touchstart', function(e){ tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if(Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)){ go(cur + (dx < 0 ? 1 : -1)); }
+  }, {passive:true});
+
+  // fit
+  var stage = document.getElementById('stage');
+  function fit(){
+    var chromeH = 74, pad = 32;
+    var s = Math.min((window.innerWidth - pad) / 1280, (window.innerHeight - chromeH - pad) / 720);
+    stage.style.transform = 'scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  var start = parseInt((location.hash || '#1').slice(1), 10);
+  if(isNaN(start) || start < 1 || start > n) start = 1;
+  slides[0].classList.add('active');
+  go(start - 1);
+})();
+</script>
+</body>
+</html>

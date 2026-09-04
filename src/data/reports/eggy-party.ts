@@ -8,7 +8,6 @@ export const eggyPartyReport: Report = {
   shortTitle: '蛋仔派对',
   summary:
     '从核心循环、玩家分层、社交动机、UGC 供给与外观商业化出发，分析一款派对游戏如何从“好玩一局”走向长期内容生态。',
-  date: '2026.08.30',
   readTime: '13 min read',
   accent: 'dark',
   heroImages: [

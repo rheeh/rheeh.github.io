@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOBA 手游机制拆解与《漫威超级战争》失败归因研究</title>
+<style>
+  :root{
+    --ink:#1a1a1a;
+    --ink-2:#3d3d3d;
+    --muted:#6b6b6b;
+    --line:#d8d8d8;
+    --line-2:#ececec;
+    --bg:#ffffff;
+    --panel:#f7f7f5;
+    --accent:#23405e;
+    --accent-2:#4a7099;
+    --warn:#9c3328;
+    --warn-bg:#fbf3f2;
+    --ok:#2f6b4f;
+    --ok-bg:#f2f7f4;
+    --note-bg:#f7f6f2;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Songti SC","SimSun","Source Han Serif SC","Noto Serif CJK SC",Georgia,serif;
+    font-size:16px;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:64px 40px 120px;}
+
+  /* ---------- 封面 ---------- */
+  .cover{border-bottom:3px double var(--accent);padding-bottom:28px;margin-bottom:8px;}
+  .kicker{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:12px;letter-spacing:.22em;color:var(--accent);
+    text-transform:uppercase;margin-bottom:18px;font-weight:600;
+  }
+  h1{
+    font-size:31px;line-height:1.4;margin:0 0 6px;font-weight:700;letter-spacing:.01em;
+  }
+  .subtitle{font-size:17px;color:var(--ink-2);margin:0 0 22px;font-weight:400;}
+  .meta{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 22px;
+  }
+  .meta b{color:var(--ink-2);font-weight:600;}
+
+  /* ---------- 摘要块 ---------- */
+  .abstract{
+    background:var(--panel);border-left:4px solid var(--accent);
+    padding:22px 26px;margin:34px 0 40px;
+  }
+  .abstract h2{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:13px;letter-spacing:.16em;margin:0 0 12px;color:var(--accent);font-weight:700;
+  }
+  .abstract p{margin:0 0 10px;font-size:15px;line-height:1.9;text-align:justify;}
+  .abstract p:last-child{margin-bottom:0;}
+  .kw{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:12.5px;color:var(--muted);margin-top:14px;padding-top:12px;border-top:1px solid var(--line);
+  }
+  .kw b{color:var(--ink-2);}
+
+  /* ---------- 标题 ---------- */
+  h2.sec{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:20px;font-weight:700;color:var(--accent);
+    margin:56px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line);
+    letter-spacing:.01em;
+  }
+  h2.sec .num{color:var(--accent-2);margin-right:12px;font-variant-numeric:tabular-nums;}
+  h3{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:16px;font-weight:700;margin:34px 0 12px;color:var(--ink);
+  }
+  h4{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:14px;font-weight:700;margin:22px 0 8px;color:var(--ink-2);
+  }
+  p{margin:0 0 14px;text-align:justify;}
+  ul,ol{margin:0 0 16px;padding-left:24px;}
+  li{margin-bottom:7px;line-height:1.85;}
+  strong{font-weight:700;}
+  em{font-style:normal;background:linear-gradient(transparent 62%, #e8eef4 62%);font-weight:600;}
+
+  /* ---------- 表格 ---------- */
+  .tbl-wrap{margin:22px 0 26px;overflow-x:auto;}
+  table{
+    width:100%;border-collapse:collapse;
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:13px;line-height:1.65;
+  }
+  caption{
+    caption-side:top;text-align:left;font-size:12.5px;color:var(--muted);
+    padding-bottom:8px;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+  caption b{color:var(--ink);font-weight:700;}
+  th{
+    background:#eef1f4;color:var(--ink);font-weight:700;text-align:left;
+    padding:9px 11px;border:1px solid var(--line);white-space:nowrap;
+  }
+  td{padding:9px 11px;border:1px solid var(--line);vertical-align:top;color:var(--ink-2);}
+  tbody tr:nth-child(even){background:#fbfbfa;}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;}
+  .pos{color:var(--ok);font-weight:700;}
+  .neg{color:var(--warn);font-weight:700;}
+  .mid{color:#8a6d1f;font-weight:700;}
+
+  /* ---------- 图 ---------- */
+  figure{margin:30px 0 34px;}
+  figure svg{display:block;width:100%;height:auto;background:#fff;}
+  figcaption{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.7;
+  }
+  figcaption b{color:var(--ink);font-weight:700;}
+  .fig-hd{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px;
+  }
+
+  /* ---------- 提示框 ---------- */
+  .box{border:1px solid var(--line);background:var(--note-bg);padding:16px 20px;margin:22px 0;font-size:14.5px;}
+  .box.warn{border-left:4px solid var(--warn);background:var(--warn-bg);}
+  .box.ok{border-left:4px solid var(--ok);background:var(--ok-bg);}
+  .box .bt{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:12.5px;font-weight:700;letter-spacing:.08em;margin-bottom:8px;display:block;
+  }
+  .box.warn .bt{color:var(--warn);}
+  .box.ok .bt{color:var(--ok);}
+  .box p:last-child{margin-bottom:0;}
+
+  /* ---------- 下行螺旋 ---------- */
+  .cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:26px 0 8px;align-items:stretch;}
+  .cy-node{
+    border:1px solid var(--line);background:#f4f6f8;padding:14px 10px;text-align:center;
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;font-size:12.5px;
+    display:flex;flex-direction:column;justify-content:center;min-height:96px;position:relative;
+  }
+  .cy-node .sn{
+    display:block;font-size:10.5px;color:#fff;background:var(--accent-2);
+    width:20px;height:20px;line-height:20px;border-radius:50%;margin:0 auto 8px;font-weight:700;
+  }
+  .cy-node b{display:block;font-size:13px;margin-bottom:5px;color:var(--ink);line-height:1.4;}
+  .cy-node span{color:var(--muted);font-size:11.5px;line-height:1.6;}
+  .cy-arrow{
+    display:flex;align-items:center;justify-content:center;color:var(--accent-2);
+    font-size:15px;font-weight:700;flex:0 0 22px;
+  }
+
+  /* ---------- 时间轴 ---------- */
+  .tl{margin:24px 0 10px;border-left:2px solid var(--line);padding-left:0;}
+  .tl-row{
+    display:grid;grid-template-columns:120px 1fr;gap:0;
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    border-bottom:1px solid var(--line-2);
+  }
+  .tl-row:last-child{border-bottom:none;}
+  .tl-d{padding:12px 14px;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;background:#fafafa;border-right:1px solid var(--line-2);}
+  .tl-c{padding:12px 16px;font-size:13.5px;color:var(--ink-2);line-height:1.7;}
+  .tl-c b{color:var(--ink);}
+  .tag{
+    display:inline-block;font-size:11px;padding:1px 7px;border-radius:2px;
+    font-weight:700;margin-left:8px;vertical-align:1px;
+  }
+  .tag.up{background:#f7ecea;color:var(--warn);}
+  .tag.dn{background:#eef3ef;color:var(--ok);}
+  .tag.nu{background:#eef1f4;color:var(--accent);}
+
+  /* ---------- 引用 ---------- */
+  .ref-list{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:12.5px;color:var(--ink-2);line-height:1.85;padding-left:26px;
+  }
+  .ref-list li{margin-bottom:7px;word-break:break-all;}
+  sup.r{color:var(--accent);font-weight:700;font-size:11px;cursor:default;}
+  .src{font-family:-apple-system,"PingFang SC",sans-serif;font-size:11.5px;color:var(--muted);}
+
+  .divider{border:none;border-top:1px solid var(--line-2);margin:44px 0;}
+  footer{
+    margin-top:60px;padding-top:20px;border-top:3px double var(--accent);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:12px;color:var(--muted);line-height:1.8;
+  }
+  @media(max-width:760px){
+    .wrap{padding:36px 20px 80px;}
+    h1{font-size:24px;}
+    .cycle{grid-template-columns:1fr;}
+    .cy-arrow{padding:6px 0;transform:rotate(90deg);}
+    .tl-row{grid-template-columns:96px 1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ============ 封面 ============ -->
+<div class="cover">
+  <div class="kicker">Game Design · 品类复盘 · 归因研究</div>
+  <h1>MOBA 手游机制拆解与《漫威超级战争》失败归因</h1>
+  <p class="subtitle">—— 从六层系统模型到「品类–平台–IP」错配的量化诊断</p>
+  <div class="meta">
+    <span><b>研究方法</b>　文档基线 + 公开二手数据交叉核验</span>
+    <span><b>样本</b>　4 款 MOBA 手游 · 4 款网易漫威产品线</span>
+    <span><b>形式</b>　交互式产品复盘</span>
+  </div>
+</div>
+
+<!-- ============ 摘要 ============ -->
+<div class="abstract">
+  <h2>摘　要</h2>
+  <p>本文在既有《王者荣耀》系统拆解的基础上，补充检索行业媒体（GameLook、娱乐资本论、伽马数据）、券商研究（德邦研究所/Sensor Tower）、玩家社区（TapTap、巴哈姆特、Reddit）与厂商公开披露（网易 GDC 2026 演讲）等一手与二手信源，构建 MOBA 手游的<strong>六层系统模型</strong>（核心循环层 / 操作层 / 英雄层 / 对局层 / 元游戏层 / 生态层），并据此对《漫威超级战争》（MARVEL Super War，2019-12 海外首发、2021-07 国服上线、2024-06-17 停服）做机制层面的逐层体检。</p>
+  <p>核心发现有三。其一，《漫威超级战争》并非「没有创新」——它在<em>系统层</em>做了 7 项差异化设计（能源核心、行星吞噬者、苏尔特尔、反重力装置、双召唤师技能等），但玩家价值集中在<em>手感层与社交层</em>，创新与用户需求存在结构性错位。其二，其失败不可归因于「漫威 IP 不行」——同 IP 的《漫威争锋》全球累计用户突破 4000 万<sup class="r">[12]</sup>；也不可归因于「MOBA 品类已死」——2025 年中国 MOBA 手游市场规模 417.5 亿元、同比 +10.2%<sup class="r">[9]</sup>。其三，真正的死因是<strong>在由社交网络效应主导的品类里，选择了网易不具备关系链基础设施的战场</strong>：八维加权评分显示其综合得分 3.45/10，低于「生态自持线」（约 4.5），也低于同厂同品类的《决战！平安京》（4.98，活着但小众）。</p>
+  <p>本文进一步给出可复用的 <strong>MOBA 新品立项 Go/No-Go 检查清单</strong>，并提出核心判断：MOBA 品类的竞争壁垒已从「玩法层」迁移至「生态层」，IP 光环只能降低首次获客成本，无法替代社交关系链与长线运营。</p>
+  <div class="kw"><b>关键词</b>　MOBA 机制拆解；社交网络效应；匹配池；IP 品类适配；漫威超级战争；失败归因；Go/No-Go 检查清单</div>
+</div>
+
+<!-- ============ 一、方法与数据 ============ -->
+<h2 class="sec"><span class="num">01</span>研究方法与数据口径</h2>
+
+<p>本文采用<strong>基线文档 + 增量检索 + 交叉核验</strong>三段式：以用户提供的《王者荣耀等 MOBA 游戏拆解》为分析基线（其已覆盖 Sensor Tower、AppMagic、AMiner 学术库等 32 项引证），在此基础上补充检索中文行业媒体与玩家社区，重点补齐原报告自述薄弱的四块——本地化策略、商业化付费细节、赛事体系建设、用户口碑定量数据。</p>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 1</b>　关键数据来源与可信度分级（A＝厂商/权威机构披露；B＝行业媒体或券商测算；C＝玩家社区或第三方估算）</caption>
+  <thead>
+    <tr><th style="width:26%">指标</th><th style="width:34%">数值</th><th style="width:24%">来源</th><th style="width:16%">分级</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>漫威超级战争生命周期总收入</td><td class="num">略超 1000 万美元（IAP）</td><td>AppMagic / GamerBraves</td><td class="mid">B</td></tr>
+    <tr><td>国服首周 iOS 下载与净收入</td><td class="num">142.3 万次 / 49.2 万美元<br><span class="src">（2021-07-14 至 07-18）</span></td><td>Sensor Tower / 德邦研究所</td><td class="mid">B</td></tr>
+    <tr><td>MAU 衰减轨迹</td><td class="num">740 万（2021-04）→ 407 万（2021-10）→ 272 万（2022-07）→ 283 万（2023-10）</td><td>ActivePlayer.io 估算</td><td class="neg">C</td></tr>
+    <tr><td>玩家评分（上线期）</td><td class="num">TapTap 5.7 / App Store 3.6</td><td>读娱（搜狐）</td><td class="mid">B</td></tr>
+    <tr><td>玩家评分（停服后）</td><td class="num">TapTap 6.5（11,352 条评价）</td><td>TapTap 官方页</td><td class="pos">A</td></tr>
+    <tr><td>2021 年 7 月榜单表现</td><td>iOS 下载测算榜 TOP10 第 5 位；新游首月流水测算榜 TOP5 <b>末位</b></td><td>伽马数据《2021 年 7 月移动游戏报告》</td><td class="pos">A</td></tr>
+    <tr><td>2025 中国移动 MOBA 市场规模</td><td class="num">417.5 亿元（+10.2%）；用户 2.6 亿</td><td>艾瑞咨询</td><td class="pos">A</td></tr>
+    <tr><td>漫威争锋全球累计用户</td><td class="num">4000 万+；Discord 420 万</td><td>网易 GDC 2026 演讲</td><td class="pos">A</td></tr>
+    <tr><td>网易漫威 IP 五年总投入</td><td class="num">至少数十亿元人民币</td><td>GameLook 估计</td><td class="mid">B</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <span class="bt">⚠ 口径声明</span>
+  <p>「生命周期收入 1000 万美元」为游戏内购（IAP）口径，「投入数十亿元」为网易漫威 IP 多项目总投入口径，二者不可直接相减。但即使仅看单产品，一款研发历时三年、需要持续支付迪士尼授权费的产品，对应千万美元级生命周期收入，商业上无法自洽。此外，ActivePlayer.io 的 MAU 为外部估算模型输出，2022-07 至 2023-10 区间出现 272 万→283 万的反向波动，应理解为<strong>低位平台期的估算噪声</strong>而非真实回升。</p>
+</div>
+
+<!-- ============ 二、MOBA 六层系统模型 ============ -->
+<h2 class="sec"><span class="num">02</span>MOBA 手游的六层系统模型</h2>
+
+<p>MOBA 不是单一玩法，而是六层相互依赖的系统栈。<strong>下层决定「能不能玩」，上层决定「能不能留」</strong>——这是理解《漫威超级战争》失败的第一把钥匙：它在第 4–6 层（对局层、元游戏层、生态层）做了大量设计，却在第 1–2 层（核心循环、操作手感）未达品类及格线。</p>
+
+<figure>
+  <div class="fig-hd">图 1　MOBA 手游六层系统模型（自下而上：下层为准入门槛，上层为壁垒高度）</div>
+  <svg viewBox="0 0 680 372" role="img" aria-label="MOBA六层系统模型">
+    <defs>
+      <style>
+        .lname{font:700 14px -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#fff;}
+        .lfn{font:400 12px -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#dbe6ef;}
+        .lidx{font:700 13px -apple-system,"PingFang SC",sans-serif;fill:#8a8a8a;}
+        .ltag{font:600 10.5px -apple-system,"PingFang SC",sans-serif;fill:#9c3328;}
+        .axl{font:600 11px -apple-system,"PingFang SC",sans-serif;fill:#23405e;}
+      </style>
+    </defs>
+
+    <!-- 层6 生态层 -->
+    <rect x="90" y="16" width="560" height="46" rx="3" fill="#6E93B8"/>
+    <text class="lidx" x="80" y="45" text-anchor="end">L6</text>
+    <text class="lname" x="108" y="38">生态层</text>
+    <text class="lfn" x="196" y="37">社交关系链 · 电竞联赛 · 直播/UGC 内容 · 线下场景</text>
+    <text class="ltag" x="108" y="55">决定天花板：网络效应，赢家通吃</text>
+
+    <!-- 层5 元游戏层 -->
+    <rect x="90" y="70" width="560" height="46" rx="3" fill="#5A81A8"/>
+    <text class="lidx" x="80" y="99" text-anchor="end">L5</text>
+    <text class="lname" x="108" y="92">元游戏层</text>
+    <text class="lfn" x="196" y="91">段位与赛季 · 英雄池广度 · 皮肤商业化 · 战令与活动</text>
+    <text class="ltag" x="108" y="109">决定变现深度：ARPU 与留存时长</text>
+
+    <!-- 层4 对局层 -->
+    <rect x="90" y="124" width="560" height="46" rx="3" fill="#4A7099"/>
+    <text class="lidx" x="80" y="153" text-anchor="end">L4</text>
+    <text class="lname" x="108" y="146">对局层</text>
+    <text class="lfn" x="196" y="145">地图与三路 · 野区与中立资源 · 节奏曲线 · 视野与信息</text>
+    <text class="ltag" x="108" y="163">决定博弈深度：策略空间与翻盘可能</text>
+
+    <!-- 层3 英雄层 -->
+    <rect x="90" y="178" width="560" height="46" rx="3" fill="#3A5D82"/>
+    <text class="lidx" x="80" y="207" text-anchor="end">L3</text>
+    <text class="lname" x="108" y="200">英雄层</text>
+    <text class="lfn" x="196" y="199">职业定位 · 技能组设计 · 成长曲线 · 平衡性迭代</text>
+    <text class="ltag" x="108" y="217">决定内容供给：版本新鲜感</text>
+
+    <!-- 层2 操作层 -->
+    <rect x="90" y="232" width="560" height="46" rx="3" fill="#2E4C6D"/>
+    <text class="lidx" x="80" y="261" text-anchor="end">L2</text>
+    <text class="lname" x="108" y="254">操作层</text>
+    <text class="lfn" x="196" y="253">双摇杆映射 · 目标锁定 · 打击反馈 · 帧率与延迟</text>
+    <text class="ltag" x="108" y="271">决定准入门槛：AHP 研究中的最高权重维度</text>
+
+    <!-- 层1 核心循环层 -->
+    <rect x="90" y="286" width="560" height="46" rx="3" fill="#233B57"/>
+    <text class="lidx" x="80" y="315" text-anchor="end">L1</text>
+    <text class="lname" x="108" y="308">核心循环层</text>
+    <text class="lfn" x="196" y="307">补刀/经济 → 装备/经验 → 推塔 → 摧毁基地</text>
+    <text class="ltag" x="108" y="325">决定品类身份：不达标则「不像 MOBA」</text>
+
+    <!-- 右侧标注 -->
+    <path d="M 664 332 L 664 308" stroke="#23405e" stroke-width="1.5" fill="none"/>
+    <path d="M 664 332 L 664 18" stroke="#23405e" stroke-width="1.5" fill="none" stroke-dasharray="0"/>
+    <path d="M 660 332 L 664 336 L 668 332 M 660 22 L 664 18 L 668 22" stroke="#23405e" stroke-width="1.5" fill="none"/>
+    <text class="axl" x="656" y="180" text-anchor="middle" transform="rotate(-90 656 180)">自下而上：先过及格线，再谈差异化</text>
+
+    <text x="90" y="356" style="font:400 11px -apple-system,'PingFang SC',sans-serif;fill:#8a8a8a;">注：层级划分基于对《王者荣耀》《英雄联盟手游》《决战！平安京》《漫威超级战争》四款产品的机制解构归纳，非行业标准模型。</text>
+  </svg>
+  <figcaption><b>图 1</b>　MOBA 六层系统模型。张瑞秋、黄纬的 AHP 研究量化得出「易用性」为 MOBA 手游交互设计最高权重准则<sup class="r">[6]</sup>，对应本文 L2 操作层；而决定长期留存与变现的则是 L6 生态层——二者构成 MOBA 的「双关键层」。</figcaption>
+</figure>
+
+<h3>2.1　机制参数横向对照</h3>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 2</b>　四款 MOBA 手游核心机制参数对照（灰底行为品类共性，白底行为差异项）</caption>
+  <thead>
+    <tr>
+      <th style="width:15%">维度</th>
+      <th style="width:23%">王者荣耀</th>
+      <th style="width:24%">漫威超级战争</th>
+      <th style="width:19%">决战！平安京</th>
+      <th style="width:19%">英雄联盟手游</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><b>上线时间</b></td><td>2015-11（国服）</td><td>2019-12 海外<br>2021-07 国服</td><td>2018-01</td><td>2020-10 海外<br>2021-10 国服</td></tr>
+    <tr><td><b>单局时长</b></td><td>12–18 分钟</td><td>偏短（玩家反馈地图偏小、塔伤极高）</td><td>15–25 分钟</td><td>15–20 分钟</td></tr>
+    <tr><td><b>地图结构</b></td><td>对称三路（镜像）</td><td>瓦坎达战场，三路 + 动态事件</td><td>轴对称，约为王者 1.5 倍，含战争迷雾</td><td>召唤师峡谷简化版</td></tr>
+    <tr><td><b>技能体系</b></td><td>3 主动 + 1 被动</td><td>4 主动 + 1 被动，18 级满级制（6/12/18 级升大招）</td><td>4 主动 + 2 被动</td><td>3 主动 + 1 被动</td></tr>
+    <tr><td><b>局外养成</b></td><td>铭文（可免费积累，红/绿/蓝三色槽）</td><td>能源核心（6 选 1 + 3 组各 4 选 1，无付费）</td><td>阴阳术（无付费）</td><td>符文</td></tr>
+    <tr><td><b>召唤师技能</b></td><td>1 个</td><td>2 个（含「侦测」「转移」）</td><td>2 个</td><td>2 个</td></tr>
+    <tr><td><b>中立资源</b></td><td>暴君 / 主宰（2 分钟刷新，暴君 9:30 进化）</td><td>行星吞噬者 · 苏尔特尔 · 黑豹之灵 · 野区物资</td><td>大蛇 / 石距</td><td>小龙 / 大龙</td></tr>
+    <tr><td><b>英雄规模</b></td><td>160+（2026）</td><td>50+（停服时约 60+）</td><td>100+（含大量联动角色）</td><td>100+</td></tr>
+    <tr><td><b>社交底座</b></td><td class="pos">微信 / QQ 关系链（LBS 战区、跨区五排、亲密关系）</td><td class="neg">网易账号体系</td><td class="neg">网易账号体系</td><td class="mid">拳头账号 + 区域发行方</td></tr>
+    <tr><td><b>赛事体系</b></td><td class="pos">KPL 三级体系（全球/洲际/高校）</td><td class="neg">无成体系联赛</td><td class="mid">OPL，规模有限</td><td class="pos">全球赛事体系</td></tr>
+    <tr><td><b>结局</b></td><td class="pos">2025 国服 DAU 1.39 亿</td><td class="neg">2024-06 停服</td><td class="mid">长尾运营，未破圈</td><td class="mid">细分市场稳定</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box ok">
+  <span class="bt">◆ 由表 2 得到的关键推论</span>
+  <p>《决战！平安京》与《漫威超级战争》共享同一个结构性短板——<strong>网易账号体系，无熟人关系链</strong>。前者靠阴阳师 IP 输血、至今长尾存活但从未破圈；后者连输血的存量 IP 都没有（漫威 IP 在中国是「认知度高于情感黏性」的进口 IP）。这构成一个天然对照实验：<em>在控制「厂商 / 社交底座 / 赛道」三个变量后，MOBA 手游的命运差异主要不由玩法质量决定。</em></p>
+</div>
+
+<!-- ============ 三、品类结构 ============ -->
+<h2 class="sec"><span class="num">03</span>品类结构：高 ARPU、低渗透、强网络效应</h2>
+
+<p>MOBA 是手游中最典型的<strong>网络效应品类</strong>：每一个新用户都同时提升所有老用户的匹配质量，因此用户规模本身就是产品功能的一部分。这解释了为何该品类呈现极端的头部集中。</p>
+
+<figure>
+  <div class="fig-hd">图 2a　2025 年移动 MOBA 收入对比（全量级刻度，单位：百万美元）</div>
+  <svg viewBox="0 0 680 208" role="img" aria-label="2025移动MOBA收入对比全量级">
+    <defs><style>
+      .bl{font:400 12px -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#3d3d3d;}
+      .bv{font:700 11.5px -apple-system,"PingFang SC",sans-serif;fill:#1a1a1a;}
+      .ax{font:400 10.5px -apple-system,"PingFang SC",sans-serif;fill:#8a8a8a;}
+      .ann{font:600 11px -apple-system,"PingFang SC",sans-serif;fill:#9c3328;}
+    </style></defs>
+    <!-- 基线 -->
+    <line x1="150" y1="182" x2="660" y2="182" stroke="#d8d8d8" stroke-width="1"/>
+
+    <text class="bl" x="140" y="44" text-anchor="end">王者荣耀 HoK</text>
+    <rect x="150" y="30" width="430" height="20" fill="#23405e"/>
+    <text class="bv" x="588" y="45">$1,600M</text>
+
+    <text class="bl" x="140" y="74" text-anchor="end">无尽对决 MLBB</text>
+    <rect x="150" y="60" width="42.5" height="20" fill="#4A7099"/>
+    <text class="bv" x="200" y="75">$158M</text>
+
+    <text class="bl" x="140" y="104" text-anchor="end">英雄联盟手游</text>
+    <rect x="150" y="90" width="18.1" height="20" fill="#4A7099"/>
+    <text class="bv" x="176" y="105">$67.4M</text>
+
+    <text class="bl" x="140" y="134" text-anchor="end">宝可梦大集结</text>
+    <rect x="150" y="120" width="4" height="20" fill="#4A7099"/>
+    <text class="bv" x="162" y="135">$14.1M</text>
+
+    <text class="bl" x="140" y="164" text-anchor="end">漫威超级战争 <tspan fill="#9c3328">*</tspan></text>
+    <rect x="150" y="150" width="3" height="20" fill="#9c3328"/>
+    <text class="bv" x="161" y="165" fill="#9c3328">$10M</text>
+
+    <text class="ax" x="150" y="196">0</text>
+    <text class="ax" x="580" y="196">1600</text>
+    <text class="ann" x="150" y="24">← 头部产品占据全部视觉空间，尾部产品在真实刻度下几乎不可见</text>
+  </svg>
+  <figcaption><b>图 2a</b>　数据来源：AppMagic（经 GamingonPhone 整理）<sup class="r">[10]</sup>。<b>*</b> 漫威超级战争为<b>生命周期累计 IAP</b>，非年度收入，不可与其他产品直接同比——即便如此，其量级差距仍在 2 个数量级以上。</figcaption>
+</figure>
+
+<figure>
+  <div class="fig-hd">图 2b　尾部放大（0–170 百万美元刻度）</div>
+  <svg viewBox="0 0 680 172" role="img" aria-label="尾部放大对比">
+    <line x1="150" y1="150" x2="660" y2="150" stroke="#d8d8d8" stroke-width="1"/>
+
+    <text class="bl" x="140" y="38" text-anchor="end" style="font:400 12px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">无尽对决 MLBB</text>
+    <rect x="150" y="24" width="400" height="20" fill="#4A7099"/>
+    <text class="bv" x="558" y="39" style="font:700 11.5px -apple-system,sans-serif;fill:#1a1a1a;">$158M（2025 年度）</text>
+
+    <text class="bl" x="140" y="70" text-anchor="end" style="font:400 12px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">英雄联盟手游</text>
+    <rect x="150" y="56" width="170.6" height="20" fill="#5A81A8"/>
+    <text class="bv" x="329" y="71" style="font:700 11.5px -apple-system,sans-serif;fill:#1a1a1a;">$67.4M（2025 年度）</text>
+
+    <text class="bl" x="140" y="102" text-anchor="end" style="font:400 12px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">宝可梦大集结</text>
+    <rect x="150" y="88" width="35.7" height="20" fill="#6E93B8"/>
+    <text class="bv" x="194" y="103" style="font:700 11.5px -apple-system,sans-serif;fill:#1a1a1a;">$14.1M（2025 年度）</text>
+
+    <text class="bl" x="140" y="134" text-anchor="end" style="font:400 12px -apple-system,'PingFang SC',sans-serif;fill:#9c3328;">漫威超级战争</text>
+    <rect x="150" y="120" width="25.4" height="20" fill="#9c3328"/>
+    <text class="bv" x="184" y="135" style="font:700 11.5px -apple-system,sans-serif;fill:#9c3328;">$10M（全生命周期，2019–2024）</text>
+
+    <text class="ax" x="150" y="164" style="font:400 10.5px -apple-system,sans-serif;fill:#8a8a8a;">0</text>
+    <text class="ax" x="580" y="164" style="font:400 10.5px -apple-system,sans-serif;fill:#8a8a8a;">170</text>
+  </svg>
+  <figcaption><b>图 2b</b>　即便只比较尾部，漫威超级战争仍以「4.5 年累计」对拼竞品「1 年」收入。宝可梦大集结虽有全球最强 IP 之一、2910 万下载，也仅录得 $14.1M——<strong>IP 强度与 MOBA 变现能力之间不存在正相关</strong>，这是本文最重要的实证观察之一。</figcaption>
+</figure>
+
+<div class="box">
+  <span class="bt">▣ 结构性判断</span>
+  <p>2024 年 Q2 全球 MOBA 手游以 <b>1.4% 的下载份额</b>贡献 <b>6.1% 的收入</b>，下载量在所有子品类中排名第 27 位<sup class="r">[2]</sup>。这一「高 ARPU、低渗透」结构意味着：<strong>新入局者争夺的不是增量蓝海，而是存量用户的迁移成本</strong>。而 MOBA 用户的迁移成本中，占比最大的一项不是「英雄熟练度」或「充值沉没成本」，而是<em>「我的朋友在哪，我就在哪」</em>。</p>
+</div>
+
+<!-- ============ 四、漫威超级战争机制拆解 ============ -->
+<h2 class="sec"><span class="num">04</span>《漫威超级战争》机制拆解：它其实做了什么</h2>
+
+<p>将「换皮」作为对该产品的全部评价并不公允。逐层核对后可见，它在 L3–L4 层（英雄层、对局层）确实做了 7 项向前的设计尝试。问题在于：<strong>这些创新发生在用户价值密度最低的层。</strong></p>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 3</b>　机制创新 → 玩家价值映射诊断（感知度与留存贡献为本文基于玩家评论文本与榜单表现的综合评估，0–5 分）</caption>
+  <thead>
+    <tr>
+      <th style="width:22%">创新机制</th>
+      <th style="width:24%">设计意图</th>
+      <th class="num" style="width:11%">感知度</th>
+      <th class="num" style="width:12%">留存贡献</th>
+      <th style="width:31%">诊断</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>能源核心</b><br><span class="src">替代付费铭文</span></td>
+      <td>公平竞技，降低氪金壁垒</td>
+      <td class="num mid">3</td><td class="num neg">1</td>
+      <td>解决了一个<strong>不是痛点的痛点</strong>：王者铭文可免费积累，公平性从来不是用户迁移 MOBA 的首要动因</td>
+    </tr>
+    <tr>
+      <td><b>行星吞噬者</b><br><span class="src">宇宙能量动态机制</span></td>
+      <td>动态战场，加速对局</td>
+      <td class="num mid">3</td><td class="num neg">1</td>
+      <td>引入随机性，与 MOBA 核心乐趣「<strong>可控博弈</strong>」相悖；同时抬高学习与平衡成本</td>
+    </tr>
+    <tr>
+      <td><b>苏尔特尔 / 黑豹之灵</b><br><span class="src">多层中立资源</span></td>
+      <td>增加战略决策维度</td>
+      <td class="num mid">2</td><td class="num neg">1</td>
+      <td>在王者「暴君 / 主宰」二元结构已被验证的基础上叠加第三、第四层，<strong>认知负荷递增而策略收益递减</strong></td>
+    </tr>
+    <tr>
+      <td><b>反重力 / 弹跳装置</b></td>
+      <td>提升战术机动性</td>
+      <td class="num neg">1</td><td class="num neg">1</td>
+      <td>位移功能与蜘蛛侠等英雄技能组高度重叠，<strong>存在感被自身 IP 稀释</strong></td>
+    </tr>
+    <tr>
+      <td><b>双召唤师技能</b><br><span class="src">侦测 / 转移</span></td>
+      <td>提高操作上限</td>
+      <td class="num mid">3</td><td class="num neg">1</td>
+      <td>提高老手上限的同时<strong>抬高新手门槛</strong>；在用户基数本就不足时，净效应为负</td>
+    </tr>
+    <tr>
+      <td><b>18 级满级制</b></td>
+      <td>延长成长曲线</td>
+      <td class="num mid">2</td><td class="num neg">1</td>
+      <td>与「压缩单局时长」的移动端设计原则相反，<strong>内部设计目标冲突</strong></td>
+    </tr>
+    <tr>
+      <td><b>英雄技能组还原</b><br><span class="src">死侍 / 洛基 / 灭霸</span></td>
+      <td>IP 代入感</td>
+      <td class="num pos">5</td><td class="num mid">3</td>
+      <td class="pos">唯一被广泛认可的维度。TapTap 停服后 11,352 条评价中，好评高度集中于「角色还原度」「打击手感」「福利良心」</td>
+    </tr>
+    <tr>
+      <td><b>无皮肤属性加成</b></td>
+      <td>公平性口碑</td>
+      <td class="num pos">4</td><td class="num mid">2</td>
+      <td>口碑来源，但<strong>同时压缩了付费点</strong>：在没有社交展示场景放大时，公平性直接等于商业化空间收窄</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box warn">
+  <span class="bt">⚑ 核心诊断：创新错位</span>
+  <p>8 项机制中，7 项的留存贡献 ≤ 2 分。唯一的 3 分项（英雄技能还原）属于<strong>IP 内容层</strong>而非<strong>系统层</strong>——也就是说，玩家真正认可的部分，恰恰是「漫威授权」直接带来的，而非团队自研的机制设计。而团队倾注最多设计资源的系统层创新（能源核心、行星吞噬者、多层中立资源），在玩家侧几乎未被感知为选择该产品的理由。</p>
+  <p style="margin-top:10px">更致命的是：<em>这些创新全部叠加在一个手感与流畅度未达及格线的底座上。</em>巴哈姆特深度评测指出其「打擊感比較低」「畫質跟流暢度亦比不上現有的 Moba Game」<sup class="r">[27]</sup>；知乎测评称「操作手感一般，并不是很顺手」<sup class="r">[8]</sup>。按图 1 的模型，这是<strong>L2 失分导致的系统性塌方</strong>。</p>
+</div>
+
+<!-- ============ 五、失败归因 ============ -->
+<h2 class="sec"><span class="num">05</span>失败归因：八维加权模型与下行螺旋</h2>
+
+<h3>5.1　量化归因：八维加权评分</h3>
+
+<p>为避免「罗列原因」式的主观复盘，本文构建加权评分模型。<strong>权重为分析者依据表 1 引证证据与品类特性赋值（类 AHP 专家打分），非实证回归结果，仅用于结构化比较与量级判断。</strong></p>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 4</b>　MOBA 品类成功要素八维加权评分（各维度 0–10 分；加权总分 ＝ Σ 得分 × 权重）</caption>
+  <thead>
+    <tr>
+      <th style="width:20%">维度</th><th class="num" style="width:8%">权重</th>
+      <th class="num" style="width:12%">王者荣耀</th>
+      <th class="num" style="width:14%">决战！平安京</th>
+      <th class="num" style="width:14%">漫威超级战争</th>
+      <th style="width:32%">评分依据（漫威超级战争）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><b>社交关系链基础设施</b></td><td class="num">25%</td><td class="num pos">10</td><td class="num mid">3</td><td class="num neg">2</td><td>网易账号体系，无熟人关系链导入；缺少 LBS、亲密关系、战队裂变等社交货币载体</td></tr>
+    <tr><td><b>操作手感与性能优化</b></td><td class="num">20%</td><td class="num pos">9</td><td class="num mid">7</td><td class="num mid">5</td><td>打击感与流畅度低于同期竞品；但 TapTap 部分玩家给予「手感非常棒」的正向评价，存在显著的<b>设备与群体分化</b></td></tr>
+    <tr><td><b>匹配池规模与质量</b></td><td class="num">15%</td><td class="num pos">10</td><td class="num mid">5</td><td class="num neg">3</td><td>玩家反馈「深夜排位匹配到熟人撞车」「低分段挂机十局近半数」「需跨服匹配日韩」</td></tr>
+    <tr><td><b>内容更新与平衡性</b></td><td class="num">12%</td><td class="num pos">9</td><td class="num mid">6</td><td class="num mid">5</td><td>有 S0–S4 赛季与电影联动（奇异博士 2），但玩家持续诟病「角色平衡真的沒問題嗎」</td></tr>
+    <tr><td><b>电竞与内容生态</b></td><td class="num">10%</td><td class="num pos">10</td><td class="num mid">3</td><td class="num neg">2</td><td>无成体系职业联赛；观战系统仅 5 个位置且限自定义场，无法支撑内容传播</td></tr>
+    <tr><td><b>商业化设计</b></td><td class="num">8%</td><td class="num pos">9</td><td class="num mid">5</td><td class="num mid">4</td><td>「活动、商店方面直接还原王者模式」；无皮肤属性加成压缩付费点；生命周期 IAP 仅 $10M</td></tr>
+    <tr><td><b>IP 还原深度与品类适配</b></td><td class="num">6%</td><td class="num pos">8</td><td class="num mid">7</td><td class="num mid">5</td><td>技能组还原获高评价，但「地图未还原漫威热门战场」，IP 停留于皮肤层</td></tr>
+    <tr><td><b>发行窗口与全球化</b></td><td class="num">4%</td><td class="num pos">10</td><td class="num mid">6</td><td class="num neg">2</td><td>2019 立项、2021-07 才公测，撞上漫威国内 IP 低谷（电影休整期 + 《尚气》争议）；始终未进入欧美主场</td></tr>
+    <tr style="background:#eef1f4 !important;">
+      <td><b>加权总分</b></td><td class="num">100%</td>
+      <td class="num pos" style="font-size:15px;"><b>9.48</b></td>
+      <td class="num mid" style="font-size:15px;"><b>4.98</b></td>
+      <td class="num neg" style="font-size:15px;"><b>3.45</b></td>
+      <td><b>低于生态自持线（约 4.5）</b></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<figure>
+  <div class="fig-hd">图 3　八维能力雷达对比</div>
+  <svg viewBox="0 0 440 392" role="img" aria-label="八维能力雷达图">
+    <defs><style>
+      .rl{font:600 10.5px -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#3d3d3d;}
+      .rw{font:400 9.5px -apple-system,"PingFang SC",sans-serif;fill:#9a9a9a;}
+      .grid{fill:none;stroke:#e0e0e0;stroke-width:1;}
+      .spoke{stroke:#e0e0e0;stroke-width:1;}
+      .s1{fill:#23405e;fill-opacity:.18;stroke:#23405e;stroke-width:2;}
+      .s2{fill:#b08a2e;fill-opacity:.14;stroke:#b08a2e;stroke-width:2;}
+      .s3{fill:#9c3328;fill-opacity:.22;stroke:#9c3328;stroke-width:2.2;}
+    </style></defs>
+    <g>
+      <!-- 网格 -->
+      <polygon class="grid" points="220,70 299.55,115.45 345,195 299.55,274.55 220,320 140.45,274.55 95,195 140.45,115.45"/>
+      <polygon class="grid" points="220,107.5 279.66,137.73 307.5,195 279.66,252.28 220,282.5 160.34,252.28 132.5,195 160.34,137.73"/>
+      <polygon class="grid" points="220,145 259.77,160 270,195 259.77,230 220,245 180.23,230 170,195 180.23,160"/>
+      <polygon class="grid" points="220,182.5 239.89,182.27 232.5,195 239.89,207.73 220,207.5 200.11,207.73 207.5,195 200.11,182.27"/>
+      <line class="spoke" x1="220" y1="195" x2="220" y2="70"/>
+      <line class="spoke" x1="220" y1="195" x2="299.55" y2="115.45"/>
+      <line class="spoke" x1="220" y1="195" x2="345" y2="195"/>
+      <line class="spoke" x1="220" y1="195" x2="299.55" y2="274.55"/>
+      <line class="spoke" x1="220" y1="195" x2="220" y2="320"/>
+      <line class="spoke" x1="220" y1="195" x2="140.45" y2="274.55"/>
+      <line class="spoke" x1="220" y1="195" x2="95" y2="195"/>
+      <line class="spoke" x1="220" y1="195" x2="140.45" y2="115.45"/>
+
+      <!-- 平安京 -->
+      <polygon class="s2" points="220,157.5 281.87,133.13 282.5,195 275.15,250.15 220,232.5 175.81,239.19 132.5,195 164.85,139.85"/>
+      <!-- 漫威 -->
+      <polygon class="s3" points="220,170 264.19,150.81 257.5,195 264.19,239.19 220,220 184.64,230.36 157.5,195 202.32,177.32"/>
+      <!-- 王者 -->
+      <polygon class="s1" points="220,70 299.55,115.45 345,195 299.55,274.55 220,320 140.45,274.55 95,195 140.45,115.45"/>
+
+      <!-- 标签 -->
+      <text class="rl" x="220" y="42" text-anchor="middle">社交关系链</text><text class="rw" x="220" y="54" text-anchor="middle">25%</text>
+      <text class="rl" x="326" y="86" text-anchor="start">操作手感</text><text class="rw" x="326" y="98" text-anchor="start">20%</text>
+      <text class="rl" x="372" y="192" text-anchor="start">匹配池</text><text class="rw" x="372" y="204" text-anchor="start">15%</text>
+      <text class="rl" x="326" y="304" text-anchor="start">更新/平衡</text><text class="rw" x="326" y="316" text-anchor="start">12%</text>
+      <text class="rl" x="220" y="348" text-anchor="middle">电竞生态</text><text class="rw" x="220" y="360" text-anchor="middle">10%</text>
+      <text class="rl" x="112" y="304" text-anchor="end">商业化</text><text class="rw" x="112" y="316" text-anchor="end">8%</text>
+      <text class="rl" x="68" y="192" text-anchor="end">IP 还原</text><text class="rw" x="68" y="204" text-anchor="end">6%</text>
+      <text class="rl" x="112" y="86" text-anchor="end">发行窗口</text><text class="rw" x="112" y="98" text-anchor="end">4%</text>
+    </g>
+    <g transform="translate(0,376)">
+      <rect x="30" y="0" width="12" height="9" fill="#23405e" fill-opacity=".7"/>
+      <text x="48" y="8" style="font:400 11px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">王者荣耀 9.48</text>
+      <rect x="150" y="0" width="12" height="9" fill="#b08a2e" fill-opacity=".6"/>
+      <text x="168" y="8" style="font:400 11px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">决战！平安京 4.98</text>
+      <rect x="298" y="0" width="12" height="9" fill="#9c3328" fill-opacity=".65"/>
+      <text x="316" y="8" style="font:400 11px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">漫威超级战争 3.45</text>
+    </g>
+  </svg>
+  <figcaption><b>图 3</b>　权重分配依据：社交关系链（25%）与操作手感（20%）合计占据 45% 权重，对应图 1 中的 L6 与 L2「双关键层」。漫威超级战争的图形高度塌陷于「社交关系链」轴，这是其失败的第一性原因。</figcaption>
+</figure>
+
+<h3>5.2　动态机制：下行螺旋如何自我强化</h3>
+
+<p>八维评分解释了「为什么起不来」，但还需要解释「为什么起不来之后会加速死亡」。MOBA 作为网络效应品类，存在一个<strong>正反馈的死亡回路</strong>：</p>
+
+<figure>
+  <div class="fig-hd">图 4　《漫威超级战争》下行螺旋机制</div>
+  <div class="cycle">
+    <div class="cy-node"><span class="sn">1</span><b>基础体验未达线</b><span>打击感弱、流畅度不足、地图偏小塔伤高</span></div>
+    <div class="cy-arrow">→</div>
+    <div class="cy-node"><span class="sn">2</span><b>首月流失率高企</b><span>下载进 TOP5，首月流水却列 TOP5 末位</span></div>
+    <div class="cy-arrow">→</div>
+    <div class="cy-node"><span class="sn">3</span><b>匹配池收缩</b><span>MAU 740 万 → 283 万，深夜需跨服匹配日韩</span></div>
+    <div class="cy-arrow">→</div>
+    <div class="cy-node"><span class="sn">4</span><b>匹配质量恶化</b><span>段位错配、挂机成风、熟人撞车刷分、举报无反馈</span></div>
+    <div class="cy-arrow">→</div>
+    <div class="cy-node"><span class="sn">5</span><b>社交链无法沉淀</b><span>无熟人关系链，离开成本低，口碑转负</span></div>
+  </div>
+  <svg viewBox="0 0 680 44" style="margin-top:2px;" role="img" aria-label="回环箭头">
+    <path d="M 600 6 L 600 24 Q 600 32 592 32 L 88 32 Q 80 32 80 24 L 80 6" fill="none" stroke="#9c3328" stroke-width="1.6" stroke-dasharray="5 3"/>
+    <path d="M 76 12 L 80 4 L 84 12" fill="none" stroke="#9c3328" stroke-width="1.6"/>
+    <text x="340" y="27" text-anchor="middle" style="font:600 11.5px -apple-system,'PingFang SC',sans-serif;fill:#9c3328;background:#fff;">↺ 回流至阶段 1：留存进一步下降，用户获取成本上升，团队投入意愿下降 → 更新放缓 → 体验继续劣化</text>
+  </svg>
+  <figcaption><b>图 4</b>　下行螺旋。关键特征：<strong>每一环的恶化都会放大下一环</strong>，且不存在自然止损点。玩家社区记录的典型症状——「低分段挂机，十局中近半数遭遇队友掉线」「深夜排位频繁匹配到熟人撞车，有人互送积分冲击国榜」<sup class="r">[33]</sup>——正是阶段 3、4 的直接证据。</figcaption>
+</figure>
+
+<h3>5.3　时间轴：从榜首到停服的 35 个月</h3>
+
+<div class="tl">
+  <div class="tl-row"><div class="tl-d">2019-05-20</div><div class="tl-c">网易与漫威达成战略合作，《漫威超级战争》立项<span class="tag nu">立项</span><br><span class="src">背景：2019 年《复仇者联盟 4》热映，漫威 IP 国内热度峰值</span></div></div>
+  <div class="tl-row"><div class="tl-d">2019-12-19</div><div class="tl-c">海外首发，先后登顶中国香港、泰国、新加坡、马来西亚 iOS 与 Google Play 免费榜<span class="tag up">开局强势</span></div></div>
+  <div class="tl-row"><div class="tl-d">2020-08</div><div class="tl-c">日服、韩服上线，长期位居免费榜前十</div></div>
+  <div class="tl-row"><div class="tl-d">2020-12-02</div><div class="tl-c">国服获批版号（国新出审〔2020〕2829 号）</div></div>
+  <div class="tl-row"><div class="tl-d">2021-07-15</div><div class="tl-c">国服全平台上线，连续 5 天登顶 App Store 免费榜；首月中国区 iOS 预估下载超 200 万<span class="tag up">流量高峰</span></div></div>
+  <div class="tl-row"><div class="tl-d">2021-07</div><div class="tl-c">伽马数据：iOS 下载榜 TOP10 第 5 位，但新游首月流水榜 TOP5 <b>末位</b><span class="tag up">首个警讯</span><br><span class="src">下载与流水的严重背离 = 用户「试一下就走」</span></div></div>
+  <div class="tl-row"><div class="tl-d">2021-09</div><div class="tl-c">上线不足两个月，免费榜跌至 100 名开外，最低 150 名以后；TapTap 5.7 / App Store 3.6<span class="tag up">断崖</span></div></div>
+  <div class="tl-row"><div class="tl-d">2021-10</div><div class="tl-c">MAU 环比 −32.27%，降至约 407 万</div></div>
+  <div class="tl-row"><div class="tl-d">2022-07</div><div class="tl-c">MAU 再跌 29.95%，降至约 272 万</div></div>
+  <div class="tl-row"><div class="tl-d">2023-10</div><div class="tl-c">MAU 约 283 万（低位平台期，估算数据存在波动）</div></div>
+  <div class="tl-row"><div class="tl-d">2024-04-17</div><div class="tl-c">网易发布停运公告，关闭全平台下载与充值，原因为「游戏开发运营策略的调整」<span class="tag up">官宣</span></div></div>
+  <div class="tl-row"><div class="tl-d">2024-06-17</div><div class="tl-c">15 时正式关闭全部服务器。国服寿命约 2 年 11 个月，全生命周期约 4.5 年</div></div>
+</div>
+
+<figure>
+  <div class="fig-hd">图 5　MAU 衰减轨迹（单位：万人，ActivePlayer.io 估算）</div>
+  <svg viewBox="0 0 680 300" role="img" aria-label="MAU衰减折线图">
+    <defs><style>
+      .gl{stroke:#ececec;stroke-width:1;}
+      .glb{font:400 10.5px -apple-system,"PingFang SC",sans-serif;fill:#8a8a8a;}
+      .xl{font:400 11px -apple-system,"PingFang SC",sans-serif;fill:#5a5a5a;}
+      .vl{font:700 11.5px -apple-system,"PingFang SC",sans-serif;fill:#9c3328;}
+      .an{font:400 11px -apple-system,"PingFang SC",sans-serif;fill:#6b6b6b;}
+    </style></defs>
+    <!-- 网格 -->
+    <line class="gl" x1="70" y1="250" x2="650" y2="250"/><text class="glb" x="58" y="254" text-anchor="end">0</text>
+    <line class="gl" x1="70" y1="195" x2="650" y2="195"/><text class="glb" x="58" y="199" text-anchor="end">200</text>
+    <line class="gl" x1="70" y1="140" x2="650" y2="140"/><text class="glb" x="58" y="144" text-anchor="end">400</text>
+    <line class="gl" x1="70" y1="85" x2="650" y2="85"/><text class="glb" x="58" y="89" text-anchor="end">600</text>
+    <line class="gl" x1="70" y1="30" x2="650" y2="30"/><text class="glb" x="58" y="34" text-anchor="end">800</text>
+
+    <!-- 面积 + 折线 -->
+    <path d="M 70 46.5 L 160 138.1 L 295 175.2 L 520 172.2 L 640 250 L 640 250 L 70 250 Z" fill="#9c3328" fill-opacity=".07"/>
+    <polyline points="70,46.5 160,138.1 295,175.2 520,172.2 640,250" fill="none" stroke="#9c3328" stroke-width="2.2"/>
+
+    <!-- 数据点 -->
+    <circle cx="70" cy="46.5" r="4.5" fill="#9c3328"/><text class="vl" x="70" y="36" text-anchor="middle">740万</text>
+    <circle cx="160" cy="138.1" r="4.5" fill="#9c3328"/><text class="vl" x="160" y="128" text-anchor="middle">407万</text>
+    <circle cx="295" cy="175.2" r="4.5" fill="#9c3328"/><text class="vl" x="295" y="165" text-anchor="middle">272万</text>
+    <circle cx="520" cy="172.2" r="4.5" fill="#9c3328"/><text class="vl" x="520" y="162" text-anchor="middle">283万</text>
+    <circle cx="640" cy="250" r="5" fill="#1a1a1a"/><text class="vl" x="632" y="242" text-anchor="end" fill="#1a1a1a">停服</text>
+
+    <!-- 标注 -->
+    <text class="an" x="115" y="92">−45.0%</text>
+    <text class="an" x="228" y="168">−33.2%</text>
+    <text class="an" x="410" y="163">2022-07 ~ 2023-10：</text>
+    <text class="an" x="410" y="177">低位平台期（估算噪声 ±）</text>
+
+    <!-- x 轴 -->
+    <text class="xl" x="70" y="270" text-anchor="middle">2021-04</text>
+    <text class="xl" x="160" y="270" text-anchor="middle">2021-10</text>
+    <text class="xl" x="295" y="270" text-anchor="middle">2022-07</text>
+    <text class="xl" x="520" y="270" text-anchor="middle">2023-10</text>
+    <text class="xl" x="640" y="270" text-anchor="end">2024-06</text>
+    <text class="xl" x="360" y="290" text-anchor="middle" fill="#8a8a8a">较峰值累计下降约 62%（不含停服归零）</text>
+  </svg>
+  <figcaption><b>图 5</b>　数据来源：ActivePlayer.io 估算模型<sup class="r">[14]</sup>（C 级）。注意 2022-07 至 2023-10 的 272 万→283 万反向波动应理解为估算噪声，实际应视为<strong>低位平台</strong>——这本身也是坏消息：产品既未死透也未回升，处于「无法支撑健康匹配池、又不至于立刻关服」的僵尸区间，持续消耗授权费与运维成本。</figcaption>
+</figure>
+
+<h3>5.4　六个可归因的失败因子（按贡献度排序）</h3>
+
+<ol>
+  <li><strong>社交关系链缺位（贡献度约 30%）</strong>　MOBA 是唯一一个「朋友在哪我在哪」决定生死的品类。网易账号体系无法导入熟人关系，皮肤无法成为社交货币，组队开黑缺少自驱动力。同厂的《决战！平安京》重复了完全相同的失败模式，构成强对照。</li>
+  <li><strong>匹配池坍塌与治理失效（约 22%）</strong>　用户基数一旦跌破临界值，匹配质量呈非线性恶化：段位错配、挂机、演员、撞车刷分。而产品的举报反馈被玩家形容为「机械式回复」<sup class="r">[33]</sup>，治理缺位进一步加速流失。</li>
+  <li><strong>基础手感未达品类及格线（约 18%）</strong>　按 AHP 研究，易用性是 MOBA 交互设计最高权重准则<sup class="r">[6]</sup>。打击感、流畅度、帧率稳定性三项失分，直接抹平了技能组还原的优势。</li>
+  <li><strong>发行窗口与 IP 周期错位（约 12%）</strong>　2019 年漫威 IP 国内热度峰值时立项，2021 年 7 月才公测——此时漫威电影进入休整期且因《尚气》引发国内舆论争议，IP 处于低谷<sup class="r">[11]</sup>。版号不确定性导致的宣发热度消耗，是典型的行业性风险。</li>
+  <li><strong>全球化缺席（约 10%）</strong>　漫威是美国 IP，主场在欧美，但产品始终未真正进入欧美市场，只在东南亚与日韩试水。海外玩家直言「漫威是美国 IP，西方没有这样的游戏是一个失败的操作」<sup class="r">[29]</sup>。</li>
+  <li><strong>商业化的自我矛盾（约 8%）</strong>　「无皮肤属性加成」提升了口碑却压缩了付费点；「照搬王者商店模式」又没能复制其社交放大效应。结果是：口碑未能转化为收入，收入不足以覆盖授权费 + 运维成本。停服前月流水据行业观察仍有数百万人民币<sup class="r">[34]</sup>——<em>它不是赚不到钱，是赚的不够覆盖成本结构。</em></li>
+</ol>
+
+<!-- ============ 六、对照组 ============ -->
+<h2 class="sec"><span class="num">06</span>对照组：同 IP、同厂商，为何《漫威争锋》能成</h2>
+
+<p>要证明「不是 IP 的问题」，最好的证据是同一家厂商、同一个 IP、不同品类的结果差异。</p>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 5</b>　网易漫威 IP 产品线对照（四款产品的品类、平台与结局）</caption>
+  <thead>
+    <tr><th style="width:16%">产品</th><th style="width:12%">品类</th><th style="width:13%">平台</th><th style="width:12%">上线</th><th style="width:11%">结局</th><th style="width:36%">关键数据</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>漫威超级战争</b></td><td>MOBA</td><td>手游</td><td>2019-12 / 2021-07</td><td class="neg">停服</td>
+      <td>生命周期 IAP &gt;$10M；国服首周 iOS 下载 142.3 万 / 净收入 $49.2 万；TapTap 5.7 → 停服后 6.5</td>
+    </tr>
+    <tr>
+      <td><b>漫威对决</b></td><td>自走棋 + 卡牌</td><td>手游</td><td>2021</td><td class="mid">弱势运营</td>
+      <td class="pos">TapTap 8.5 / App Store 4.7（口碑显著优于漫战），但热度下滑速度「丝毫不比漫威超级战争慢」<sup class="r">[11]</sup></td>
+    </tr>
+    <tr>
+      <td><b>漫威秘法狂潮</b></td><td>战术 RPG</td><td>手游</td><td>2025</td><td class="neg">停服</td>
+      <td>iOS 免费榜最高第 3，畅销榜仅 74；美区畅销榜最高 54；曾被写入网易 2025 Q2 财报仍被砍<sup class="r">[12]</sup></td>
+    </tr>
+    <tr style="background:#f2f7f4 !important;">
+      <td><b>漫威争锋</b></td><td>英雄射击</td><td>PC + 主机</td><td>2024-12</td><td class="pos">成功</td>
+      <td class="pos">4 小时登顶 Steam 全球畅销榜；2024-12-18 全球玩家 2000 万；2026 GDC 披露全球累计 4000 万、Discord 420 万（全平台游戏社区第一）<sup class="r">[12]</sup></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box warn">
+  <span class="bt">⚑ 由表 5 得到的最强反证</span>
+  <p><strong>《漫威对决》的口碑比《漫威超级战争》高 2.8 分（TapTap 8.5 vs 5.7），结局却同样是热度迅速衰减。</strong>这直接否证了「只要把游戏做好就能活」的朴素归因——在网络效应品类里，产品口碑是<em>必要不充分条件</em>。真正决定生死的是品类结构：MOBA 与自走棋都是重度依赖匹配池与社交链的品类，而英雄射击（6v6、PC 端、可随机匹配陌生人、单局短）对社交关系链的依赖度低得多。</p>
+</div>
+
+<h3>6.1　《漫威争锋》做对了什么：可迁移的五条方法论</h3>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 6</b>　《漫威争锋》成功要素及其对 MOBA 产品的可迁移性评估</caption>
+  <thead>
+    <tr><th style="width:24%">做法</th><th style="width:38%">具体内容（网易 GDC 2026 披露）</th><th style="width:38%">对 MOBA 的可迁移性</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><b>IP 服务于「爽点」而非「皮」</b></td><td>Demo 阶段发现钢铁侠飞行设 CD、浩克跳跃设 CD，玩家直言「这还算超能力吗？」——正式版直接推翻，改为能量消耗 / 无 CD</td><td class="pos">高。MOBA 同样应让「灭霸打响指」「洛基变身」成为机制本身，而非技能名</td></tr>
+    <tr><td><b>全角色免费 + 付费仅外观</b></td><td>上线前完整公开全部商业化内容，彻底打消「数值逼氪」顾虑</td><td class="mid">中。漫威超级战争已部分做到（能源核心无付费），但缺少社交场景放大付费意愿</td></tr>
+    <tr><td><b>48 小时社区响应机制</b></td><td>建立快速反馈闭环；S3 赛季起更新节奏由 3 个月压缩至 2 个月</td><td class="pos">高。漫威超级战争的玩家投诉集中于「举报无反馈」「平衡长期不改」，属可修复项</td></tr>
+    <tr><td><b>数值模型驱动平衡</b></td><td>基于 TTK 公式搭建数值模型，配合每日内部跑测与多段位数据监控</td><td class="pos">高。MOBA 平衡性要求更高，此方法论直接适用</td></tr>
+    <tr><td><b>选对品类与主场</b></td><td>PC + 主机优先，直面欧美核心受众，填补「漫威缺乏在线多人竞技」的空白</td><td class="neg">不可迁移。这正是漫威超级战争的战略性错误：在手游 MOBA 这个被关系链锁死的战场，用欧美 IP 打中国市场</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============ 七、结论 ============ -->
+<h2 class="sec"><span class="num">07</span>结论：品类–平台–IP 的三元错配</h2>
+
+<p>把所有证据收敛为一句判断：</p>
+
+<div class="box warn" style="font-size:16px;line-height:1.9;">
+  <span class="bt" style="font-size:12.5px;">◆ 核心论断</span>
+  <p style="margin-bottom:10px;"><strong>《漫威超级战争》的根本错误，不是做得不够好，而是「品类–平台–IP」三者选错了组合。</strong></p>
+  <p style="margin-bottom:0;">它在<b>由社交网络效应主导的品类（手游 MOBA）</b>里，选择了一个<b>网易不具备关系链基础设施的战场</b>，使用一个<b>主场在欧美、在中国认知度高但情感黏性弱的授权 IP</b>，并在<b>IP 周期低谷</b>时进入<b>已被头部产品锁死</b>的市场。四个变量同时错配，IP 光环只能换来 5 天的免费榜第一，换不来第 6 天的留存。</p>
+</div>
+
+<h3>7.1　MOBA 新品立项 Go/No-Go 检查清单</h3>
+
+<p>将上述结论转化为可执行的评估工具。建议在任何 MOBA 新品立项评审中使用，<strong>任一红线条目触发即应重新评估项目</strong>。</p>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 7</b>　MOBA 新品立项 Go/No-Go 检查清单（红线项为一票否决候选）</caption>
+  <thead>
+    <tr><th style="width:6%">#</th><th style="width:24%">检查项</th><th style="width:44%">通过标准</th><th style="width:14%">漫威超级战争</th><th style="width:12%">级别</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td><b>社交关系链</b></td><td>可导入亿级熟人关系链，或具备等价的组队自驱动机制</td><td class="neg">✗ 网易账号体系</td><td class="neg">红线</td></tr>
+    <tr><td>2</td><td><b>冷启动匹配池</b></td><td>首发市场可在 30 天内维持 &gt;100 万 DAU，使低段位匹配等待 &lt;60 秒</td><td class="neg">✗ 上线两月即跌出榜 100</td><td class="neg">红线</td></tr>
+    <tr><td>3</td><td><b>L2 手感基准</b></td><td>盲测中打击感/流畅度评分不低于品类头部产品的 90%</td><td class="neg">✗ 显著低于同期竞品</td><td class="neg">红线</td></tr>
+    <tr><td>4</td><td><b>IP 与品类适配</b></td><td>IP 的核心爽点可被转化为机制（而非仅皮肤/名称）</td><td class="mid">△ 仅技能组层面还原</td><td class="mid">高</td></tr>
+    <tr><td>5</td><td><b>IP 主场与市场匹配</b></td><td>所选市场为该 IP 的高情感黏性区域</td><td class="neg">✗ 欧美 IP 主攻中国市场</td><td class="mid">高</td></tr>
+    <tr><td>6</td><td><b>发行窗口</b></td><td>公测时点距 IP 热度峰值 &lt;12 个月</td><td class="neg">✗ 2019 立项 → 2021 公测</td><td class="mid">高</td></tr>
+    <tr><td>7</td><td><b>成本结构</b></td><td>授权费 + 运维成本 &lt; 预期月流水 × 60%</td><td class="neg">✗ 迪士尼授权费高昂</td><td class="mid">高</td></tr>
+    <tr><td>8</td><td><b>赛事与内容规划</b></td><td>有明确的分级赛事路径与观赛产品（含观战系统）</td><td class="neg">✗ 观战仅 5 位且限自定义场</td><td class="mid">中</td></tr>
+    <tr><td>9</td><td><b>平衡性治理能力</b></td><td>具备数值模型 + 多段位监控 + 双周级迭代节奏</td><td class="mid">△ 更新有但节奏慢、投诉多</td><td class="mid">中</td></tr>
+    <tr><td>10</td><td><b>差异化定位</b></td><td>差异化落在用户价值密度最高的层（L2 手感 / L6 社交）</td><td class="neg">✗ 差异化全在 L3–L4</td><td class="mid">中</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="font-size:14.5px;color:#6b6b6b;">《漫威超级战争》在 10 项检查中通过 0 项、部分通过 3 项，触发<strong> 3 条红线</strong>。按此清单，该项目在立项阶段即应被识别为高风险。</p>
+
+<h3>7.2　反事实推演</h3>
+
+<div class="tbl-wrap">
+<table>
+  <caption><b>表 8</b>　三个反情景的推演与可行性评估</caption>
+  <thead>
+    <tr><th style="width:26%">情景</th><th style="width:40%">推演</th><th style="width:34%">可行性判断</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><b>A. 2019 年同步全球发行<br>（欧美先行）</b></td><td>漫威 IP 主场优势可发挥，避开国内王者封锁</td><td class="mid">中。可延长生命周期，但 MOBA 在欧美手游渗透率低（2025 年北美占全球 22.3% 但以高 ARPU 小众市场为主），天花板有限，大概率成为「第二个 Wild Rift」而非爆款</td></tr>
+    <tr><td><b>B. 换品类：做英雄射击</b></td><td>用同样的 IP 与美术资产做 6v6 英雄射击</td><td class="pos">高。<strong>已被《漫威争锋》实证</strong>——4000 万累计用户、Steam 双榜铂金、Discord 社区全球第一。这是最接近「正确答案」的路径</td></tr>
+    <tr><td><b>C. 坚持 MOBA + 补社交链</b></td><td>通过外部合作导入熟人关系链</td><td class="neg">低。社交关系链是不可采购的战略资产——这正是《决战！平安京》与《漫威超级战争》先后验证过的结论</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3>7.3　对行业趋势的三点判断</h3>
+
+<ol>
+  <li><strong>MOBA 的竞争壁垒已从玩法层迁移至生态层。</strong>2025 年中国 MOBA 手游市场 417.5 亿元、用户 2.6 亿、渗透率超 35%<sup class="r">[9]</sup>，增速放缓至 10.2%，品类进入存量成熟期。此阶段新品的胜负手不在机制创新数量，而在社交关系链与赛事内容供给。</li>
+  <li><strong>IP 强度与 MOBA 变现能力无正相关。</strong>宝可梦大集结（2910 万下载，$14.1M）与漫威超级战争（$10M 生命周期）共同证明：IP 能买来首次下载，买不来第二次匹配。IP 在 MOBA 中的正确用法是「把 IP 爽点翻译成机制」（如《漫威争锋》的无 CD 飞行），而非「把 IP 名字贴在技能上」。</li>
+  <li><strong>下一阶段的关键变量是 AI 对运营效率与体验底线的重塑。</strong>《王者荣耀》已落地 AI 断线托管、AI 语音助手、AI 裁判系统（消极比赛识别效率提升 400%）<sup class="r">[16]</sup>。值得注意的是，AI 断线托管与 AI 裁判恰恰直击本文图 4 下行螺旋的阶段 3、4（匹配池与治理）——<em>头部产品正在用技术手段加固后来者最难翻越的护城河。</em></li>
+</ol>
+
+<hr class="divider">
+
+<h2 class="sec"><span class="num">08</span>研究局限</h2>
+<ul>
+  <li><strong>权重主观性</strong>　表 4 的八维权重为分析者依据引证证据赋值，未经过专家德尔菲法或多轮 AHP 一致性检验，量级判断可靠但精确分值不宜直接引用。</li>
+  <li><strong>第三方估算偏差</strong>　MAU 数据来自 ActivePlayer.io 估算模型（C 级），2022-07 至 2023-10 存在反向波动，且该数据源在游戏停服后仍显示「未死亡」，更新滞后明显。</li>
+  <li><strong>收入口径不可比</strong>　漫威超级战争的 $10M 为生命周期 IAP，与其他产品的年度收入口径不同；且未包含可能的渠道分成前/后差异。</li>
+  <li><strong>玩家口碑样本偏差</strong>　TapTap 停服后评分（6.5）显著高于上线期（5.7），存在典型的「幸存者怀旧偏差」——留下的评价者多为高情感投入用户。两期数据应分开解读，不可混用。</li>
+  <li><strong>未覆盖的维度</strong>　本地化适配的具体差异、分区域付费点布局、是否有过区域性赛事尝试等，公开信源不足，未作深入分析。</li>
+</ul>
+
+<h2 class="sec"><span class="num">09</span>参考文献</h2>
+<ol class="ref-list">
+  <li>[1] Sensor Tower. Mobile Market in 2025 — GameDev Reports.</li>
+  <li>[2] Sensor Tower. Honor of Kings Expands Globally with Strong Launch.</li>
+  <li>[6] 张瑞秋, 黄纬. 基于 AHP 的 MOBA 手游交互设计研究[J]. 包装工程, 2019, 40(22): 169-173.</li>
+  <li>[7] GamerBraves. MARVEL Super War Announces Service Termination（引 AppMagic 生命周期收入数据）.</li>
+  <li>[8] 知乎专栏.《漫威超级战争》有哪些游戏特色？游戏测评. zhuanlan.zhihu.com/p/381803654</li>
+  <li>[9] 艾瑞咨询. 2026 年中国手游行业热点研究白皮书（2025 年中国 MOBA 类手游市场规模 417.5 亿元 / 用户 2.6 亿）.</li>
+  <li>[10] GamingonPhone（via AppMagic）. The Mobile MOBA Great Divide: Regionalism vs. Globalization in 2025.</li>
+  <li>[11] 娱乐资本论 / 36 氪.《漫威》手游等屡战屡败，IP 手游的严苛成功学. m.36kr.com/p/2951338940915848</li>
+  <li>[12] 搜狐科技 / 电玩帮. 网易连砍 3 款漫威手游，为何唯独《漫威争锋》火遍全球？（引网易 GDC 2026 演讲数据）.</li>
+  <li>[14] ActivePlayer.io. Marvel Super War – Mobile（MAU 估算数据）.</li>
+  <li>[16] 哔哩哔哩. 十年长青，到底谁在玩？王者荣耀游戏行业研究报告.</li>
+  <li>[27] 巴哈姆特.【情報】深入淺出 探討 Marvel 漫威超級戰爭的優劣. forum.gamer.com.tw/C.php?bsn=36671&amp;snA=382</li>
+  <li>[29] Reddit r/MarvelSuperWar. 停服公告讨论帖.</li>
+  <li>[33] 4399 游戏盒 / 17 游戏网. 《漫威超级战争》玩家长评（匹配机制与游戏环境相关）.</li>
+  <li>[34] 网易号「戒戒说游戏」.《漫威超级战争》官宣即将停运（停服前月流水观察）.</li>
+  <li>[35] 伽马数据.《2021 年 7 月移动游戏报告》（iOS 渠道下载测算榜 TOP10 / 新游首月流水测算榜 TOP5）.</li>
+  <li>[36] Sensor Tower / 德邦研究所. 游戏行业数据周报（2021-07-14 至 07-18 漫威超级战争国内 iOS 下载 142.3 万次、净收入 49.2 万美元）.</li>
+  <li>[37] 百度百科. 漫威超级战争（版本历程与机制说明）.</li>
+  <li>基线文档：用户提供的《王者荣耀等 moba 游戏拆解》，其 [1]–[32] 项引证构成本文分析基线，此处不重复列出。</li>
+</ol>
+
+<footer>
+  <b>报告信息</b>　本文在基线文档《王者荣耀等 moba 游戏拆解》基础上补充公开检索完成，共引用 19 项独立信源（其中 A 级 5 项、B 级 7 项、C 级 4 项，基线文档转引 3 类）。<br>
+  <b>内容类型</b>　手游 MOBA 系统分析与失败复盘<br>
+  <b>免责声明</b>　文中评分模型、检查清单与反事实推演为分析者基于公开信息的判断，不代表任何厂商官方立场。第三方估算数据存在误差，引用前请回溯原始信源。
+</footer>
+
+</div>
+</body>
+</html>

@@ -91,7 +91,6 @@ export type Report = {
   title: string;
   shortTitle: string;
   summary: string;
-  date: string;
   readTime: string;
   accent: 'red' | 'dark' | 'lavender';
   heroImages: ReportImage[];
@@ -100,4 +99,16 @@ export type Report = {
   conclusion: string;
   sections: ReportSection[];
   sources: ReportSource[];
+};
+
+export type AnalysisShowcase = {
+  slug: string;
+  number: string;
+  category: string;
+  title: string;
+  summary: string;
+  format: string;
+  href: string;
+  capabilityTags: string[];
+  accent: 'cobalt' | 'coral' | 'sage' | 'gold' | 'ink';
 };

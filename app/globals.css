@@ -254,3 +254,56 @@ body{background:var(--paper);color:var(--ink)}
   .drawer-art{height:180px;margin-top:52px}
   .drawer-art b{font-size:32px}
 }
+
+/* Project-only homepage and analysis archive */
+.hero{min-height:calc(84svh - 72px)}
+.hero-intro{max-width:500px}
+.index-visual{position:relative;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;border-bottom:1px solid var(--ink);background:linear-gradient(135deg,var(--accent-soft),#fffdf8 58%);overflow:hidden}
+.index-visual::before{content:'';position:absolute;inset:20px;border:1px solid color-mix(in srgb,var(--accent) 42%,transparent)}
+.index-visual::after{content:'';position:absolute;width:210px;height:210px;border:1px dashed var(--accent);border-radius:50%;right:-48px;top:-72px}
+.index-visual span,.index-visual strong,.index-visual i{position:relative;z-index:1}
+.index-visual span{font:9px var(--mono);letter-spacing:.18em;color:var(--accent)}
+.index-visual strong{font:600 clamp(42px,5vw,65px)/.95 var(--serif);letter-spacing:.02em}
+.index-visual i{position:absolute;right:25px;bottom:16px;font:400 66px/1 var(--serif);font-style:normal;color:color-mix(in srgb,var(--accent) 28%,transparent)}
+.contact-strip{scroll-margin-top:72px;border-top:1px solid var(--ink);padding-block:70px}
+.contact-strip-inner{display:flex;justify-content:space-between;align-items:end;gap:40px}
+.contact-strip h2{margin:0;font:600 clamp(34px,4vw,52px)/1.1 var(--serif)}
+.contact-strip .contact-mail{margin-bottom:5px}
+
+.report-collection{padding-bottom:120px}
+.collection-heading{display:grid;grid-template-columns:160px 1fr 340px;gap:36px;align-items:end;padding:32px 0 42px;border-top:1px solid var(--ink)}
+.collection-heading>span{align-self:start;font:9px var(--mono);letter-spacing:.14em;color:var(--accent)}
+.collection-heading h2{margin:0;font:600 clamp(36px,4.4vw,58px)/1.1 var(--serif)}
+.collection-heading p{margin:0;font-size:13px;line-height:1.8;color:var(--muted)}
+.report-collection .reports-grid{padding-bottom:0}
+.interactive-collection{padding-block:88px 120px;background:var(--ink);color:var(--paper)}
+.collection-heading-dark{border-color:#48443c}
+.collection-heading-dark>span{color:var(--butter)}
+.collection-heading-dark p{color:#a39c8d}
+.showcase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #48443c}
+.showcase-card{min-width:0;border-bottom:1px solid #48443c}
+.showcase-card:nth-child(odd){border-right:1px solid #48443c}
+.showcase-card a{display:flex;flex-direction:column;min-height:420px;padding:30px;transition:background .2s,color .2s}
+.showcase-card a:hover{background:#23221e}
+.showcase-card-head{display:flex;justify-content:space-between;gap:24px;font:10px var(--mono);letter-spacing:.13em;color:var(--butter)}
+.showcase-card-head i{font-style:normal;color:#8f897d}
+.showcase-category{margin:62px 0 12px!important;font:9px var(--mono)!important;letter-spacing:.14em;text-transform:uppercase;color:var(--showcase-accent,#a9b8ff)!important}
+.showcase-card h3{max-width:520px;margin:0 0 18px;font:600 clamp(26px,3vw,38px)/1.32 var(--serif)}
+.showcase-card p{max-width:540px;margin:0;font-size:13px;line-height:1.85;color:#aaa397}
+.showcase-card ul{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:28px 0 0}
+.showcase-card li{padding:4px 8px;border:1px solid #4d4941;font:8px var(--mono);letter-spacing:.05em;color:#aaa397}
+.showcase-card b{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:30px;font:10px var(--mono);letter-spacing:.1em;font-weight:500}
+.showcase-card b span{font-size:19px;color:var(--showcase-accent,#a9b8ff)}
+.showcase-cobalt{--showcase-accent:#a9b8ff}.showcase-coral{--showcase-accent:#ff9c7d}.showcase-sage{--showcase-accent:#b9c99e}.showcase-gold{--showcase-accent:#efd887}.showcase-ink{--showcase-accent:#d5c7e9}
+
+@media(max-width:800px){
+  .index-visual{min-height:190px}
+  .contact-strip-inner{display:block}
+  .contact-strip .contact-mail{margin-top:30px}
+  .collection-heading{grid-template-columns:1fr;gap:14px}
+  .collection-heading>span{margin-bottom:12px}
+  .showcase-grid{grid-template-columns:1fr}
+  .showcase-card:nth-child(odd){border-right:0}
+  .showcase-card a{min-height:360px;padding:26px 4px}
+  .showcase-category{margin-top:46px!important}
+}
