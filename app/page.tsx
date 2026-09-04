@@ -1,54 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
-
-import { profile, projects, type Project } from '../src/data/profile';
+import { profile, projects } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
-function ProjectVisual({ project }: { project: Project }) {
-  if (project.visual === 'auralis') {
-    return (
-      <div className="project-preview preview-auralis">
-        <img
-          src="/project-assets/auralis-workspace.png"
-          alt="Auralis 广播剧制作工作台界面"
-          width="1200"
-          height="751"
-        />
-      </div>
-    );
-  }
-
-  if (project.visual === 'stocks') {
-    return (
-      <div className="project-preview preview-stocks" aria-hidden="true">
-        <div className="stock-head"><span>知行指数</span><strong>78</strong></div>
-        <div className="stock-chart"><i /><i /><i /><i /><i /><i /><i /></div>
-        <div className="stock-foot"><span>趋势</span><b>规则评分</b><span>核验</span></div>
-      </div>
-    );
-  }
-
-  if (project.visual === 'resume') {
-    return (
-      <div className="project-preview preview-resume" aria-hidden="true">
-        <span>选择岗位</span><i>→</i><span>填写经历</span><i>→</i><strong>生成材料</strong>
-      </div>
-    );
-  }
-
-  return (
-    <div className="project-preview preview-genes" aria-hidden="true">
-      <span>GENE</span>
-      <div>{Array.from({ length: 48 }, (_, index) => <i key={index} />)}</div>
-      <strong>19K</strong>
-    </div>
-  );
-}
-
 export default function Home() {
+  const [featuredProject, ...otherProjects] = projects;
   const recentNotes = [
     ...reports.map((report) => ({
       title: report.shortTitle,
@@ -79,40 +37,49 @@ export default function Home() {
       </header>
 
       <main id="main">
-        <section className="home-hero home-shell" id="top">
-          <div className="home-hero-copy">
-            <p className="home-hello">你好，我是 Z.</p>
-            <h1>{profile.tagline}</h1>
-            <p>{profile.note}</p>
+        <section className="featured-project home-shell" id="top" aria-labelledby="featured-title">
+          <p className="featured-kicker">FEATURED PROJECT / AI AUDIO WORKFLOW</p>
+          <div className="featured-heading">
+            <h1 id="featured-title">{featuredProject.title}</h1>
+            <span aria-hidden="true">01</span>
           </div>
-          <a className="home-github-note" href={profile.contact.github} target="_blank" rel="noreferrer">
-            <span>github.com/rheeh</span>
-            <Arrow />
-          </a>
+          <div className="featured-details">
+            <p className="featured-type">{featuredProject.type}</p>
+            <p className="featured-summary">{featuredProject.summary}</p>
+            <ul>{featuredProject.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+            <div className="featured-links">
+              {featuredProject.links.map((link) => (
+                <a className={link.kind === 'demo' ? 'featured-demo' : ''} href={link.href} target="_blank" rel="noreferrer" key={link.href}>
+                  {link.label} <Arrow />
+                </a>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="home-section home-shell" id="projects">
           <header className="home-section-head">
             <h2>做过的项目</h2>
-            <p>只有可以体验或查看源码的项目。</p>
           </header>
 
-          <div className="project-board">
-            {projects.map((project) => (
-              <article className={`project-piece piece-${project.visual}`} key={project.id}>
-                <ProjectVisual project={project} />
-                <div className="project-piece-copy">
+          <div className="project-list">
+            {otherProjects.map((project, index) => (
+              <article className="project-row" key={project.id}>
+                <span className="project-index">0{index + 2}</span>
+                <div className="project-row-title">
                   <p>{project.type}</p>
                   <h3>{project.title}</h3>
-                  <span>{project.summary}</span>
+                </div>
+                <div className="project-row-detail">
+                  <p>{project.summary}</p>
                   <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                  <div className="project-links">
-                    {project.links.map((link) => (
-                      <a className={link.kind === 'demo' ? 'link-demo' : ''} href={link.href} target="_blank" rel="noreferrer" key={link.href}>
-                        {link.label} <Arrow />
-                      </a>
-                    ))}
-                  </div>
+                </div>
+                <div className="project-row-links">
+                  {project.links.map((link) => (
+                    <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>
+                      {link.label} <Arrow />
+                    </a>
+                  ))}
                 </div>
               </article>
             ))}
