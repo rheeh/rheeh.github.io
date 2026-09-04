@@ -1,5 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { profile, projects } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
+import HomeIntro from './HomeIntro';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -29,7 +32,9 @@ export default function Home() {
         <nav className="home-shell" aria-label="主页导航">
           <a className="home-name" href="#top">{profile.name}</a>
           <div>
+            <a href="#auralis">Auralis</a>
             <a href="#projects">项目</a>
+            <a href="#ai-videos">AI 视频</a>
             <a href="#notes">笔记</a>
             <a href={profile.contact.github} target="_blank" rel="noreferrer">GitHub</a>
           </div>
@@ -37,12 +42,23 @@ export default function Home() {
       </header>
 
       <main id="main">
-        <section className="featured-project home-shell" id="top" aria-labelledby="featured-title">
+        <HomeIntro />
+
+        <section className="featured-project home-shell" id="auralis" aria-labelledby="featured-title">
           <p className="featured-kicker">FEATURED PROJECT / AI AUDIO WORKFLOW</p>
           <div className="featured-heading">
-            <h1 id="featured-title">{featuredProject.title}</h1>
+            <h2 id="featured-title">{featuredProject.title}</h2>
             <span aria-hidden="true">01</span>
           </div>
+          <a className="featured-image" href={featuredProject.links[0].href} target="_blank" rel="noreferrer" aria-label="打开 Auralis 在线体验">
+            <img
+              src="/project-assets/auralis-home.jpg"
+              alt="Auralis AI 广播剧创作产品首页"
+              width="1600"
+              height="918"
+              loading="lazy"
+            />
+          </a>
           <div className="featured-details">
             <p className="featured-type">{featuredProject.type}</p>
             <p className="featured-summary">{featuredProject.summary}</p>
@@ -83,6 +99,20 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="home-section video-section" id="ai-videos">
+          <div className="home-shell">
+            <header className="home-section-head video-heading">
+              <div><p>PERSONAL AI FILMS</p><h2>AI 生成视频</h2></div>
+              <span>目录整理中</span>
+            </header>
+            <div className="video-shelf" aria-label="AI 生成视频目录，内容待添加">
+              <div><span>01</span><i /></div>
+              <div><span>02</span><i /></div>
+              <div><span>03</span><i /></div>
+            </div>
           </div>
         </section>
 
