@@ -220,11 +220,11 @@ export function ReportArticle({ report }: { report: Report }) {
         <nav className="report-nav container" aria-label="报告导航">
           <a className="report-brand" href="/">
             <b>Z.</b>
-            <span>Z. / Product Notes</span>
+            <span>Z. / 调研笔记</span>
           </a>
           <div>
             <a href="/reports">全部报告</a>
-            <a href="/#work">项目</a>
+            <a href="/#projects">项目</a>
             <a href="#sources">来源</a>
           </div>
         </nav>
@@ -332,7 +332,7 @@ export function ReportArticle({ report }: { report: Report }) {
         </article>
       </main>
       <footer className="report-footer container">
-        <span>Z. / Product Notes</span>
+        <span>Z. / 调研笔记</span>
         <a href="/reports">返回报告目录 ↗</a>
       </footer>
     </>

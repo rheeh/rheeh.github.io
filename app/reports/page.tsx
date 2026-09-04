@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import { analysisShowcases, reports } from '../../src/data/reports';
 
 export const metadata: Metadata = {
-  title: '分析目录 | Z. Project Index',
-  description: '平台策略、AI 产品、商业模式与游戏系统分析。',
+  title: '调研笔记 | Z.',
+  description: '关于产品、平台、商业模式与游戏系统的调研笔记。',
 };
 
 export default function ReportsPage() {
@@ -15,21 +15,21 @@ export default function ReportsPage() {
     <>
       <a className="skip-link" href="#reports-main">Skip to content</a>
       <header className="report-nav-shell">
-        <nav className="report-nav container" aria-label="分析目录导航">
-          <a className="report-brand" href="/"><b>Z.</b><span>Z. / Analysis Library</span></a>
-          <div><a href="/">主页</a><a href="/#work">项目</a><a href="mailto:grunt1948@163.com">联系</a></div>
+        <nav className="report-nav container" aria-label="笔记导航">
+          <a className="report-brand" href="/"><b>Z.</b><span>Z. / 调研笔记</span></a>
+          <div><a href="/">主页</a><a href="/#projects">项目</a><a href="mailto:grunt1948@163.com">联系</a></div>
         </nav>
       </header>
 
       <main className="reports-index" id="reports-main">
         <header className="reports-index-hero container">
           <div>
-            <p className="eyebrow">ANALYSIS LIBRARY</p>
-            <h1>分析<br />目录。</h1>
+            <p className="eyebrow">NOTES</p>
+            <h1>调研<br />笔记。</h1>
           </div>
           <div>
             <p>围绕一个具体问题组织证据、判断与方案。长文适合深入阅读，交互演示适合快速浏览结论。</p>
-            <span>{total} ANALYSES / ARTICLES &amp; INTERACTIVE BRIEFS</span>
+            <span>{total} NOTES / ARTICLES &amp; INTERACTIVE PAGES</span>
           </div>
         </header>
 
@@ -65,9 +65,9 @@ export default function ReportsPage() {
         <section className="interactive-collection" aria-labelledby="interactive-heading">
           <div className="container">
             <header className="collection-heading collection-heading-dark">
-              <span>02 / INTERACTIVE BRIEFS</span>
-              <h2 id="interactive-heading">交互分析</h2>
-              <p>用图表、对照和分步叙事压缩阅读成本；点击后进入独立的全屏分析。</p>
+              <span>02 / INTERACTIVE NOTES</span>
+              <h2 id="interactive-heading">交互笔记</h2>
+              <p>用图表、对照和分步叙事压缩阅读成本；点击后进入独立的全屏页面。</p>
             </header>
             <div className="showcase-grid">
               {analysisShowcases.map((item) => (
@@ -78,7 +78,7 @@ export default function ReportsPage() {
                     <h3>{item.title}</h3>
                     <p>{item.summary}</p>
                     <ul>{item.capabilityTags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                    <b>打开分析 <span>↗</span></b>
+                    <b>打开笔记 <span>↗</span></b>
                   </a>
                 </article>
               ))}
@@ -87,7 +87,7 @@ export default function ReportsPage() {
         </section>
       </main>
 
-      <footer className="report-footer container"><span>Z. / Analysis Library</span><a href="/">返回项目目录 ↗</a></footer>
+      <footer className="report-footer container"><span>Z. / 调研笔记</span><a href="/">返回主页 ↗</a></footer>
     </>
   );
 }
