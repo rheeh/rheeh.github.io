@@ -2,7 +2,7 @@ import { profile, projects, creativeWorks } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
-import ScrollMood from './ScrollMood';
+import RunningDivider from './RunningDivider';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -23,7 +23,7 @@ export default function Home() {
   const notes = [
     ...creativeWorks.map((work) => ({
       title: work.title,
-      category: `${work.process} / 插画系列`,
+      category: 'AI 创作',
       summary: work.summary,
       href: work.href,
     })),
@@ -42,10 +42,11 @@ export default function Home() {
   ];
 
   return (
-    <ScrollMood>
+    <div className="personal-home">
       <a className="skip-link" href="#main">Skip to content</a>
       <main id="main">
         <HomeIntro />
+        <RunningDivider />
 
         <section className="doodle-section" id="projects">
           <SectionHeading kicker="vibe coding" title="我做过的小项目" />
@@ -72,6 +73,7 @@ export default function Home() {
           </div>
         </section>
 
+        <RunningDivider />
         <section className="doodle-section doodle-writing" id="notes">
           <span className="section-alias" id="ai-creations" aria-hidden="true" />
           <span className="section-alias" id="illustrations" aria-hidden="true" />
@@ -103,6 +105,6 @@ export default function Home() {
           <a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
         </footer>
       </main>
-    </ScrollMood>
+    </div>
   );
 }

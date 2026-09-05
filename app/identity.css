@@ -168,24 +168,36 @@ html{scroll-behavior:smooth;scroll-padding-bottom:100px}
 
 }
 
-/* The scroll interaction belongs to the page itself. */
-.personal-home{
- --scene-paper:var(--studio-paper);
- --scene-accent:var(--studio-red);
- background:var(--scene-paper);
- transition:background-color .8s ease;
-}
-.personal-home[data-scene="projects"]{--scene-paper:#f0f4fd;--scene-accent:var(--studio-blue)}
-.personal-home[data-scene="notes"]{--scene-paper:#fff3e8;--scene-accent:var(--studio-red)}
-.personal-home .doodle-section-heading h2{transition:color .55s ease,transform .65s ease,clip-path .7s ease}
-.personal-home .doodle-section[data-active="true"] .doodle-section-heading h2{color:var(--scene-accent)}
-.personal-home .doodle-section-heading::after{transition:width .6s ease,border-color .6s ease,transform .65s ease}
-.personal-home .doodle-section[data-active="true"] .doodle-section-heading::after{width:108px;border-color:var(--scene-accent)}
-.personal-home .doodle-section[data-active="false"] .doodle-section-heading::after{width:40px}
-.personal-home .doodle-project-card{transition:border-color .5s ease,box-shadow .3s ease,transform .3s ease}
-.personal-home #projects[data-active="true"] .doodle-project-card{border-top-color:#6986d2}
+/* Keep the paper still; the small runner carries the section transition. */
 .creative-article-index{margin-bottom:32px}
 .creative-article-index .doodle-article-row{grid-template-columns:44px 1fr 24px}
+.running-divider{width:calc(100% - 48px);max-width:1080px;margin:0 auto;height:52px;border-bottom:1px dashed var(--studio-rule);overflow:hidden;color:var(--studio-red)}
+.runner-lane{position:relative;height:100%;width:calc(100% - 40px)}
+.runner-carrier{position:absolute;inset:0}
+.divider-person{position:absolute;bottom:0;left:0;width:40px;height:48px}
+.runner-arm{transform-origin:23px 17px;animation:runner-swing .45s ease-in-out infinite alternate;animation-play-state:paused}
+.runner-leg{transform-origin:19px 28px;animation:runner-swing .45s ease-in-out infinite alternate;animation-play-state:paused}
+.runner-opposite{animation-direction:alternate-reverse}
+.is-running .runner-arm,.is-running .runner-leg{animation-play-state:running}
+@keyframes runner-swing{from{transform:rotate(-22deg)}to{transform:rotate(22deg)}}
+.story-start{display:inline-flex;align-items:center;gap:14px;margin-top:28px;color:var(--studio-red);font-size:14px;text-decoration:none}
+.story-start span{transition:transform .2s}.story-start:hover span{transform:translateY(4px)}
+.graduate-gallery figcaption{display:block;margin:0;padding:12px 28px 48px}
+.story-caption>span{font:12px/1.6 ui-monospace,monospace;color:var(--studio-red)}
+.story-caption h2{margin:10px 0 8px;display:inline-block;background:linear-gradient(transparent 80%,#f2cd4d70 80%);background-size:0% 100%;background-repeat:no-repeat;transition:background-size .7s .2s}
+.story-caption.is-shown h2{background-size:100% 100%}
+.story-caption>span{display:block}
+.story-ending{max-width:568px;margin:30px auto 0;padding:28px 24px;border-top:1px dashed var(--studio-rule);font-size:15px;line-height:1.9}
+.story-ending details{margin:24px 0;border-block:1px solid var(--studio-rule)}
+.story-ending summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;padding:14px 0;color:var(--studio-red)}
+.story-ending summary::-webkit-details-marker{display:none}
+.story-ending summary span{transition:transform .25s}
+.story-ending details[open] summary span{transform:rotate(45deg)}
+.story-ending details p{margin:0 0 20px;color:#555}
+.story-ending>a{font-size:13px;color:var(--studio-blue)}
+.story-start:focus-visible,.story-ending summary:focus-visible{outline:2px solid var(--studio-blue);outline-offset:5px}
 @media(prefers-reduced-motion:reduce){
- .personal-home,.personal-home .doodle-section-heading h2,.personal-home .doodle-section-heading::after,.personal-home .doodle-project-card{transition:none}
+ .runner-arm,.runner-leg{animation:none}
+ .story-caption h2{background-size:100% 100%;transition:none}
+ .story-start span,.story-ending summary span{transition:none}
 }
