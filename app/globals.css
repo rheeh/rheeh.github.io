@@ -597,45 +597,6 @@ body{background:var(--paper);color:var(--ink)}
 /* Keep the complete overview readable instead of cropping it like a photo. */
 .report-visual-grid .note-overview img{height:auto;max-height:none;aspect-ratio:auto;object-fit:contain}
 
-/* Personal site: white surfaces, quiet rules, colour belongs to the work. */
-:root{--paper:#fff;--ink:#252525;--muted:#656565;--line:#dededb}
-body{background:#fff}
-.personal-home{--doodle-coral:#f3f3f1;--doodle-mint:#f3f3f1;--doodle-sky:#f3f3f1;--doodle-sun:#f3f3f1}
-.personal-home .intro-content nav a:nth-child(n){background:#fff;border-width:1px;box-shadow:none}
-.personal-home .intro-content nav a:hover{background:#f3f3f1}
-.personal-home .intro-bubble{background:#fff;box-shadow:3px 3px 0 #ddd;border-width:1.5px}
-.personal-home .intro-doodle,.personal-home .intro-sprout{color:#8a8a86}
-.personal-home a:focus-visible,.personal-home button:focus-visible{outline:2px solid #252525;outline-offset:5px}
-.doodle-section-heading>span{padding:0;background:none;border:0;box-shadow:none;color:#656565;font:12px/1.6 system-ui;letter-spacing:.08em}
-.doodle-section-heading i{color:#656565}
-.doodle-project-card,.doodle-video-card{border:1px solid #dededb;border-radius:6px;background:#fff;box-shadow:none}
-.doodle-project-card:hover{transform:translateY(-3px);box-shadow:none;border-color:#aaa}
-.doodle-card-top>span:first-child{background:#f4f4f2;border:0;border-radius:4px}
-.doodle-project-links a,.notes-more a{border:1px solid #c8c8c4;border-radius:4px;box-shadow:none;background:#fff}
-.doodle-project-links a:hover,.notes-more a:hover{transform:none;box-shadow:none;background:#f4f4f2}
-.doodle-project-links a:first-child,.notes-more a{background:#fff}
-.doodle-video-grid .doodle-video-card{background:#fafafa;box-shadow:none}
-.doodle-play{background:#fff!important;border-color:#aaa!important;box-shadow:none!important}
-.doodle-writing-list{gap:0}
-.doodle-article-row{background:transparent;border:0;border-top:1px solid #dededb;border-radius:0;box-shadow:none;padding-block:26px}
-.doodle-article-row:hover{transform:none;box-shadow:none;background:#fafafa}
-.doodle-writing-list .article-mark{background:transparent!important;border:0;border-radius:0;color:#777}
-.doodle-article-row small{background:none;padding:0;color:#656565;font:12px/1.6 system-ui}
-.doodle-article-row p,.doodle-card-summary{color:#656565}
-.report-page{--report-accent:#333}
-.report-nav-shell,.reports-index,.report-page{background:#fff}
-.report-index-card,.report-index-card:nth-child(n){background:#fff;border:1px solid #dededb;box-shadow:none}
-.report-index-art{background:#f5f5f3}
-.report-index-art>span{background:#fff;color:#333}
-.report-index-copy ul li{background:#f4f4f2;color:#555}
-.interactive-collection{background:#fafafa;color:#252525}
-.collection-heading-dark h2,.collection-heading-dark p,.collection-heading-dark span{color:#555}
-.showcase-card,.showcase-card:nth-child(n){background:#fff;color:#252525;border:1px solid #dededb;box-shadow:none}
-.showcase-card p,.showcase-card b,.showcase-card li,.showcase-card-head{color:#555}
-.report-conclusion,.report-callout,.proposal-card,.analysis-cards article,.metric-card{background:#fafafa;color:#252525;border:1px solid #dededb}
-.report-conclusion>span,.report-callout>span{color:#656565}
-.flow-track{background:#fafafa;color:#252525;border:1px solid #dededb}
-
 /* Illustration series */
 .illustration-feature{display:block;border-block:1px solid #dededb;padding-block:28px}
 .illustration-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
@@ -674,17 +635,3 @@ body{background:#fff}
  .gallery-nav,.gallery-main{width:calc(100% - 36px)}.gallery-heading{padding-block:50px 36px}
 }
 .note-cover-label{display:grid;place-items:center;width:100%;height:100%;padding:32px;font:500 clamp(24px,3vw,42px)/1.4 Georgia,'Songti SC',serif;letter-spacing:.04em;color:#444;background:#f6f6f4}
-.report-page{--report-soft:#f3f3f1}
-.report-index-card:nth-child(n){grid-column:span 6;border-radius:6px}
-.note-cover-label{grid-column:1/-1}
-.report-index-card a:hover .report-index-copy>b{color:#252525}
-.showcase-card{--showcase-accent:#555}
-.showcase-card a:hover{background:#f3f3f1;color:#252525}
-.showcase-card-head i{color:#656565}
-.flow-step{background:#f3f3f1}
-.personal-home{--home-paper:#fff;--home-ink:#252525;--home-muted:#656565}
-.intro-runner .runner-head{fill:#fff}
-.intro-runner .runner-cheek{fill:#d8d8d5}
-.personal-home .intro-sprout i,.personal-home .motion-streaks i{background:#aaa}
-.personal-home .intro-ground path{stroke:#777}
-.personal-home .intro-content nav a:hover{transform:translateY(-1px);box-shadow:none}

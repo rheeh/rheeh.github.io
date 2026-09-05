@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { graduateDay } from '../../../src/data/profile';
 
 export const metadata: Metadata = {
-  title: `${graduateDay.title} · 插画 | Zoe Zhang`,
+  title: `${graduateDay.title} · AI 插画 | Zoe Zhang`,
   description: graduateDay.description,
 };
 
@@ -12,7 +12,7 @@ export default function GraduateDayPage() {
     <div className="illustration-page">
       <a className="skip-link" href="#gallery-main">跳到作品</a>
       <nav className="gallery-nav" aria-label="插画导航">
-        <a href="/#illustrations">← 返回主页</a><span>Zoe Zhang / 插画</span>
+        <a href="/#ai-creations">← 返回主页</a><span>Zoe Zhang / AI 创作</span>
       </nav>
       <main id="gallery-main" className="gallery-main">
         <header className="gallery-heading">
@@ -32,7 +32,7 @@ export default function GraduateDayPage() {
           ))}
         </div>
       </main>
-      <footer className="gallery-nav"><a href="/#illustrations">← 回到作品列表</a><span>5 / 5</span></footer>
+      <footer className="gallery-nav"><a href="/#ai-creations">← 回到作品列表</a><span>5 / 5</span></footer>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { profile, projects, graduateDay } from '../src/data/profile';
+import { profile, projects, creativeCollection, creativeWorks } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
@@ -66,36 +66,31 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="doodle-section" id="illustrations">
-          <SectionHeading kicker="插画" title="画下来的一些日常" />
-          <DoodleReveal>
-            <a className="illustration-feature" href={graduateDay.href}>
-              <div className="illustration-preview" aria-hidden="true">
-                {graduateDay.images.filter((item) => ['01', '02', '05'].includes(item.id)).map((item) => (
-                  <img key={item.id} src={`/illustrations/graduate-day/${item.id}.png`} alt="" width="624" height="1088" loading="lazy" />
-                ))}
-              </div>
-              <div className="illustration-feature-copy">
-                <div><small>{graduateDay.category}</small><h3>{graduateDay.title}</h3><p>{graduateDay.description}</p></div>
-                <span>看完整组图 <Arrow /></span>
-              </div>
-            </a>
-          </DoodleReveal>
-        </section>
-
-        <section className="doodle-section" id="ai-videos">
-          <SectionHeading kicker="personal ai films" title="AI 生成视频" />
-          <div className="doodle-video-grid" aria-label="AI 生成视频目录，内容待添加">
-            {[1, 2, 3].map((number, index) => (
-              <DoodleReveal key={number} delay={index * 90}>
-                <div className="doodle-video-card">
-                  <span>0{number}</span>
-                  <div className="doodle-play" aria-hidden="true"><i /></div>
-                  <p>等待下一支作品</p>
+        <section className="doodle-section creative-section" id="ai-creations">
+          <span className="section-alias" id="illustrations" aria-hidden="true" />
+          <span className="section-alias" id="ai-videos" aria-hidden="true" />
+          <SectionHeading kicker={creativeCollection.label} title={creativeCollection.title} />
+          <p className="creative-intro">{creativeCollection.description}</p>
+          <ul className="creative-formats" aria-label="AI 创作的作品形式">
+            {creativeCollection.formats.map((format) => {
+              const count = creativeWorks.filter((work) => work.format === format.id).length;
+              return <li key={format.id} className={count ? 'has-work' : ''}><span>{format.label}</span><small>{count ? `${count} 组` : '待整理'}</small></li>;
+            })}
+          </ul>
+          {creativeWorks.map((work) => (
+            <DoodleReveal key={work.id}>
+              <a className="illustration-feature" href={work.href}>
+                <div className="creative-work-label"><span>{creativeCollection.formats.find((format) => format.id === work.format)?.label}</span><span>{work.process}</span></div>
+                <div className="illustration-preview" aria-hidden="true">
+                  {work.previews.map((image) => <img key={image.src} {...image} alt="" loading="lazy" />)}
                 </div>
-              </DoodleReveal>
-            ))}
-          </div>
+                <div className="illustration-feature-copy">
+                  <div><h3>{work.title}</h3><p>{work.summary}</p></div>
+                  <span>打开作品 <Arrow /></span>
+                </div>
+              </a>
+            </DoodleReveal>
+          ))}
         </section>
 
         <section className="doodle-section doodle-writing" id="notes">

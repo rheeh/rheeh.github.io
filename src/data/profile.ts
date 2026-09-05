@@ -61,9 +61,9 @@ export const projects: Project[] = [
 
 export const graduateDay = {
   title: '研究生的一天',
-  category: '插画练习 / 5 幅',
+  category: 'AI 创作 / 插画系列 · 5 幅',
   description: '早起、实验、深夜回家。把实验室里的小小崩溃，画成五张黑白线稿。',
-  styleNote: '喜茶风格的线稿练习',
+  styleNote: 'AI 生成 · 喜茶风格线稿练习',
   href: '/illustrations/graduate-day/',
   images: [
     { id: '01', title: '再睡五分钟', caption: '早上七点，和闹钟再商量一下。', alt: '巨大的七点闹钟旁，一个戴学位帽的小人说再睡五分钟。' },
@@ -73,3 +73,39 @@ export const graduateDay = {
     { id: '05', title: '生物的世纪', caption: '“二十一世纪是生物的世纪。”', alt: '牌子上写着二十一世纪是生物的世纪，下方的小人仰面躺倒。' },
   ],
 };
+
+export type CreativeFormat = 'illustration' | 'poster' | 'video';
+export type CreativeWork = {
+  id: string;
+  title: string;
+  format: CreativeFormat;
+  summary: string;
+  process: string;
+  href: string;
+  previews: { src: string; width: number; height: number }[];
+};
+
+export const creativeCollection = {
+  title: '和 AI 一起，做点好玩的',
+  label: 'AI 创作',
+  description: '把一个念头变成图像、海报，或一小段故事。',
+  formats: [
+    { id: 'illustration', label: '插画系列' },
+    { id: 'poster', label: '海报设计' },
+    { id: 'video', label: '短片 / 动态影像' },
+  ] as const,
+};
+
+export const creativeWorks: CreativeWork[] = [
+  {
+    id: 'graduate-day',
+    title: graduateDay.title,
+    format: 'illustration',
+    summary: graduateDay.description,
+    process: 'AI 生成',
+    href: graduateDay.href,
+    previews: ['01', '02', '05'].map((id) => ({
+      src: `/illustrations/graduate-day/${id}.png`, width: 624, height: 1088,
+    })),
+  },
+];

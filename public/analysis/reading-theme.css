@@ -1,13 +1,14 @@
-/* Shared reading surface. Diagram colours remain available for data. */
+/* Calm reading surface with the personal site's red and blue accents. */
 :root{
- --bg:#fff;--surface:#fff;--panel:#fafafa;
- --ink:#252525;--ink-2:#4a4a48;--ink-3:#666;--muted:#666;
- --line:#dededb;--line-2:#d0d0cc;
- --accent:#333;--accent-2:#555;--accent-soft:#f5f5f3;
- --blue-soft:#f5f5f3;--green-soft:#f5f5f3;--amber-soft:#f5f5f3;--purple-soft:#f5f5f3;
- --warn-bg:#f5f5f3;--ok-bg:#f5f5f3;--note-bg:#f5f5f3;
+ --bg:#fffcf7;--surface:#fffefb;--panel:#faf6ee;
+ --ink:#30312f;--ink-2:#4a4843;--ink-3:#67655f;--muted:#67655f;
+ --line:#ddd5c8;--line-2:#d0c6b5;
+ --accent:#244bc1;--accent-2:#244bc1;--accent-soft:#f5efe3;
+ --blue-soft:#eef2fc;--green-soft:#f3f4e9;--amber-soft:#fff7e2;--purple-soft:#f5efe3;
+ --warn-bg:#fff4ed;--ok-bg:#f3f4e9;--note-bg:#faf6ee;
 }
-body{background:#fff;background-image:none}
-body>nav[aria-label="笔记导航"]{background:#fff!important;border-bottom:1px solid #dededb}
-.box,.fig,.callout,.toc,.sc{background:#fafafa!important;box-shadow:none!important}
-a:focus-visible,button:focus-visible{outline:2px solid #252525;outline-offset:4px}
+body{background:var(--bg);background-image:none}
+body>nav[aria-label="笔记导航"]{background:var(--bg)!important;border-bottom:1px solid var(--line);color:var(--accent)!important}
+.cover .kicker,header>.kicker{color:#b93b29}
+.box,.fig,.callout,.toc,.sc{box-shadow:none!important}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
