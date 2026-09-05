@@ -36,13 +36,10 @@ export const projects: Project[] = [
   {
     id: 'ttt',
     title: '知行股研',
-    type: 'A 股研究工作台',
+    type: '个人 A 股研究工具',
     summary: '把自选池、规则评分、技术指标、研究快照和后续表现核验放进一套本地工作流。',
     tags: ['React', 'FastAPI', 'SQLite'],
-    links: [
-      { label: '体验 Demo', href: '/projects/zhixing/', kind: 'demo' },
-      { label: '查看 GitHub', href: 'https://github.com/rheeh/ttt', kind: 'source' },
-    ],
+    links: [{ label: '查看 GitHub', href: 'https://github.com/rheeh/ttt', kind: 'source' }],
   },
   {
     id: 'resume-assistant',
