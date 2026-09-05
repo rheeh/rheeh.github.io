@@ -92,7 +92,11 @@ function IntroScene() {
   return (
     <section className="intro-scene" id="top" aria-labelledby="intro-title">
       <div className="intro-doodle intro-star" aria-hidden="true">✦</div>
+      <div className="intro-doodle intro-star-two" aria-hidden="true">✧</div>
+      <div className="intro-doodle intro-star-three" aria-hidden="true">✦</div>
       <div className="intro-doodle intro-cloud" aria-hidden="true" />
+      <div className="intro-sprout intro-sprout-left" aria-hidden="true"><i /><i /><i /></div>
+      <div className="intro-sprout intro-sprout-right" aria-hidden="true"><i /><i /><i /></div>
       <div className="intro-stage">
         <Runner reduced={reduced} arrived={arrived || Boolean(reduced)} />
         <motion.svg
@@ -109,15 +113,17 @@ function IntroScene() {
           />
         </motion.svg>
 
-        <motion.div
-          className="intro-bubble"
-          initial={reduced ? false : { opacity: 0, scale: 0.45, rotate: -7 }}
-          animate={{ opacity: 1, scale: 1, rotate: -1 }}
-          transition={{ delay: reveal, duration: reduced ? 0 : 0.48, type: 'spring', bounce: 0.42 }}
-        >
-          <p>你好，欢迎！</p>
-          <span>welcome to my little corner</span>
-        </motion.div>
+        <div className="intro-speech-positioner">
+          <motion.div
+            className="intro-bubble"
+            initial={reduced ? false : { opacity: 0, scale: 0.45, rotate: -7 }}
+            animate={{ opacity: 1, scale: 1, rotate: -1 }}
+            transition={{ delay: reveal, duration: reduced ? 0 : 0.48, type: 'spring', bounce: 0.42 }}
+          >
+            <p>你好，欢迎！</p>
+            <span>Hi, welcome to my little corner</span>
+          </motion.div>
+        </div>
       </div>
 
       <motion.div

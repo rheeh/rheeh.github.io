@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { profile, projects } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
@@ -49,36 +47,21 @@ export default function Home() {
           <div className="doodle-project-grid">
             {projects.map((project, index) => (
               <DoodleReveal key={project.id} delay={index * 90}>
-                {project.id === 'auralis' ? (
-                  <article className="doodle-project-card doodle-project-card--image">
-                    <a className="doodle-project-thumb" href={project.links[0].href} target="_blank" rel="noreferrer" aria-label="打开 Auralis 在线体验">
-                      <img src="/project-assets/auralis-home.jpg" alt="Auralis AI 广播剧创作产品首页" width="1600" height="918" loading="lazy" />
-                      <span>在线体验 <Arrow /></span>
-                    </a>
-                    <div className="doodle-project-body">
-                      <p>{project.type}</p>
-                      <h3>{project.title}</h3>
-                      <div className="doodle-card-summary">{project.summary}</div>
-                      <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                      <div className="doodle-project-links">
-                        {project.links.map((link) => (
-                          <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label} <Arrow /></a>
-                        ))}
-                      </div>
-                    </div>
-                  </article>
-                ) : (
-                  <a className="doodle-project-card" href={project.links[0].href} target="_blank" rel="noreferrer">
-                    <div className="doodle-card-top">
-                      <span style={{ background: cardColors[index % cardColors.length] }}>{project.title.slice(0, 1)}</span>
-                      <Arrow />
-                    </div>
-                    <p>{project.type}</p>
-                    <h3>{project.title}</h3>
-                    <div className="doodle-card-summary">{project.summary}</div>
-                    <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                  </a>
-                )}
+                <article className="doodle-project-card">
+                  <div className="doodle-card-top">
+                    <span style={{ background: cardColors[index % cardColors.length] }}>{project.title.slice(0, 1)}</span>
+                    <Arrow />
+                  </div>
+                  <p>{project.type}</p>
+                  <h3>{project.title}</h3>
+                  <div className="doodle-card-summary">{project.summary}</div>
+                  <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  <div className="doodle-project-links">
+                    {project.links.map((link) => (
+                      <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label} <Arrow /></a>
+                    ))}
+                  </div>
+                </article>
               </DoodleReveal>
             ))}
           </div>

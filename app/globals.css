@@ -324,7 +324,7 @@ body{background:var(--paper);color:var(--ink)}
 .intro-wrap{position:relative;overflow:hidden;border-bottom:1px solid var(--home-line);background-color:#fbf5e9;background-image:radial-gradient(circle,rgba(40,37,31,.13) 1.2px,transparent 1.2px);background-size:24px 24px}
 .intro-scene{position:relative;width:min(1120px,calc(100% - 64px));min-height:calc(100svh - 100px);margin-inline:auto;padding:42px 0 54px;overflow:hidden}
 .intro-stage{position:relative;height:390px}
-.intro-runner{position:absolute;left:39%;bottom:35px;width:150px;height:190px;z-index:3}
+.intro-runner{position:absolute;left:calc(50% - 75px);bottom:35px;width:150px;height:190px;z-index:3}
 .intro-runner svg{display:block;width:100%;height:100%;overflow:visible;fill:none;stroke:var(--home-ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 .intro-runner .runner-head{fill:#fff8e9}
 .intro-runner .runner-cheek{fill:#e8a28f;stroke:none}
@@ -333,9 +333,13 @@ body{background:var(--paper);color:var(--ink)}
 .motion-streaks i:nth-child(2){width:72%;margin-left:22px;background:#7d9cbb}.motion-streaks i:nth-child(3){width:45%;margin-left:8px;background:#e4bd63}
 .intro-ground{position:absolute;left:9%;right:9%;bottom:19px;width:82%;height:40px;overflow:visible}
 .intro-ground path{fill:none;stroke:#63816d;stroke-width:4;stroke-linecap:round}
-.intro-bubble{position:absolute;left:55%;top:32px;min-width:280px;padding:24px 28px 21px;border:3px solid var(--home-ink);border-radius:38px 38px 38px 8px;background:#fffdf5;box-shadow:7px 8px 0 #e8b868;transform-origin:left bottom}
-.intro-bubble p{margin:0;font:700 29px/1.15 var(--serif)}
-.intro-bubble span{display:block;margin-top:8px;font:14px/1.4 "Kaiti SC","STKaiti",serif;color:var(--home-muted)}
+.intro-speech-positioner{position:absolute;left:0;right:0;top:14px;z-index:4;display:flex;justify-content:center;pointer-events:none}
+.intro-bubble{position:relative;width:min(620px,calc(100% - 56px));padding:25px 28px 23px;border:3px solid var(--home-ink);border-radius:38px;background:#fffdf5;box-shadow:7px 8px 0 #e8b868;transform-origin:center bottom;text-align:center}
+.intro-bubble::before,.intro-bubble::after{content:'';position:absolute;left:50%;width:0;height:0;transform:translateX(-50%)}
+.intro-bubble::before{bottom:-27px;border-left:24px solid transparent;border-right:24px solid transparent;border-top:28px solid var(--doodle-ink,var(--home-ink))}
+.intro-bubble::after{bottom:-20px;border-left:18px solid transparent;border-right:18px solid transparent;border-top:22px solid var(--doodle-card,#fffdf5)}
+.intro-bubble p{margin:0;font:700 clamp(30px,5vw,46px)/1.1 var(--serif)}
+.intro-bubble span{display:block;margin-top:10px;font:clamp(14px,2vw,19px)/1.4 "Kaiti SC","STKaiti",serif;color:var(--home-muted)}
 .intro-content{display:grid;grid-template-columns:1fr auto;grid-template-areas:"title links" "scroll scroll";gap:16px 48px;align-items:end;border-top:2px solid var(--home-ink);padding-top:20px}
 .intro-content h1{grid-area:title;margin:0;font:700 clamp(70px,10vw,120px)/.8 var(--serif);letter-spacing:-.07em}
 .intro-content nav{grid-area:links;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:9px}
@@ -346,7 +350,11 @@ body{background:var(--paper);color:var(--ink)}
 .intro-replay:hover{color:var(--home-red)}
 .intro-replay:focus-visible{outline:3px solid var(--home-red);outline-offset:2px}
 .intro-doodle{position:absolute;color:#e4ad55;font-size:34px;transform:rotate(12deg)}
-.intro-star{left:4%;top:68px}.intro-cloud{right:7%;top:84px;width:76px;height:31px;border:3px solid #819eb6;border-top-color:transparent;border-radius:50%;opacity:.55}
+.intro-star{left:4%;top:68px}.intro-star-two{right:17%;top:270px;color:#7fa38c;font-size:27px}.intro-star-three{left:16%;top:300px;color:#e5947f;font-size:20px}.intro-cloud{right:7%;top:84px;width:76px;height:31px;border:3px solid #819eb6;border-top-color:transparent;border-radius:50%;opacity:.55}
+.intro-sprout{position:absolute;z-index:1;width:52px;height:44px;opacity:.65}
+.intro-sprout i{position:absolute;bottom:0;left:24px;width:4px;height:38px;border-radius:99px;background:#76917e;transform-origin:center bottom}
+.intro-sprout i:first-child{transform:rotate(-42deg);height:30px}.intro-sprout i:last-child{transform:rotate(42deg);height:32px}
+.intro-sprout-left{left:8%;top:335px;transform:rotate(-7deg)}.intro-sprout-right{right:9%;top:325px;transform:rotate(9deg) scale(.82)}
 .featured-project{min-height:620px;padding-block:86px 96px;border-bottom:1px solid var(--home-line)}
 .featured-kicker{margin:0 0 24px;font:11px var(--mono);letter-spacing:.14em;color:var(--home-red)}
 .featured-heading{display:flex;align-items:start;justify-content:space-between;gap:40px;border-top:1px solid var(--home-ink)}
@@ -406,8 +414,7 @@ body{background:var(--paper);color:var(--ink)}
 @media(max-width:900px){
   .intro-scene{min-height:740px}
   .intro-stage{height:390px}
-  .intro-runner{left:31%}
-  .intro-bubble{left:51%}
+  .intro-runner{left:calc(50% - 75px)}
   .intro-content{grid-template-columns:1fr;grid-template-areas:"title" "links" "scroll";align-items:start}
   .intro-content nav{justify-content:flex-start}
   .featured-project{min-height:auto;padding-block:72px 80px}
@@ -425,9 +432,12 @@ body{background:var(--paper);color:var(--ink)}
   .home-nav nav>div a:last-child{display:none}
   .intro-scene{width:min(100% - 36px,560px);min-height:670px;padding-top:44px}
   .intro-stage{height:340px}
-  .intro-runner{left:16%;bottom:26px;width:130px;height:165px}
-  .intro-bubble{left:43%;top:34px;min-width:0;width:54%;padding:18px 17px 16px;border-width:2px;border-radius:28px 28px 28px 7px;box-shadow:5px 6px 0 #e8b868}
-  .intro-bubble p{font-size:22px}.intro-bubble span{font-size:11px}
+  .intro-runner{left:calc(50% - 65px);bottom:26px;width:130px;height:165px}
+  .intro-speech-positioner{top:18px}
+  .intro-bubble{width:calc(100% - 24px);padding:20px 16px 18px;border-width:2px;border-radius:28px;box-shadow:5px 6px 0 #e8b868}
+  .intro-bubble::before{bottom:-23px;border-left-width:20px;border-right-width:20px;border-top-width:24px}.intro-bubble::after{bottom:-17px;border-left-width:15px;border-right-width:15px;border-top-width:19px}
+  .intro-bubble p{font-size:32px}.intro-bubble span{font-size:14px}
+  .intro-sprout-left{left:1%;top:295px}.intro-sprout-right{right:0;top:290px}
   .intro-ground{left:0;width:100%}
   .intro-content h1{font-size:72px}
   .intro-content nav{gap:7px}.intro-content nav a{padding-inline:13px;font-size:11px}
@@ -479,7 +489,7 @@ body{background:var(--paper);color:var(--ink)}
 .personal-home .intro-stage{height:420px}
 .personal-home .intro-content{border-top:3px solid var(--doodle-ink)}
 .personal-home .intro-content h1{font-family:'Baloo 2',system-ui,sans-serif;font-size:clamp(48px,8vw,88px);font-weight:800;letter-spacing:-.045em;line-height:.9}
-.personal-home .intro-bubble{border:2.5px solid var(--doodle-ink);border-radius:26px;background:var(--doodle-card);box-shadow:4px 4px 0 rgba(58,53,46,.85)}
+.personal-home .intro-bubble{border:2.5px solid var(--doodle-ink);border-radius:38px;background:var(--doodle-card);box-shadow:6px 7px 0 rgba(58,53,46,.85)}
 .personal-home .intro-bubble p{font-family:'Baloo 2','PingFang SC',system-ui,sans-serif;font-weight:800}
 .personal-home .intro-bubble span,.personal-home .intro-scroll{font-family:'Patrick Hand','Kaiti SC',cursive}
 .personal-home .intro-content nav a{border:2.5px solid var(--doodle-ink);background:var(--doodle-card);box-shadow:3px 3px 0 rgba(58,53,46,.85);font-family:'Nunito',sans-serif;font-weight:700}
@@ -525,13 +535,6 @@ body{background:var(--paper);color:var(--ink)}
 .doodle-project-card:hover .doodle-card-top>span:last-child{transform:translate(3px,-3px)}
 .doodle-project-card h3{margin:0;font:700 28px/1.2 'Baloo 2','PingFang SC',sans-serif}
 .doodle-card-summary{flex:1;margin-top:8px;color:#6f685d;font-size:15px;line-height:1.7}
-.doodle-project-card--image{overflow:hidden;padding:0}
-.doodle-project-thumb{position:relative;display:block;overflow:hidden;border-bottom:2.5px solid var(--doodle-ink);background:var(--doodle-soft)}
-.doodle-project-thumb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .3s ease}
-.doodle-project-thumb:hover img{transform:scale(1.025)}
-.doodle-project-thumb>span{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 13px;border:2px solid var(--doodle-ink);border-radius:999px;background:var(--doodle-sun);font-size:12px;font-weight:800;box-shadow:3px 3px 0 rgba(58,53,46,.8)}
-.doodle-project-body{display:flex;flex:1;flex-direction:column;padding:20px 24px 24px}
-.doodle-project-body>p{margin:0 0 4px;color:var(--doodle-muted);font:16px 'Patrick Hand',cursive}
 .doodle-project-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
 .doodle-project-links a{display:flex;flex:1;align-items:center;justify-content:space-between;gap:8px;min-width:120px;min-height:44px;padding:0 13px;border:2px solid var(--doodle-ink);border-radius:999px;background:var(--doodle-card);font-size:12px;font-weight:800;box-shadow:2px 2px 0 rgba(58,53,46,.8);transition:transform .2s ease,box-shadow .2s ease}
 .doodle-project-links a:first-child{background:var(--doodle-sun)}
@@ -575,6 +578,7 @@ body{background:var(--paper);color:var(--ink)}
 @media(max-width:480px){
   .personal-home .intro-scene{width:min(100% - 36px,560px)}
   .personal-home .intro-content h1{font-size:clamp(44px,16vw,64px)}
+  .personal-home .intro-bubble{border-radius:28px}
   .doodle-section-heading h2{font-size:36px}
   .auralis-card{border-radius:18px;box-shadow:5px 5px 0 rgba(58,53,46,.85)}
   .auralis-card-image>span{right:10px;top:10px;padding:6px 9px;font-size:10px}
