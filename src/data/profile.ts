@@ -14,7 +14,7 @@ export type Project = {
 };
 
 export const profile = {
-  name: 'Z.',
+  name: 'Zoe Zhang',
   contact: {
     email: 'grunt1948@163.com',
     github: 'https://github.com/rheeh',

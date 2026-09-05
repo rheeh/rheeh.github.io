@@ -478,7 +478,7 @@ body{background:var(--paper);color:var(--ink)}
 .personal-home .intro-scene{width:min(760px,calc(100% - 48px));min-height:100svh;padding:50px 0 38px}
 .personal-home .intro-stage{height:420px}
 .personal-home .intro-content{border-top:3px solid var(--doodle-ink)}
-.personal-home .intro-content h1{font-family:'Baloo 2',system-ui,sans-serif;font-weight:800}
+.personal-home .intro-content h1{font-family:'Baloo 2',system-ui,sans-serif;font-size:clamp(48px,8vw,88px);font-weight:800;letter-spacing:-.045em;line-height:.9}
 .personal-home .intro-bubble{border:2.5px solid var(--doodle-ink);border-radius:26px;background:var(--doodle-card);box-shadow:4px 4px 0 rgba(58,53,46,.85)}
 .personal-home .intro-bubble p{font-family:'Baloo 2','PingFang SC',system-ui,sans-serif;font-weight:800}
 .personal-home .intro-bubble span,.personal-home .intro-scroll{font-family:'Patrick Hand','Kaiti SC',cursive}
@@ -516,7 +516,7 @@ body{background:var(--paper);color:var(--ink)}
 .doodle-actions a:hover,.notes-more a:hover{transform:translate(-2px,-2px) rotate(-1deg);box-shadow:5px 5px 0 rgba(58,53,46,.85)}
 
 .doodle-project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.doodle-project-grid>.doodle-reveal:last-child{grid-column:1/-1;width:calc(50% - 12px);justify-self:center}
+.doodle-project-grid>.doodle-reveal:last-child{grid-column:auto;width:auto;justify-self:stretch}
 .doodle-project-card{display:flex;height:100%;flex-direction:column;padding:24px;border:2.5px solid var(--doodle-ink);border-radius:20px;background:var(--doodle-card);box-shadow:4px 4px 0 rgba(58,53,46,.85);transition:transform .2s ease,box-shadow .2s ease}
 .doodle-project-card:hover{transform:translate(-2px,-5px) rotate(-.5deg);box-shadow:7px 8px 0 rgba(58,53,46,.85)}
 .doodle-card-top{display:flex;align-items:start;justify-content:space-between;margin-bottom:18px}
@@ -525,6 +525,17 @@ body{background:var(--paper);color:var(--ink)}
 .doodle-project-card:hover .doodle-card-top>span:last-child{transform:translate(3px,-3px)}
 .doodle-project-card h3{margin:0;font:700 28px/1.2 'Baloo 2','PingFang SC',sans-serif}
 .doodle-card-summary{flex:1;margin-top:8px;color:#6f685d;font-size:15px;line-height:1.7}
+.doodle-project-card--image{overflow:hidden;padding:0}
+.doodle-project-thumb{position:relative;display:block;overflow:hidden;border-bottom:2.5px solid var(--doodle-ink);background:var(--doodle-soft)}
+.doodle-project-thumb img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;transition:transform .3s ease}
+.doodle-project-thumb:hover img{transform:scale(1.025)}
+.doodle-project-thumb>span{position:absolute;right:12px;bottom:12px;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 13px;border:2px solid var(--doodle-ink);border-radius:999px;background:var(--doodle-sun);font-size:12px;font-weight:800;box-shadow:3px 3px 0 rgba(58,53,46,.8)}
+.doodle-project-body{display:flex;flex:1;flex-direction:column;padding:20px 24px 24px}
+.doodle-project-body>p{margin:0 0 4px;color:var(--doodle-muted);font:16px 'Patrick Hand',cursive}
+.doodle-project-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.doodle-project-links a{display:flex;flex:1;align-items:center;justify-content:space-between;gap:8px;min-width:120px;min-height:44px;padding:0 13px;border:2px solid var(--doodle-ink);border-radius:999px;background:var(--doodle-card);font-size:12px;font-weight:800;box-shadow:2px 2px 0 rgba(58,53,46,.8);transition:transform .2s ease,box-shadow .2s ease}
+.doodle-project-links a:first-child{background:var(--doodle-sun)}
+.doodle-project-links a:hover{transform:translate(-1px,-2px);box-shadow:4px 4px 0 rgba(58,53,46,.8)}
 
 .doodle-video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .doodle-video-card{position:relative;aspect-ratio:16/11;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2.5px dashed var(--doodle-ink);border-radius:20px;background:var(--doodle-card);box-shadow:4px 4px 0 rgba(58,53,46,.35)}
@@ -563,6 +574,7 @@ body{background:var(--paper);color:var(--ink)}
 }
 @media(max-width:480px){
   .personal-home .intro-scene{width:min(100% - 36px,560px)}
+  .personal-home .intro-content h1{font-size:clamp(44px,16vw,64px)}
   .doodle-section-heading h2{font-size:36px}
   .auralis-card{border-radius:18px;box-shadow:5px 5px 0 rgba(58,53,46,.85)}
   .auralis-card-image>span{right:10px;top:10px;padding:6px 9px;font-size:10px}

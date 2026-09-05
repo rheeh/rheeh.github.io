@@ -5,7 +5,7 @@ import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
 
-const cardColors = ['#c7ecd8', '#cfe9f6', '#ffe8b0'];
+const cardColors = ['#ffe8b0', '#c7ecd8', '#cfe9f6', '#ffd7c9'];
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -23,7 +23,6 @@ function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
 }
 
 export default function Home() {
-  const [auralis, ...otherProjects] = projects;
   const notes = [
     ...reports.map((report) => ({
       title: report.shortTitle,
@@ -45,47 +44,41 @@ export default function Home() {
       <main id="main">
         <HomeIntro />
 
-        <section className="doodle-section doodle-projects" id="auralis">
-          <SectionHeading kicker="featured project" title="先看看 Auralis" />
-          <DoodleReveal className="auralis-card-wrap">
-            <article className="auralis-card">
-              <a className="auralis-card-image" href={auralis.links[0].href} target="_blank" rel="noreferrer" aria-label="打开 Auralis 在线体验">
-                <img src="/project-assets/auralis-home.jpg" alt="Auralis AI 广播剧创作产品首页" width="1600" height="918" loading="lazy" />
-                <span>LIVE DEMO <Arrow /></span>
-              </a>
-              <div className="auralis-card-copy">
-                <div className="doodle-monogram" aria-hidden="true">A</div>
-                <div>
-                  <p>{auralis.type}</p>
-                  <h3>{auralis.title}</h3>
-                  <span>{auralis.summary}</span>
-                  <ul>{auralis.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                </div>
-                <div className="doodle-actions">
-                  {auralis.links.map((link) => (
-                    <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label} <Arrow /></a>
-                  ))}
-                </div>
-              </div>
-            </article>
-          </DoodleReveal>
-        </section>
-
         <section className="doodle-section" id="projects">
           <SectionHeading kicker="vibe coding" title="我做过的小项目" />
           <div className="doodle-project-grid">
-            {otherProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <DoodleReveal key={project.id} delay={index * 90}>
-                <a className="doodle-project-card" href={project.links[0].href} target="_blank" rel="noreferrer">
-                  <div className="doodle-card-top">
-                    <span style={{ background: cardColors[index % cardColors.length] }}>{project.title.slice(0, 1)}</span>
-                    <Arrow />
-                  </div>
-                  <p>{project.type}</p>
-                  <h3>{project.title}</h3>
-                  <div className="doodle-card-summary">{project.summary}</div>
-                  <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                </a>
+                {project.id === 'auralis' ? (
+                  <article className="doodle-project-card doodle-project-card--image">
+                    <a className="doodle-project-thumb" href={project.links[0].href} target="_blank" rel="noreferrer" aria-label="打开 Auralis 在线体验">
+                      <img src="/project-assets/auralis-home.jpg" alt="Auralis AI 广播剧创作产品首页" width="1600" height="918" loading="lazy" />
+                      <span>在线体验 <Arrow /></span>
+                    </a>
+                    <div className="doodle-project-body">
+                      <p>{project.type}</p>
+                      <h3>{project.title}</h3>
+                      <div className="doodle-card-summary">{project.summary}</div>
+                      <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                      <div className="doodle-project-links">
+                        {project.links.map((link) => (
+                          <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label} <Arrow /></a>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ) : (
+                  <a className="doodle-project-card" href={project.links[0].href} target="_blank" rel="noreferrer">
+                    <div className="doodle-card-top">
+                      <span style={{ background: cardColors[index % cardColors.length] }}>{project.title.slice(0, 1)}</span>
+                      <Arrow />
+                    </div>
+                    <p>{project.type}</p>
+                    <h3>{project.title}</h3>
+                    <div className="doodle-card-summary">{project.summary}</div>
+                    <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  </a>
+                )}
               </DoodleReveal>
             ))}
           </div>
