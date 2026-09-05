@@ -593,3 +593,6 @@ body{background:var(--paper);color:var(--ink)}
 @media(prefers-reduced-motion:reduce){
   .doodle-reveal{opacity:1;transform:none}
 }
+
+/* Keep the complete overview readable instead of cropping it like a photo. */
+.report-visual-grid .note-overview img{height:auto;max-height:none;aspect-ratio:auto;object-fit:contain}

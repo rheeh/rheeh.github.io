@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MOBA 手游机制拆解与《漫威超级战争》失败归因研究</title>
+<title>有了漫威角色，为什么仍留不住玩家？ · 观察与体验</title>
 <style>
   :root{
     --ink:#1a1a1a;
@@ -198,34 +198,24 @@
   }
 </style>
 </head>
-<body>
+<body><nav aria-label="笔记导航" style="padding:16px 24px;font:14px system-ui;background:#faf8f2;color:#252525"><a href="/#notes" style="color:inherit">← 一些观察与体验</a> · <a href="/reports/" style="color:inherit">全部笔记</a></nav>
 <div class="wrap">
 
 <!-- ============ 封面 ============ -->
 <div class="cover">
   <div class="kicker">Game Design · 品类复盘 · 归因研究</div>
-  <h1>MOBA 手游机制拆解与《漫威超级战争》失败归因</h1>
-  <p class="subtitle">—— 从六层系统模型到「品类–平台–IP」错配的量化诊断</p>
-  <div class="meta">
-    <span><b>研究方法</b>　文档基线 + 公开二手数据交叉核验</span>
-    <span><b>样本</b>　4 款 MOBA 手游 · 4 款网易漫威产品线</span>
-    <span><b>形式</b>　交互式产品复盘</span>
-  </div>
+  <h1>有了漫威角色，为什么仍留不住玩家？</h1>
+  <p class="subtitle">从角色吸引力，到操作、匹配和一起玩的朋友。</p>
+
 </div>
 
 <!-- ============ 摘要 ============ -->
-<div class="abstract">
-  <h2>摘　要</h2>
-  <p>本文在既有《王者荣耀》系统拆解的基础上，补充检索行业媒体（GameLook、娱乐资本论、伽马数据）、券商研究（德邦研究所/Sensor Tower）、玩家社区（TapTap、巴哈姆特、Reddit）与厂商公开披露（网易 GDC 2026 演讲）等一手与二手信源，构建 MOBA 手游的<strong>六层系统模型</strong>（核心循环层 / 操作层 / 英雄层 / 对局层 / 元游戏层 / 生态层），并据此对《漫威超级战争》（MARVEL Super War，2019-12 海外首发、2021-07 国服上线、2024-06-17 停服）做机制层面的逐层体检。</p>
-  <p>核心发现有三。其一，《漫威超级战争》并非「没有创新」——它在<em>系统层</em>做了 7 项差异化设计（能源核心、行星吞噬者、苏尔特尔、反重力装置、双召唤师技能等），但玩家价值集中在<em>手感层与社交层</em>，创新与用户需求存在结构性错位。其二，其失败不可归因于「漫威 IP 不行」——同 IP 的《漫威争锋》全球累计用户突破 4000 万<sup class="r">[12]</sup>；也不可归因于「MOBA 品类已死」——2025 年中国 MOBA 手游市场规模 417.5 亿元、同比 +10.2%<sup class="r">[9]</sup>。其三，真正的死因是<strong>在由社交网络效应主导的品类里，选择了网易不具备关系链基础设施的战场</strong>：八维加权评分显示其综合得分 3.45/10，低于「生态自持线」（约 4.5），也低于同厂同品类的《决战！平安京》（4.98，活着但小众）。</p>
-  <p>本文进一步给出可复用的 <strong>MOBA 新品立项 Go/No-Go 检查清单</strong>，并提出核心判断：MOBA 品类的竞争壁垒已从「玩法层」迁移至「生态层」，IP 光环只能降低首次获客成本，无法替代社交关系链与长线运营。</p>
-  <div class="kw"><b>关键词</b>　MOBA 机制拆解；社交网络效应；匹配池；IP 品类适配；漫威超级战争；失败归因；Go/No-Go 检查清单</div>
-</div>
+<div class="abstract"><p>熟悉的角色可以让人愿意试一局，但下一次是否打开游戏，还取决于操作、匹配，以及朋友是否也在。以《漫威超级战争》为例，这篇笔记关注 IP 吸引力与日常对局体验之间的距离。</p><p>这是基于公开材料的产品复盘。外部收入估算、玩家评论和主观评分，都不足以独立证明停服原因。</p></div>
 
 <!-- ============ 一、方法与数据 ============ -->
-<h2 class="sec"><span class="num">01</span>研究方法与数据口径</h2>
+<h2 class="sec"><span class="num">01</span>先核对材料的口径</h2>
 
-<p>本文采用<strong>基线文档 + 增量检索 + 交叉核验</strong>三段式：以用户提供的《王者荣耀等 MOBA 游戏拆解》为分析基线（其已覆盖 Sensor Tower、AppMagic、AMiner 学术库等 32 项引证），在此基础上补充检索中文行业媒体与玩家社区，重点补齐原报告自述薄弱的四块——本地化策略、商业化付费细节、赛事体系建设、用户口碑定量数据。</p>
+<p>下面保留公开材料的来源和口径。玩家评论能提供体验线索，但不代表全体玩家；第三方估算也不能当作官方经营数据。</p>
 
 <div class="tbl-wrap">
 <table>
@@ -511,99 +501,7 @@
 </div>
 
 <!-- ============ 五、失败归因 ============ -->
-<h2 class="sec"><span class="num">05</span>失败归因：八维加权模型与下行螺旋</h2>
-
-<h3>5.1　量化归因：八维加权评分</h3>
-
-<p>为避免「罗列原因」式的主观复盘，本文构建加权评分模型。<strong>权重为分析者依据表 1 引证证据与品类特性赋值（类 AHP 专家打分），非实证回归结果，仅用于结构化比较与量级判断。</strong></p>
-
-<div class="tbl-wrap">
-<table>
-  <caption><b>表 4</b>　MOBA 品类成功要素八维加权评分（各维度 0–10 分；加权总分 ＝ Σ 得分 × 权重）</caption>
-  <thead>
-    <tr>
-      <th style="width:20%">维度</th><th class="num" style="width:8%">权重</th>
-      <th class="num" style="width:12%">王者荣耀</th>
-      <th class="num" style="width:14%">决战！平安京</th>
-      <th class="num" style="width:14%">漫威超级战争</th>
-      <th style="width:32%">评分依据（漫威超级战争）</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><b>社交关系链基础设施</b></td><td class="num">25%</td><td class="num pos">10</td><td class="num mid">3</td><td class="num neg">2</td><td>网易账号体系，无熟人关系链导入；缺少 LBS、亲密关系、战队裂变等社交货币载体</td></tr>
-    <tr><td><b>操作手感与性能优化</b></td><td class="num">20%</td><td class="num pos">9</td><td class="num mid">7</td><td class="num mid">5</td><td>打击感与流畅度低于同期竞品；但 TapTap 部分玩家给予「手感非常棒」的正向评价，存在显著的<b>设备与群体分化</b></td></tr>
-    <tr><td><b>匹配池规模与质量</b></td><td class="num">15%</td><td class="num pos">10</td><td class="num mid">5</td><td class="num neg">3</td><td>玩家反馈「深夜排位匹配到熟人撞车」「低分段挂机十局近半数」「需跨服匹配日韩」</td></tr>
-    <tr><td><b>内容更新与平衡性</b></td><td class="num">12%</td><td class="num pos">9</td><td class="num mid">6</td><td class="num mid">5</td><td>有 S0–S4 赛季与电影联动（奇异博士 2），但玩家持续诟病「角色平衡真的沒問題嗎」</td></tr>
-    <tr><td><b>电竞与内容生态</b></td><td class="num">10%</td><td class="num pos">10</td><td class="num mid">3</td><td class="num neg">2</td><td>无成体系职业联赛；观战系统仅 5 个位置且限自定义场，无法支撑内容传播</td></tr>
-    <tr><td><b>商业化设计</b></td><td class="num">8%</td><td class="num pos">9</td><td class="num mid">5</td><td class="num mid">4</td><td>「活动、商店方面直接还原王者模式」；无皮肤属性加成压缩付费点；生命周期 IAP 仅 $10M</td></tr>
-    <tr><td><b>IP 还原深度与品类适配</b></td><td class="num">6%</td><td class="num pos">8</td><td class="num mid">7</td><td class="num mid">5</td><td>技能组还原获高评价，但「地图未还原漫威热门战场」，IP 停留于皮肤层</td></tr>
-    <tr><td><b>发行窗口与全球化</b></td><td class="num">4%</td><td class="num pos">10</td><td class="num mid">6</td><td class="num neg">2</td><td>2019 立项、2021-07 才公测，撞上漫威国内 IP 低谷（电影休整期 + 《尚气》争议）；始终未进入欧美主场</td></tr>
-    <tr style="background:#eef1f4 !important;">
-      <td><b>加权总分</b></td><td class="num">100%</td>
-      <td class="num pos" style="font-size:15px;"><b>9.48</b></td>
-      <td class="num mid" style="font-size:15px;"><b>4.98</b></td>
-      <td class="num neg" style="font-size:15px;"><b>3.45</b></td>
-      <td><b>低于生态自持线（约 4.5）</b></td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<figure>
-  <div class="fig-hd">图 3　八维能力雷达对比</div>
-  <svg viewBox="0 0 440 392" role="img" aria-label="八维能力雷达图">
-    <defs><style>
-      .rl{font:600 10.5px -apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#3d3d3d;}
-      .rw{font:400 9.5px -apple-system,"PingFang SC",sans-serif;fill:#9a9a9a;}
-      .grid{fill:none;stroke:#e0e0e0;stroke-width:1;}
-      .spoke{stroke:#e0e0e0;stroke-width:1;}
-      .s1{fill:#23405e;fill-opacity:.18;stroke:#23405e;stroke-width:2;}
-      .s2{fill:#b08a2e;fill-opacity:.14;stroke:#b08a2e;stroke-width:2;}
-      .s3{fill:#9c3328;fill-opacity:.22;stroke:#9c3328;stroke-width:2.2;}
-    </style></defs>
-    <g>
-      <!-- 网格 -->
-      <polygon class="grid" points="220,70 299.55,115.45 345,195 299.55,274.55 220,320 140.45,274.55 95,195 140.45,115.45"/>
-      <polygon class="grid" points="220,107.5 279.66,137.73 307.5,195 279.66,252.28 220,282.5 160.34,252.28 132.5,195 160.34,137.73"/>
-      <polygon class="grid" points="220,145 259.77,160 270,195 259.77,230 220,245 180.23,230 170,195 180.23,160"/>
-      <polygon class="grid" points="220,182.5 239.89,182.27 232.5,195 239.89,207.73 220,207.5 200.11,207.73 207.5,195 200.11,182.27"/>
-      <line class="spoke" x1="220" y1="195" x2="220" y2="70"/>
-      <line class="spoke" x1="220" y1="195" x2="299.55" y2="115.45"/>
-      <line class="spoke" x1="220" y1="195" x2="345" y2="195"/>
-      <line class="spoke" x1="220" y1="195" x2="299.55" y2="274.55"/>
-      <line class="spoke" x1="220" y1="195" x2="220" y2="320"/>
-      <line class="spoke" x1="220" y1="195" x2="140.45" y2="274.55"/>
-      <line class="spoke" x1="220" y1="195" x2="95" y2="195"/>
-      <line class="spoke" x1="220" y1="195" x2="140.45" y2="115.45"/>
-
-      <!-- 平安京 -->
-      <polygon class="s2" points="220,157.5 281.87,133.13 282.5,195 275.15,250.15 220,232.5 175.81,239.19 132.5,195 164.85,139.85"/>
-      <!-- 漫威 -->
-      <polygon class="s3" points="220,170 264.19,150.81 257.5,195 264.19,239.19 220,220 184.64,230.36 157.5,195 202.32,177.32"/>
-      <!-- 王者 -->
-      <polygon class="s1" points="220,70 299.55,115.45 345,195 299.55,274.55 220,320 140.45,274.55 95,195 140.45,115.45"/>
-
-      <!-- 标签 -->
-      <text class="rl" x="220" y="42" text-anchor="middle">社交关系链</text><text class="rw" x="220" y="54" text-anchor="middle">25%</text>
-      <text class="rl" x="326" y="86" text-anchor="start">操作手感</text><text class="rw" x="326" y="98" text-anchor="start">20%</text>
-      <text class="rl" x="372" y="192" text-anchor="start">匹配池</text><text class="rw" x="372" y="204" text-anchor="start">15%</text>
-      <text class="rl" x="326" y="304" text-anchor="start">更新/平衡</text><text class="rw" x="326" y="316" text-anchor="start">12%</text>
-      <text class="rl" x="220" y="348" text-anchor="middle">电竞生态</text><text class="rw" x="220" y="360" text-anchor="middle">10%</text>
-      <text class="rl" x="112" y="304" text-anchor="end">商业化</text><text class="rw" x="112" y="316" text-anchor="end">8%</text>
-      <text class="rl" x="68" y="192" text-anchor="end">IP 还原</text><text class="rw" x="68" y="204" text-anchor="end">6%</text>
-      <text class="rl" x="112" y="86" text-anchor="end">发行窗口</text><text class="rw" x="112" y="98" text-anchor="end">4%</text>
-    </g>
-    <g transform="translate(0,376)">
-      <rect x="30" y="0" width="12" height="9" fill="#23405e" fill-opacity=".7"/>
-      <text x="48" y="8" style="font:400 11px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">王者荣耀 9.48</text>
-      <rect x="150" y="0" width="12" height="9" fill="#b08a2e" fill-opacity=".6"/>
-      <text x="168" y="8" style="font:400 11px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">决战！平安京 4.98</text>
-      <rect x="298" y="0" width="12" height="9" fill="#9c3328" fill-opacity=".65"/>
-      <text x="316" y="8" style="font:400 11px -apple-system,'PingFang SC',sans-serif;fill:#3d3d3d;">漫威超级战争 3.45</text>
-    </g>
-  </svg>
-  <figcaption><b>图 3</b>　权重分配依据：社交关系链（25%）与操作手感（20%）合计占据 45% 权重，对应图 1 中的 L6 与 L2「双关键层」。漫威超级战争的图形高度塌陷于「社交关系链」轴，这是其失败的第一性原因。</figcaption>
-</figure>
+<h2 class="sec"><span class="num">05</span>匹配、流失与朋友离开</h2>
 
 <h3>5.2　动态机制：下行螺旋如何自我强化</h3>
 
@@ -692,7 +590,7 @@
   <figcaption><b>图 5</b>　数据来源：ActivePlayer.io 估算模型<sup class="r">[14]</sup>（C 级）。注意 2022-07 至 2023-10 的 272 万→283 万反向波动应理解为估算噪声，实际应视为<strong>低位平台</strong>——这本身也是坏消息：产品既未死透也未回升，处于「无法支撑健康匹配池、又不至于立刻关服」的僵尸区间，持续消耗授权费与运维成本。</figcaption>
 </figure>
 
-<h3>5.4　六个可归因的失败因子（按贡献度排序）</h3>
+<h3>5.4　六个值得讨论的可能因素（非因果排序）</h3>
 
 <ol>
   <li><strong>社交关系链缺位（贡献度约 30%）</strong>　MOBA 是唯一一个「朋友在哪我在哪」决定生死的品类。网易账号体系无法导入熟人关系，皮肤无法成为社交货币，组队开黑缺少自驱动力。同厂的《决战！平安京》重复了完全相同的失败模式，构成强对照。</li>
@@ -740,7 +638,7 @@
   <p><strong>《漫威对决》的口碑比《漫威超级战争》高 2.8 分（TapTap 8.5 vs 5.7），结局却同样是热度迅速衰减。</strong>这直接否证了「只要把游戏做好就能活」的朴素归因——在网络效应品类里，产品口碑是<em>必要不充分条件</em>。真正决定生死的是品类结构：MOBA 与自走棋都是重度依赖匹配池与社交链的品类，而英雄射击（6v6、PC 端、可随机匹配陌生人、单局短）对社交关系链的依赖度低得多。</p>
 </div>
 
-<h3>6.1　《漫威争锋》做对了什么：可迁移的五条方法论</h3>
+<h3>6.1　《漫威争锋》做对了什么：五个可以对照的问题</h3>
 
 <div class="tbl-wrap">
 <table>
@@ -759,7 +657,7 @@
 </div>
 
 <!-- ============ 七、结论 ============ -->
-<h2 class="sec"><span class="num">07</span>结论：品类–平台–IP 的三元错配</h2>
+<h2 class="sec"><span class="num">07</span>角色吸引力之外，还缺什么？</h2>
 
 <p>把所有证据收敛为一句判断：</p>
 
@@ -822,7 +720,7 @@
 
 <hr class="divider">
 
-<h2 class="sec"><span class="num">08</span>研究局限</h2>
+<h2 class="sec"><span class="num">08</span>还有哪些问题没有答案</h2>
 <ul>
   <li><strong>权重主观性</strong>　表 4 的八维权重为分析者依据引证证据赋值，未经过专家德尔菲法或多轮 AHP 一致性检验，量级判断可靠但精确分值不宜直接引用。</li>
   <li><strong>第三方估算偏差</strong>　MAU 数据来自 ActivePlayer.io 估算模型（C 级），2022-07 至 2023-10 存在反向波动，且该数据源在游戏停服后仍显示「未死亡」，更新滞后明显。</li>

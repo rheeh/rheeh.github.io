@@ -24,13 +24,13 @@ export default function Home() {
   const notes = [
     ...reports.map((report) => ({
       title: report.shortTitle,
-      category: '调研笔记',
+      category: report.category,
       summary: report.summary,
       href: `/reports/${report.slug}/`,
     })),
     ...analysisShowcases.map((note) => ({
       title: note.title,
-      category: '交互笔记',
+      category: note.category,
       summary: note.summary,
       href: note.href,
     })),

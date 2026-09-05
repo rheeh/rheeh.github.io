@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>国内 AIGC 视频平台深度分析 · 2026年8月</title>
+<title>AI 视频工具，生成之后还有多少事要做？ · 观察与体验</title>
 <style>
   :root{
     --bg:#fbfaf8;
@@ -291,62 +291,38 @@
   }
 </style>
 </head>
-<body>
+<body><nav aria-label="笔记导航" style="padding:16px 24px;font:14px system-ui;background:#faf8f2;color:#252525"><a href="/#notes" style="color:inherit">← 一些观察与体验</a> · <a href="/reports/" style="color:inherit">全部笔记</a></nav>
 <div class="wrap">
 
 <header>
-  <div class="kicker">Industry Analysis · AIGC Video · China</div>
-  <h1>谁在为谁造工具，谁在为谁付钱<br>——国内 AIGC 视频平台的 topographic survey</h1>
-  <p class="sub">把 20 家平台放在同一把尺子下量一遍：从上亿用户的基础设施层，到只有几百个客户却活得很稳的行业服务商。重点回答参考文没回答的两个问题——<strong>这些工具到底卖给谁</strong>，以及<strong>那个人的钱包里到底有多少钱</strong>。</p>
+  <div class="kicker">工具与制作 · 阅读笔记</div>
+  <h1>AI 视频工具，生成之后还有多少事要做？</h1>
+  <p class="sub">生成一个好镜头和交付一支片子，中间还隔着角色一致性、修改、协作和导出。沿着这些实际工作，重新看视频工具的差别。</p>
   <div class="meta">
     <span>AI 视频平台全景分析</span><i></i>
     <span>覆盖 8 家模型层 + 12 家应用层</span><i></i>
-    <span>约 11,000 字</span>
+    <span>公开资料整理</span>
   </div>
 </header>
 
 <nav class="toc">
   <h4>目录</h4>
   <ol>
-    <li><a href="#s0">先说结论：六条判断</a></li>
+
     <li><a href="#s1">地图：三层价值链，以及大厂的纵向整合</a></li>
     <li><a href="#s2">用户画像：五类人，五种钱包</a></li>
     <li><a href="#s3">被忽略的第六类人：坐在屏幕那头的观众</a></li>
     <li><a href="#s4">竞品矩阵：分层、象限与能力对照</a></li>
-    <li><a href="#s5">三场关键对决</a></li>
+    <li><a href="#s5">几种工作流程的区别</a></li>
     <li><a href="#s6">商业模式：四种赚钱方式，哪种算得过账</a></li>
-    <li><a href="#s7">钱在哪：五个垂类方向的账本</a></li>
+    <li><a href="#s7">钱在哪：不同任务的成本差别</a></li>
     <li><a href="#s8">风险清单：政策、模型、算力、留存</a></li>
-    <li><a href="#s9">存活打分卡与行动建议</a></li>
+
     <li><a href="#s10">参考资料：全部来源可点开核对</a></li>
   </ol>
 </nav>
 
 <!-- ============ 0 ============ -->
-<h2 id="s0"><span class="num">00</span>先说结论：六条判断</h2>
-
-<div class="box box-key">
-  <span class="tag">TL;DR</span>
-  <p><strong>1. 这个赛道真正的钱在 B 端，而且已经不在"中小工作室"那里了。</strong>可灵 2026 年 B 端 API + 企业服务收入占比从约 40% 升到约 70%，海外收入约 70%；MiniMax 2026 上半年 B 端占比从 30.3% 升至 63.4%<span class="src" data-tip="MiniMax Group Inc. 截至 2026-06-30 止六个月中期业绩公告（港交所披露易，2026-08-26）。"><a class="pill p-green" href="https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600681_c.pdf" target="_blank" rel="noopener" title="香港交易所披露易｜MiniMax Group Inc. 截至 2026 年 6 月 30 日止六个月的中期业绩公告（PDF）（2026-08-26）
-https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600681_c.pdf">MiniMax 财报</a><button class="src-copy" type="button" data-url="https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0826/2026082600681_c.pdf" title="复制此来源链接" aria-label="复制来源链接"></button></span>。C 端付费率行业普遍只有 3%–5%，安策智库甚至给出 1% 的口径<span class="src" data-tip="头豹研究院《2026 年 AI 视频生成行业报告》（2026-05-11）。C 端付费率 3%–5% 出自该报告；安策智库 1% 的口径未找到官方发布页，建议按二手引述处理。"><a class="pill p-amber" href="https://pdf.dfcfw.com/pdf/H3_AP202605111822168906_1.pdf" target="_blank" rel="noopener" title="头豹研究院｜2026 年 AI 视频生成行业报告：国产爆款频出（PDF）（2026-05-11）
-https://pdf.dfcfw.com/pdf/H3_AP202605111822168906_1.pdf">付费率测算</a><button class="src-copy" type="button" data-url="https://pdf.dfcfw.com/pdf/H3_AP202605111822168906_1.pdf" title="复制此来源链接" aria-label="复制来源链接"></button></span>。<em>把消费者当客户的平台，在做慈善。</em></p>
-  <p><strong>2. 应用层唯一能守住的差异化，只剩"迁移成本"，而迁移成本有三种形态：</strong>深度工作流（用户把整条产线跑在你这儿）、行业客户关系（渠道与信任）、工程交付能力（能导出达芬奇/FCP 工程文件，而不只是 mp4）。模型能力、画质、价格，一样都守不住。</p>
-  <p><strong>3. 漫剧这条最热闹的路，正在以肉眼可见的速度放气。</strong>2026 上半年抖音端新上线 AI 剧/漫剧 <strong>22.19 万部</strong>，破亿的 1055 部（0.47%）；以 5000 万播放为盈亏平衡线，达标的只有 2886 部，占 <strong>1.3%</strong>。活跃承制方一个季度从 1216 家掉到 698 家，<strong>少了 42%</strong><span class="src" data-tip="中国日报网《AI 短剧半年规模超 220 亿元》（2026-07-29），数据引自 DataEye。DataEye 官网原文页未找到，且「2886 部 / 1.3%」这组数字仅见于自媒体转载，引用需谨慎。"><a class="pill p-amber" href="https://caijing.chinadaily.com.cn/a/202607/29/WS6a69553ba310d709c2fc043d.html" target="_blank" rel="noopener" title="中国日报网｜AI 短剧半年规模超 220 亿元 产业爆发重塑内容生产逻辑（引 DataEye 数据）（2026-07-29）
-https://caijing.chinadaily.com.cn/a/202607/29/WS6a69553ba310d709c2fc043d.html">DataEye 系</a><button class="src-copy" type="button" data-url="https://caijing.chinadaily.com.cn/a/202607/29/WS6a69553ba310d709c2fc043d.html" title="复制此来源链接" aria-label="复制来源链接"></button></span>。给一群 90% 都在亏钱的人卖铲子，铲子能卖多贵？</p>
-  <p><strong>4. 大厂正在从"卖工具"转向"圈链路"。</strong>字节已经同时握着底层模型（Seedance 2.5）、工作流平台（Seedance Studio）、内容孵化（即梦片场）、C 端工具（即梦/小云雀）、B 端 API（火山引擎）和分发（抖音/红果）。留给独立应用层平台的，是<strong>大厂嫌小、嫌脏、嫌慢的格子</strong>。</p>
-  <p><strong>5. 政策的牙齿在 2026 年 9 月 1 日长出来。</strong>广电总局令第 16 号《微短剧发展管理办法》2026 年 9 月 1 日施行，第 34 条明确要求 AI 生成微短剧在每集明显位置加提示标识；叠加 2025 年 9 月已施行的《AI 生成合成内容标识办法》（显式 + 隐式双标识）。合规不再是法务的事，它是<strong>产品架构的一部分</strong>。</p>
-  <p><strong>6. 「无限画布」正在从卖点变成入场券——这对应用层是坏消息。</strong>2025 下半年以来，可灵（灵动画布）、商汤 Seko 3.0、字节 Seedance Studio 以及几乎全部创业公司都上了画布 + 节点工作流。当 80% 的平台都有画布时，画布本身不再构成差异化。用户迁移的从来不是画布，是<strong>画布上已经搭好的那条产线</strong>。</p>
-
-</div>
-
-<div class="box box-plain">
-  <span class="tag" style="color:var(--ink-3)">关于本文的数据口径</span>
-  <p class="small" style="margin:0">本文所有数字分三个可信度等级：<span class="src" data-tip="示例：快手科技 2026 年第二季度及中期业绩公告（2026-08-19）。点标签打开原文，点右侧按钮复制链接。"><a class="pill p-green" href="https://ir.kuaishou.com/zh-hans/news-releases/news-release-details/kuaishoukejifabu2026niandierjidujizhongqiweijingshenhecaiwuyeji" target="_blank" rel="noopener" title="快手科技投资者关系｜2026 年第二季度及中期未经审核财务业绩（2026-08-19）
-https://ir.kuaishou.com/zh-hans/news-releases/news-release-details/kuaishoukejifabu2026niandierjidujizhongqiweijingshenhecaiwuyeji">财报/公告</a><button class="src-copy" type="button" data-url="https://ir.kuaishou.com/zh-hans/news-releases/news-release-details/kuaishoukejifabu2026niandierjidujizhongqiweijingshenhecaiwuyeji" title="复制此来源链接" aria-label="复制来源链接"></button></span> 来自上市公司财报、交易所公告或官方发布，可直接引用；<span class="src" data-tip="示例：腾讯新闻·雷报《可灵 AI 上半年收入突破 15 亿元》（2026-08-20）。这类数字引用时建议加「据…披露」。"><a class="pill p-amber" href="https://new.qq.com/rain/a/20260820A0DUSR00" target="_blank" rel="noopener" title="腾讯新闻·雷报｜可灵 AI 上半年收入突破 15 亿元，快手烧了 82 亿做 AI 研发（2026-08-20）
-https://new.qq.com/rain/a/20260820A0DUSR00">公司口径/第三方估算</a><button class="src-copy" type="button" data-url="https://new.qq.com/rain/a/20260820A0DUSR00" title="复制此来源链接" aria-label="复制来源链接"></button></span> 来自公司自述或第三方机构测算，引用时建议加"据…披露"；<span class="pill p-gray">存疑</span> 为单一来源或存在口径冲突，本文会直接标出冲突点。正文中每一个<strong>带底色的来源标注都可以点击</strong>——点标签跳转到原文，点标签右边的方框按钮复制链接；鼠标悬停可看来源全称。<strong>凡未查到的维度，写"未查到"，不做推测填补。</strong>另外提醒一处广泛流传的错误：<strong>阿里 Wan 3.0 并未开源</strong>（无权重、无 GitHub 仓库），最后一个开放权重的旗舰是 Wan 2.2（Apache 2.0，2025 年 7 月）。</p>
-</div>
-
-<!-- ============ 1 ============ -->
 <h2 id="s1"><span class="num">01</span>地图：三层价值链，以及大厂的纵向整合</h2>
 
 <p class="lede">讨论任何一个平台之前，得先说清楚它在链条的哪一层。因为<strong>不同层的竞争对手根本不是同一批人</strong>——LibTV 的敌人不是可灵，就像剪映的敌人不是索尼。</p>
@@ -433,7 +409,7 @@ https://new.qq.com/rain/a/20260820A0DUSR00">公司口径/第三方估算</a><but
   <figcaption>图 1：AIGC 视频三层价值链。真正的结构性变化在最右侧——头部大厂正在把三层一起吃掉，这直接决定了 L2 独立平台的生存空间是"被收购"还是"被绕过"。</figcaption>
 </figure>
 
-<h3>大厂已经把地图画好了</h3>
+<h3>先看模型、应用和交付之间的关系</h3>
 
 <p>2026 年 8 月 26 日，字节推出影视厂牌<strong>「即梦片场」</strong>——面向电影到剧集的 AI 影视内容孵化，提供算力、技术、资金和制作发行支持，S 级项目全额包制作积分并给最高算力，A 级每分钟最高 25 万积分，合作方包括上美影、艺画开天、欢娱影视<span class="src" data-tip="腾讯新闻《厂牌「即梦片场」首发，打通了 AI 影视商业化的最后一公里》（2026-08-26）。S 级 / A 级积分规则以此报道为准。"><a class="pill p-amber" href="https://new.qq.com/rain/a/20260826A07PHV00" target="_blank" rel="noopener" title="腾讯新闻｜厂牌「即梦片场」首发，打通了 AI 影视商业化的最后一公里（2026-08-26）
 https://new.qq.com/rain/a/20260826A07PHV00">即梦片场</a><button class="src-copy" type="button" data-url="https://new.qq.com/rain/a/20260826A07PHV00" title="复制此来源链接" aria-label="复制来源链接"></button></span>，并联合番茄小说做 IP 专项，征集持续到 12 月。同期火山引擎内测 <strong>Seedance Studio</strong>，覆盖从创意规划到成片的全流程。</p>
@@ -565,7 +541,7 @@ https://h.xinhuaxmt.com/vh512/share/12938812?docid=12938812&newstype=1001&d=1352
   <span>这就是为什么"注册用户破百万"和"ARR 破亿"是两种完全不同的公司。</span>
 </div>
 
-<h3>一个残酷的错位：平台服务的对象和它营销的对象，往往不是同一个人</h3>
+<h3>平台服务的对象和它营销的对象，往往不是同一个人</h3>
 
 <p>OiiOii 的社交裂变打的是 P1/P2，但它真正能收上钱的功能（全局资产锁定、跨集画风一致性）只有 P3 需要。LibTV 的《被裁掉的女孩》在抖音上破 2 亿播放，带来的是 P1 的注册量，而它的 499–6599 元年费定价显然是冲着 P3/P4 去的。即梦 AI 的月活是头部（QuestMobile 口径 2026 Q1 约 1352.5 万，春节峰值破 4500 万<span class="src" data-tip="每日经济新闻 × QuestMobile《2026 年一季度 AI 应用价值榜》（2026-04-21）。即梦 AI MAU 1352.5 万为此榜单口径。"><a class="pill p-amber" href="https://www.nbd.com.cn/articles/2026-04-21/4350446.html" target="_blank" rel="noopener" title="每日经济新闻 × QuestMobile｜2026 年一季度 AI 应用价值榜（2026-04-21）
 https://www.nbd.com.cn/articles/2026-04-21/4350446.html">QuestMobile</a><button class="src-copy" type="button" data-url="https://www.nbd.com.cn/articles/2026-04-21/4350446.html" title="复制此来源链接" aria-label="复制来源链接"></button></span>），但高定价 + 缺少画布工作流，让它在重度创作者中的黏性远低于它的市占率所暗示的水平——重度用户大量迁移到直接调 Seedance API，或去咸鱼买折扣积分。</p>
@@ -1017,9 +993,9 @@ https://www.toutiao.com/article/7676897387968791055">另两篇横评</a><button 
 </div>
 
 <!-- ============ 5 ============ -->
-<h2 id="s5"><span class="num">05</span>三场关键对决</h2>
+<h2 id="s5"><span class="num">05</span>几种工作流程的区别</h2>
 
-<h3>对决一：LibTV vs OiiOii vs tapnow —— 应用层三种工作流哲学</h3>
+<h3>对决一：LibTV vs OiiOii vs tapnow —— 应用层三种工作流选择</h3>
 
 <p>这三家代表了"如何在模型之上做差异化"的三种答案，也是最值得放在一起看的一组。</p>
 
@@ -1077,7 +1053,7 @@ https://new.qq.com/rain/a/20260625A07M8I00">融资口径</a><button class="src-c
 </table>
 </div>
 
-<h3>对决三：PixVerse vs Vidu —— 创业公司在模型层的两条活路</h3>
+<h3>对决三：PixVerse vs Vidu —— 创业公司在模型层的两种选择</h3>
 
 <p>两家都是创业公司，都不做应用层，都拿到了巨额融资，但赌的方向完全不同。</p>
 
@@ -1188,14 +1164,14 @@ https://new.qq.com/rain/a/20260625A07M8I00">融资口径</a><button class="src-c
   <p style="margin:0">往上，OiiOii 的 APEX 档 ¥181/月（约 ¥1.48 万/年）已进入专业软件的定价区间；往下，烟火 AI（浙江银盾云）的会员只要 <strong>¥19/月</strong>，主打人物与动物动作真实度<span class="src" data-tip="掘金《2025 AI 视频平台盘点：可灵、即梦谁更能打？》。烟火 AI（浙江银盾云）19 元/月、即梦 69 元/月含 1080 积分等定价信息出自此文，为开发者社区文章，可信度中等。"><a class="pill p-gray" href="https://juejin.cn/post/7530091637373452288" target="_blank" rel="noopener">平台盘点</a><button class="src-copy" type="button" data-url="https://juejin.cn/post/7530091637373452288" title="复制此来源链接" aria-label="复制来源链接"></button></span>。同一个赛道里，最高档与最低档差了 <strong>约 68 倍</strong>。这只能说明一件事：行业对"用户到底愿意为 AI 视频付多少钱"，还没有形成任何共识——<strong>而一个连价格锚都没有的市场，谈不上有定价权。</strong></p>
 </div>
 
-<h3>6.4 一个反直觉的发现：B 端占比是唯一值得看的指标</h3>
+<h3>6.4 付费客户是谁，会怎样影响产品设计？</h3>
 
 <p>把可灵和 MiniMax 的数字并排看：可灵 B 端 API + 企业服务收入占比从约 40% 升到约 70%，P 端订阅降到约 30%；MiniMax 2026 上半年 B 端收入占比从 30.3% 升至 63.4%，企业客户和开发者突破 200 万。<strong>两家都在一年内完成了从 C 端到 B 端的收入结构翻转。</strong></p>
 
 <p>这不是巧合，这是行业在集体承认一件事：<em>C 端 AI 视频是一个获客成本高于终身价值的市场。</em>当你在朋友圈看到"某平台用户破亿"时，值得问一句——这一亿人里，有多少人下个月还会付钱？</p>
 
 <!-- ============ 7 ============ -->
-<h2 id="s7"><span class="num">07</span>钱在哪：五个垂类方向的账本</h2>
+<h2 id="s7"><span class="num">07</span>钱在哪：不同任务的成本差别</h2>
 
 <div class="box box-warn">
   <span class="tag">看这张表之前</span>
@@ -1313,111 +1289,6 @@ https://www.nrta.gov.cn/art/2026/7/31/art_113_73785.html">广电总局令第 16 
 <p>国内平台至今没有一家公布过次月留存。这本身就是答案。</p>
 
 <!-- ============ 9 ============ -->
-<h2 id="s9"><span class="num">09</span>存活打分卡与行动建议</h2>
-
-<h3>9.1 逻辑成立度打分</h3>
-<p class="small">评分标准：这套商业逻辑在 3 年内能否自洽（不依赖持续融资）。★★★★★ = 逻辑闭环且已有验证；★ = 依赖外部输血。</p>
-
-<div class="score">
-  <div class="sc">
-    <div class="top"><span class="nm">可灵 AI</span><span class="stars">★★★★<span class="off">★</span></span></div>
-    <p class="logic">收入进财报可审计，B 端 + 海外双分散，企业客户近 5 万家。唯一悬念是模型层能否扛住字节/阿里的夹击。</p>
-    <dl><dt>核心资产</dt><dd>全球化 API 分发 + 5 万企业客户</dd><dt>最大风险</dt><dd>2031/10 前 IPO 对赌；模型代差</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">Vidu</span><span class="stars">★★★★<span class="off">★</span></span></div>
-    <p class="logic">B 端客户名单本身就是护城河（京东、1688、亚马逊、美团、分众、蓝色光标、欧莱雅、安踏…），ARR 上线 8 个月破 2000 万美元。</p>
-    <dl><dt>核心资产</dt><dd>行业大客户 + 世界模型技术路线</dd><dt>最大风险</dt><dd>融资依赖度高，5 个月 3 轮</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">Pixmax</span><span class="stars">★★★★<span class="off">★</span></span></div>
-    <p class="logic">瑞云的算力成本优势 + 影视行业客户网络是真实资产。前提是守住 B 端影视，不要贪 C 端。</p>
-    <dl><dt>核心资产</dt><dd>GPU 集群调度 + 80% 头部影视客户网络</dd><dt>最大风险</dt><dd>推理效率跃升会压缩成本优势</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">清绘 AI</span><span class="stars">★★★<span class="off">★★</span></span></div>
-    <p class="logic">不打流量战、走垂直行业企业级渠道，逻辑最健康。但主体与数据完全不透明，无法验证执行。</p>
-    <dl><dt>核心资产</dt><dd>行业渠道 + 企业合同模式</dd><dt>最大风险</dt><dd>信息不透明，无法尽调</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">海扇 AI</span><span class="stars">★★★<span class="off">★★</span></span></div>
-    <p class="logic">卡出海转绘这个真窗口，1080P 约 1.05 元/秒 + 月流水千万级。但数据全为公司口径，且主体归属存疑。</p>
-    <dl><dt>核心资产</dt><dd>一键转绘 + 2211 家机构客户（公司口径）</dd><dt>最大风险</dt><dd>出海窗口以月为单位关闭</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">Xcine</span><span class="stars">★★★<span class="off">★★</span></span></div>
-    <p class="logic">3D 导演模式 + 无损导出达芬奇/FCP 工程文件，是真正的工程交付能力。老牌影视背景带来 BD 资源，但产品迭代速度存疑。</p>
-    <dl><dt>核心资产</dt><dd>影视级工程交付 + 国有影视体系资源</dd><dt>最大风险</dt><dd>迭代速度 vs AI 原生团队</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">tapnow</span><span class="stars">★★★<span class="off">★★</span></span></div>
-    <p class="logic">"影视内容的生产操作系统"定位天花板高，节点式工作流是最接近 IDE 形态的答案。但客群决策链长、上手门槛高，逻辑待验证。</p>
-    <dl><dt>核心资产</dt><dd>Tapflow 节点引擎 + 模型中立接入</dd><dt>最大风险</dt><dd>学习成本筛选掉了大部分用户</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">FlovaAI</span><span class="stars">★★★<span class="off">★★</span></span></div>
-    <p class="logic">创始人郭列（FaceU 创始人）有 C 端产品化能力，累计融资超 8000 万美元。Agent + Skill 路线与 LibTV 正面重叠。</p>
-    <dl><dt>核心资产</dt><dd>项目级记忆 + 时间线 + 100+ Skill</dd><dt>最大风险</dt><dd>与 LibTV/tapnow 同质化，弹药少一个量级</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">LibTV</span><span class="stars">★★★<span class="off">★★</span></span></div>
-    <p class="logic">弹药最足（两轮合计超 4 亿美元，另有含早期轮次「累计超 5 亿美元」口径<span class="src" data-tip="新浪财经《腾讯、雷军都押注！这家公司刷新了中国 AI 应用层最高单轮融资纪录》（2026-06-18）。"><a class="pill p-amber" href="https://finance.sina.com.cn/wm/2026-06-18/doc-inicuyvv3380261.shtml" target="_blank" rel="noopener" title="新浪财经｜腾讯、雷军都押注！这家公司刷新了中国 AI 应用层最高单轮融资纪录（2026-06-18）
-https://finance.sina.com.cn/wm/2026-06-18/doc-inicuyvv3380261.shtml">融资口径</a><button class="src-copy" type="button" data-url="https://finance.sina.com.cn/wm/2026-06-18/doc-inicuyvv3380261.shtml" title="复制此来源链接" aria-label="复制来源链接"></button></span>）、团队最强、产品成熟度高。但它押注的漫剧承制方客户群正在以季度 40% 的速度收缩——<strong>产能工具的价值取决于客户有没有订单。</strong></p>
-    <dl><dt>核心资产</dt><dd>资本 + Skill Hub 生态 + 批量产线</dd><dt>最大风险</dt><dd>客户群（P3 承制方）结构性萎缩</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">OiiOii</span><span class="stars">★★<span class="off">★★★</span></span></div>
-    <p class="logic">产品差异化最锋利（全局画风锁定是模型迭代最难抹平的能力），但融资规模撑不起持久战，且获客面（P1）与收钱面（P3）严重错位。</p>
-    <dl><dt>核心资产</dt><dd>140+ 画风预设 + FaceID 全局锁定</dd><dt>最大风险</dt><dd>弹药不足 + 长篇协作能力薄弱</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">小云雀 / 万兴剧厂</span><span class="stars">★★<span class="off">★★★</span></span></div>
-    <p class="logic">都有大厂导流（剪映生态 / Filmora 付费用户 + 喵影打通），逻辑有效但不具备攻击性——它们是大厂/上市公司的防守型产品，不是进攻型平台。</p>
-    <dl><dt>核心资产</dt><dd>既有用户基础与后期链路</dd><dt>最大风险</dt><dd>定位为子公司业务，资源优先级不稳定</dd></dl>
-  </div>
-  <div class="sc">
-    <div class="top"><span class="nm">RunningHub</span><span class="stars">★★<span class="off">★★★</span></span></div>
-    <p class="logic">云端 ComfyUI 是开发者和高级用户的工具箱，社区 + API 变现逻辑成立。但门槛决定了规模天花板，且极易被云厂商复制。</p>
-    <dl><dt>核心资产</dt><dd>工作流社区 + 按 GPU 秒计费</dd><dt>最大风险</dt><dd>阿里云/火山随时可做同类产品</dd></dl>
-  </div>
-</div>
-
-<h3>9.2 给不同角色的行动建议</h3>
-
-<h4>如果你是内容工作室（P3）</h4>
-<ul>
-  <li><strong>不要把工作流建在单一平台上。</strong>把剧本、角色设定、分镜表这些<strong>结构化资产</strong>存在自己手里（哪怕是飞书文档），把平台只当作渲染层。这是唯一能在平台关停/涨价时活下来的做法。</li>
-  <li>选型时按你的真实痛点对号入座：痛点如果是"跨集角色崩脸"，优先 OiiOii；如果是"要同时推进多个题材、批量出片"，优先 LibTV；如果是"单镜头表现力优先、愿意投入学习成本"，tapnow/可灵组合。</li>
-  <li><strong>9 月 1 日之后，先算合规成本再算制作成本。</strong>每集显式标识 + 备案/发行许可会拉长周期，靠"快"吃饭的模式要重新评估。</li>
-  <li>认真考虑把产能转向出海或行业客户——给品牌方做视频的毛利，比在红果上赌爆款高得多，而且它不需要你赌。</li>
-</ul>
-
-<h4>如果你是平台方</h4>
-<ul>
-  <li><strong>把"客户质量"而不是"用户数"写进 OKR。</strong>可灵和 MiniMax 都在一年内完成了 B 端翻转，这不是巧合。</li>
-  <li>选定一种迁移成本并把它做到极致：工作流深度（tapnow/LibTV）、行业关系（Pixmax/清绘）、工程交付（Xcine）。<strong>三者都不占，就只剩价格战。</strong></li>
-  <li>把合规做成功能，不是做成法务条款。元数据标识一键写入、角色版权证明导出、活体授权审批——这些是能卖钱的 B 端功能。</li>
-  <li>重新审视"用户破百万"这类叙事。OiiOii 的增长数据好看，但留存率的真相藏在"注册用户破百万"这句话后面的那道墙里——没人愿意把日活数字和注册用户数放在同一张 PPT 里。</li>
-</ul>
-
-<h4>如果你是投资人</h4>
-<ul>
-  <li>尽调时只问三个问题：<strong>付费客户有多少家？年续约率多少？单个客户的年度支出是多少？</strong>注册用户数、MAU、ARR（公司自述口径）都可以不作数。</li>
-  <li>警惕"以 P3 承制方为主要客群"的商业模式。这个客户群一季度消失了 42%，90% 在亏钱，且随着《微短剧发展管理办法》9 月 1 日施行还会继续出清。</li>
-  <li>优先看那些客户名单能念出具体公司名字的平台——Vidu 能念出京东、亚马逊、欧莱雅，这比"服务 2211 家机构"有说服力得多。</li>
-  <li>注意三处尽调雷区：bollo.video 的迪士尼背景无实证、清绘 AI 的主体与融资不明、海扇 AI 主体归属存在冲突（十方融海 vs 脉可科技）。另有两处价格/参数口径冲突（tapnow 各档价格差 2–3 倍、Flova 剧本字数上限 10 万 vs 30 万）。</li>
-</ul>
-
-<hr class="sep">
-
-<div class="box box-key">
-  <span class="tag">最 后 一 句</span>
-  <p>这个赛道有商业逻辑，但很窄——<strong>只容得下四五家真正找到垂类定位的玩家存活</strong>。</p>
-  <p>能活下来的，不一定是技术最好的那个。能活下来的，是那个最先想清楚三件事的人：<strong>我服务的是谁、他们为什么必须用我、他们为什么必须为我付钱。</strong></p>
-  <p>参考文里那句"谁倒贴的多谁赢"说得准确但不完整——2 毛钱的战争打的是 P1/P2 客户，而他们本来就是这个赛道里最不稳定的地基。真正的问题从来不是价格，是<em>那只看不见的羊，到底是谁</em>。</p>
-</div>
-
-
 <h2 id="s10"><span class="num">10</span>参考资料：全部来源可点开核对</h2>
 
 <p class="lede">这一节把正文里所有可溯源的数字，逐条对回原始出处。<strong>每一行右侧的蓝色标签点开即跳转原文，旁边的方框按钮一键复制链接。</strong>正文中所有带底色的来源标注（如 <span class="pill p-green">财报/公告</span>、<span class="pill p-amber">媒体口径</span>、<span class="pill p-amber">DataEye 系</span>）也都遵循同样的规则：点标签跳转，点按钮复制。</p>

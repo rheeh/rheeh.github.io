@@ -217,13 +217,13 @@ export function ReportArticle({ report }: { report: Report }) {
         Skip to content
       </a>
       <header className="report-nav-shell">
-        <nav className="report-nav container" aria-label="报告导航">
+        <nav className="report-nav container" aria-label="笔记导航">
           <a className="report-brand" href="/">
             <b>Z.</b>
-            <span>Z. / 调研笔记</span>
+            <span>Z. / 观察与体验</span>
           </a>
           <div>
-            <a href="/reports">全部报告</a>
+            <a href="/reports">全部笔记</a>
             <a href="/#projects">项目</a>
             <a href="#sources">来源</a>
           </div>
@@ -246,8 +246,9 @@ export function ReportArticle({ report }: { report: Report }) {
               {report.heroImages.map((image) => {
                 const source = report.sources.find((item) => item.id === image.sourceId);
                 return (
-                  <figure key={image.src}>
+                  <figure key={image.src} className={image.caption ? "note-overview" : undefined}>
                     <img src={image.src} alt={image.alt} width="1200" height="630" />
+                    {image.caption && <figcaption>{image.caption}</figcaption>}
                     {source && (
                       <figcaption>
                         图片来源：
@@ -260,14 +261,14 @@ export function ReportArticle({ report }: { report: Report }) {
                 );
               })}
             </div>
-            <div className="report-question">
+            {report.question && <div className="report-question">
               <span>KEY QUESTION</span>
               <p>{report.question}</p>
-            </div>
+            </div>}
           </header>
 
           <div className="report-body container">
-            <aside className="report-toc" aria-label="报告目录">
+            <aside className="report-toc" aria-label="笔记目录">
               <span>CONTENTS</span>
               {report.sections.map((section) => (
                 <a key={section.id} href={`#${section.id}`}>
@@ -297,7 +298,7 @@ export function ReportArticle({ report }: { report: Report }) {
 
               <section className="report-conclusion">
                 <span>CONCLUSION</span>
-                <h2>最终判断</h2>
+                <h2>留待继续观察</h2>
                 <p>{report.conclusion}</p>
               </section>
 
@@ -308,7 +309,7 @@ export function ReportArticle({ report }: { report: Report }) {
                     <small>SOURCES &amp; LIMITATIONS</small>
                     <h2>来源与限制</h2>
                     <p>
-                      第三方调研口径可能随时间、样本与统计方法变化；本报告不将公开资料解释为平台内部完整数据或因果证明。
+                      第三方调研口径可能随时间、样本与统计方法变化；文中不将公开资料解释为平台内部完整数据或因果证明。
                     </p>
                   </div>
                 </div>
@@ -332,8 +333,8 @@ export function ReportArticle({ report }: { report: Report }) {
         </article>
       </main>
       <footer className="report-footer container">
-        <span>Z. / 调研笔记</span>
-        <a href="/reports">返回报告目录 ↗</a>
+        <span>Z. / 观察与体验</span>
+        <a href="/reports">返回笔记目录 ↗</a>
       </footer>
     </>
   );

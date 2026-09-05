@@ -12,7 +12,8 @@ export type ReportSource = {
 export type ReportImage = {
   src: string;
   alt: string;
-  sourceId: string;
+  sourceId?: string;
+  caption?: string;
 };
 
 type CitedBlock = {
