@@ -2,22 +2,36 @@
 
 import { profile, projects } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
+import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
+
+const cardColors = ['#c7ecd8', '#cfe9f6', '#ffe8b0'];
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
 }
 
+function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
+  return (
+    <DoodleReveal>
+      <header className="doodle-section-heading">
+        <span><i aria-hidden="true">✦</i>{kicker}</span>
+        <h2>{title}</h2>
+      </header>
+    </DoodleReveal>
+  );
+}
+
 export default function Home() {
-  const [featuredProject, ...otherProjects] = projects;
-  const recentNotes = [
+  const [auralis, ...otherProjects] = projects;
+  const notes = [
     ...reports.map((report) => ({
       title: report.shortTitle,
       category: '调研笔记',
       summary: report.summary,
       href: `/reports/${report.slug}/`,
     })),
-    ...analysisShowcases.slice(0, 3).map((note) => ({
+    ...analysisShowcases.map((note) => ({
       title: note.title,
       category: '交互笔记',
       summary: note.summary,
@@ -28,120 +42,98 @@ export default function Home() {
   return (
     <div className="personal-home">
       <a className="skip-link" href="#main">Skip to content</a>
-      <header className="home-nav">
-        <nav className="home-shell" aria-label="主页导航">
-          <a className="home-name" href="#top">{profile.name}</a>
-          <div>
-            <a href="#auralis">Auralis</a>
-            <a href="#projects">项目</a>
-            <a href="#ai-videos">AI 视频</a>
-            <a href="#notes">笔记</a>
-            <a href={profile.contact.github} target="_blank" rel="noreferrer">GitHub</a>
-          </div>
-        </nav>
-      </header>
-
       <main id="main">
         <HomeIntro />
 
-        <section className="featured-project home-shell" id="auralis" aria-labelledby="featured-title">
-          <p className="featured-kicker">FEATURED PROJECT / AI AUDIO WORKFLOW</p>
-          <div className="featured-heading">
-            <h2 id="featured-title">{featuredProject.title}</h2>
-            <span aria-hidden="true">01</span>
-          </div>
-          <a className="featured-image" href={featuredProject.links[0].href} target="_blank" rel="noreferrer" aria-label="打开 Auralis 在线体验">
-            <img
-              src="/project-assets/auralis-home.jpg"
-              alt="Auralis AI 广播剧创作产品首页"
-              width="1600"
-              height="918"
-              loading="lazy"
-            />
-          </a>
-          <div className="featured-details">
-            <p className="featured-type">{featuredProject.type}</p>
-            <p className="featured-summary">{featuredProject.summary}</p>
-            <ul>{featuredProject.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-            <div className="featured-links">
-              {featuredProject.links.map((link) => (
-                <a className={link.kind === 'demo' ? 'featured-demo' : ''} href={link.href} target="_blank" rel="noreferrer" key={link.href}>
-                  {link.label} <Arrow />
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="home-section home-shell" id="projects">
-          <header className="home-section-head">
-            <h2>做过的项目</h2>
-          </header>
-
-          <div className="project-list">
-            {otherProjects.map((project, index) => (
-              <article className="project-row" key={project.id}>
-                <span className="project-index">0{index + 2}</span>
-                <div className="project-row-title">
-                  <p>{project.type}</p>
-                  <h3>{project.title}</h3>
+        <section className="doodle-section doodle-projects" id="auralis">
+          <SectionHeading kicker="featured project" title="先看看 Auralis" />
+          <DoodleReveal className="auralis-card-wrap">
+            <article className="auralis-card">
+              <a className="auralis-card-image" href={auralis.links[0].href} target="_blank" rel="noreferrer" aria-label="打开 Auralis 在线体验">
+                <img src="/project-assets/auralis-home.jpg" alt="Auralis AI 广播剧创作产品首页" width="1600" height="918" loading="lazy" />
+                <span>LIVE DEMO <Arrow /></span>
+              </a>
+              <div className="auralis-card-copy">
+                <div className="doodle-monogram" aria-hidden="true">A</div>
+                <div>
+                  <p>{auralis.type}</p>
+                  <h3>{auralis.title}</h3>
+                  <span>{auralis.summary}</span>
+                  <ul>{auralis.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
                 </div>
-                <div className="project-row-detail">
-                  <p>{project.summary}</p>
-                  <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                </div>
-                <div className="project-row-links">
-                  {project.links.map((link) => (
-                    <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>
-                      {link.label} <Arrow />
-                    </a>
+                <div className="doodle-actions">
+                  {auralis.links.map((link) => (
+                    <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label} <Arrow /></a>
                   ))}
                 </div>
-              </article>
+              </div>
+            </article>
+          </DoodleReveal>
+        </section>
+
+        <section className="doodle-section" id="projects">
+          <SectionHeading kicker="vibe coding" title="我做过的小项目" />
+          <div className="doodle-project-grid">
+            {otherProjects.map((project, index) => (
+              <DoodleReveal key={project.id} delay={index * 90}>
+                <a className="doodle-project-card" href={project.links[0].href} target="_blank" rel="noreferrer">
+                  <div className="doodle-card-top">
+                    <span style={{ background: cardColors[index % cardColors.length] }}>{project.title.slice(0, 1)}</span>
+                    <Arrow />
+                  </div>
+                  <p>{project.type}</p>
+                  <h3>{project.title}</h3>
+                  <div className="doodle-card-summary">{project.summary}</div>
+                  <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                </a>
+              </DoodleReveal>
             ))}
           </div>
         </section>
 
-        <section className="home-section video-section" id="ai-videos">
-          <div className="home-shell">
-            <header className="home-section-head video-heading">
-              <div><p>PERSONAL AI FILMS</p><h2>AI 生成视频</h2></div>
-              <span>目录整理中</span>
-            </header>
-            <div className="video-shelf" aria-label="AI 生成视频目录，内容待添加">
-              <div><span>01</span><i /></div>
-              <div><span>02</span><i /></div>
-              <div><span>03</span><i /></div>
-            </div>
+        <section className="doodle-section" id="ai-videos">
+          <SectionHeading kicker="personal ai films" title="AI 生成视频" />
+          <div className="doodle-video-grid" aria-label="AI 生成视频目录，内容待添加">
+            {[1, 2, 3].map((number, index) => (
+              <DoodleReveal key={number} delay={index * 90}>
+                <div className="doodle-video-card">
+                  <span>0{number}</span>
+                  <div className="doodle-play" aria-hidden="true"><i /></div>
+                  <p>等待下一支作品</p>
+                </div>
+              </DoodleReveal>
+            ))}
           </div>
         </section>
 
-        <section className="home-section notes-section" id="notes">
-          <div className="home-shell">
-            <header className="home-section-head">
-              <h2>调研笔记</h2>
-              <a href="/reports/">全部笔记 <Arrow /></a>
-            </header>
-            <div className="home-notes-grid">
-              {recentNotes.map((note, index) => (
-                <a className={`home-note note-${(index % 4) + 1}`} href={note.href} key={note.href}>
-                  <small>{note.category}</small>
-                  <h3>{note.title}</h3>
-                  <p>{note.summary}</p>
+        <section className="doodle-section doodle-writing" id="notes">
+          <SectionHeading kicker="随手记" title="一些观察与体验" />
+          <div className="doodle-writing-list">
+            {notes.map((note, index) => (
+              <DoodleReveal key={note.href} delay={(index % 4) * 70}>
+                <a className="doodle-article-row" href={note.href}>
+                  <span className="article-mark" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <small>{note.category}</small>
+                    <h3>{note.title}</h3>
+                    <p>{note.summary}</p>
+                  </div>
                   <Arrow />
                 </a>
-              ))}
-            </div>
+              </DoodleReveal>
+            ))}
           </div>
+          <DoodleReveal className="notes-more">
+            <a href="/reports/">查看全部笔记 <Arrow /></a>
+          </DoodleReveal>
         </section>
 
-        <section className="home-contact home-shell">
-          <p>想聊具体项目，可以直接写信。</p>
-          <a href={`mailto:${profile.contact.email}`}>{profile.contact.email} <Arrow /></a>
-        </section>
+        <footer className="doodle-footer">
+          <div />
+          <p>慢慢做产品，也慢慢记录。</p>
+          <a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
+        </footer>
       </main>
-
-      <footer className="home-footer home-shell"><span>Z.</span><a href="#top">回到顶部 ↑</a></footer>
     </div>
   );
 }
