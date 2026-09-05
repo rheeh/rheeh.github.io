@@ -58,3 +58,18 @@ export const projects: Project[] = [
     links: [{ label: '查看 GitHub', href: 'https://github.com/rheeh/GeneEmbedLLM', kind: 'source' }],
   },
 ];
+
+export const graduateDay = {
+  title: '研究生的一天',
+  category: '插画练习 / 5 幅',
+  description: '早起、实验、深夜回家。把实验室里的小小崩溃，画成五张黑白线稿。',
+  styleNote: '喜茶风格的线稿练习',
+  href: '/illustrations/graduate-day/',
+  images: [
+    { id: '01', title: '再睡五分钟', caption: '早上七点，和闹钟再商量一下。', alt: '巨大的七点闹钟旁，一个戴学位帽的小人说再睡五分钟。' },
+    { id: '02', title: '今天一定要出结果', caption: '离心机、移液器和培养皿之间，忙忙忙。', alt: '小人抱着实验工具，周围是巨大的离心机、烧杯、移液器和培养皿，文字为今天一定要出结果。' },
+    { id: '03', title: '深夜回家', caption: '门上的时钟，已经走到二十三点。', alt: '小人背着包走向一扇巨大的门，门上标着23:00，小人说累瘫了。' },
+    { id: '04', title: '怎么会这样', caption: '实验结果：失败。', alt: '培养皿上写着实验结果和失败，中间画着大叉，小人抱头说怎么会这样。' },
+    { id: '05', title: '生物的世纪', caption: '“二十一世纪是生物的世纪。”', alt: '牌子上写着二十一世纪是生物的世纪，下方的小人仰面躺倒。' },
+  ],
+};

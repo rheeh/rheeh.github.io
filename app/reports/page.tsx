@@ -37,7 +37,7 @@ export default function ReportsPage() {
           <header className="collection-heading">
             <span>01 / ARTICLES</span>
             <h2 id="articles-heading">从一个小问题说起</h2>
-            <p>收藏、内容表达，以及和朋友玩一局游戏。</p>
+            <p>收藏、游戏、内容表达，还有日常里的小物件。</p>
           </header>
           <div className="reports-grid">
             {reports.map((report) => (
@@ -47,6 +47,7 @@ export default function ReportsPage() {
                     {report.heroImages.slice(0, 2).map((image) => (
                       <img src={image.src} alt="" width="1200" height="630" loading="lazy" key={image.src} />
                     ))}
+                    {report.coverLabel ? <strong className="note-cover-label">{report.coverLabel}</strong> : null}
                     <span>{report.number}</span>
                   </div>
                   <div className="report-index-copy">
@@ -67,7 +68,7 @@ export default function ReportsPage() {
             <header className="collection-heading collection-heading-dark">
               <span>02 / INTERACTIVE NOTES</span>
               <h2 id="interactive-heading">带着图表继续看</h2>
-              <p>视频工具、潮玩和 MOBA：每篇关注一个不同的侧面。</p>
+              <p>视频工具和 MOBA：每篇关注一个不同的侧面。</p>
             </header>
             <div className="showcase-grid">
               {analysisShowcases.map((item) => (

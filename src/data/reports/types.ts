@@ -95,6 +95,7 @@ export type Report = {
   readTime: string;
   accent: 'red' | 'dark' | 'lavender';
   heroImages: ReportImage[];
+  coverLabel?: string;
   capabilityTags: string[];
   question: string;
   conclusion: string;

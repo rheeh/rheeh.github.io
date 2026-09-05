@@ -242,7 +242,7 @@ export function ReportArticle({ report }: { report: Report }) {
               <span>{report.readTime}</span>
               <span>{report.capabilityTags.join(' / ')}</span>
             </div>
-            <div className={`report-visual-grid images-${report.heroImages.length}`}>
+            {report.heroImages.length > 0 && <div className={`report-visual-grid images-${report.heroImages.length}`}>
               {report.heroImages.map((image) => {
                 const source = report.sources.find((item) => item.id === image.sourceId);
                 return (
@@ -260,7 +260,7 @@ export function ReportArticle({ report }: { report: Report }) {
                   </figure>
                 );
               })}
-            </div>
+            </div>}
             {report.question && <div className="report-question">
               <span>KEY QUESTION</span>
               <p>{report.question}</p>

@@ -1,9 +1,8 @@
-import { profile, projects } from '../src/data/profile';
+/* eslint-disable @next/next/no-img-element */
+import { profile, projects, graduateDay } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
-
-const cardColors = ['#ffe8b0', '#c7ecd8', '#cfe9f6', '#ffd7c9'];
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -49,7 +48,7 @@ export default function Home() {
               <DoodleReveal key={project.id} delay={index * 90}>
                 <article className="doodle-project-card">
                   <div className="doodle-card-top">
-                    <span style={{ background: cardColors[index % cardColors.length] }}>{project.title.slice(0, 1)}</span>
+                    <span>{project.title.slice(0, 1)}</span>
                     <Arrow />
                   </div>
                   <p>{project.type}</p>
@@ -65,6 +64,23 @@ export default function Home() {
               </DoodleReveal>
             ))}
           </div>
+        </section>
+
+        <section className="doodle-section" id="illustrations">
+          <SectionHeading kicker="插画" title="画下来的一些日常" />
+          <DoodleReveal>
+            <a className="illustration-feature" href={graduateDay.href}>
+              <div className="illustration-preview" aria-hidden="true">
+                {graduateDay.images.filter((item) => ['01', '02', '05'].includes(item.id)).map((item) => (
+                  <img key={item.id} src={`/illustrations/graduate-day/${item.id}.png`} alt="" width="624" height="1088" loading="lazy" />
+                ))}
+              </div>
+              <div className="illustration-feature-copy">
+                <div><small>{graduateDay.category}</small><h3>{graduateDay.title}</h3><p>{graduateDay.description}</p></div>
+                <span>看完整组图 <Arrow /></span>
+              </div>
+            </a>
+          </DoodleReveal>
         </section>
 
         <section className="doodle-section" id="ai-videos">

@@ -135,6 +135,7 @@ function IntroScene() {
         <h1 id="intro-title">Zoe Zhang</h1>
         <nav aria-label="主页快捷入口">
           <a href="#projects">项目</a>
+          <a href="#illustrations">插画</a>
           <a href="#ai-videos">AI 视频</a>
           <a href="#notes">笔记</a>
           <a href="https://github.com/rheeh" target="_blank" rel="noreferrer">GitHub</a>
