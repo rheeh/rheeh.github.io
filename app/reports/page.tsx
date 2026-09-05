@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages, @next/next/no-img-element */
 
 import type { Metadata } from 'next';
+import { creativeWorks } from '../../src/data/profile';
 import { analysisShowcases, reports } from '../../src/data/reports';
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function ReportsPage() {
-  const total = reports.length + analysisShowcases.length;
+  const total = reports.length + analysisShowcases.length + creativeWorks.length;
 
   return (
     <>
@@ -39,6 +40,9 @@ export default function ReportsPage() {
             <h2 id="articles-heading">从一个小问题说起</h2>
             <p>收藏、游戏、内容表达，还有日常里的小物件。</p>
           </header>
+          <div className="creative-article-index">
+            {creativeWorks.map((work) => <a className="doodle-article-row" href={work.href} key={work.id}><span className="article-mark" aria-hidden="true">✦</span><div><small>{work.process} / 插画系列</small><h3>{work.title}</h3><p>{work.summary}</p></div><span aria-hidden="true">↗</span></a>)}
+          </div>
           <div className="reports-grid">
             {reports.map((report) => (
               <article className={`report-index-card index-${report.accent}`} key={report.slug}>

@@ -141,8 +141,7 @@ function IntroScene() {
         </h1>
         <nav aria-label="主页快捷入口">
           <a href="#projects">项目</a>
-          <a href="#ai-creations">AI 创作</a>
-          <a href="#notes">笔记</a>
+          <a href="#notes">文章</a>
           <a href="https://github.com/rheeh" target="_blank" rel="noreferrer">GitHub</a>
         </nav>
         <a className="intro-scroll" href="#projects">往下看看 ↓</a>
@@ -152,13 +151,5 @@ function IntroScene() {
 }
 
 export default function HomeIntro() {
-  const [run, setRun] = useState(0);
-  return (
-    <div className="intro-wrap">
-      <IntroScene key={run} />
-      <button className="intro-replay" type="button" onClick={() => setRun((value) => value + 1)}>
-        ↺ 再看一次开场
-      </button>
-    </div>
-  );
+  return <div className="intro-wrap"><IntroScene /></div>;
 }

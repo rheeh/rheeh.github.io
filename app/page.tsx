@@ -1,9 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
-import { profile, projects, creativeCollection, creativeWorks } from '../src/data/profile';
+import { profile, projects, creativeWorks } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
-import SectionNav from './SectionNav';
+import ScrollMood from './ScrollMood';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -22,6 +21,12 @@ function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
 
 export default function Home() {
   const notes = [
+    ...creativeWorks.map((work) => ({
+      title: work.title,
+      category: `${work.process} / 插画系列`,
+      summary: work.summary,
+      href: work.href,
+    })),
     ...reports.map((report) => ({
       title: report.shortTitle,
       category: report.category,
@@ -37,11 +42,10 @@ export default function Home() {
   ];
 
   return (
-    <div className="personal-home">
+    <ScrollMood>
       <a className="skip-link" href="#main">Skip to content</a>
       <main id="main">
         <HomeIntro />
-        <SectionNav />
 
         <section className="doodle-section" id="projects">
           <SectionHeading kicker="vibe coding" title="我做过的小项目" />
@@ -68,34 +72,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="doodle-section creative-section" id="ai-creations">
+        <section className="doodle-section doodle-writing" id="notes">
+          <span className="section-alias" id="ai-creations" aria-hidden="true" />
           <span className="section-alias" id="illustrations" aria-hidden="true" />
           <span className="section-alias" id="ai-videos" aria-hidden="true" />
-          <SectionHeading kicker={creativeCollection.label} title={creativeCollection.title} />
-          <p className="creative-intro">{creativeCollection.description}</p>
-          <ul className="creative-formats" aria-label="AI 创作的作品形式">
-            {creativeCollection.formats.map((format) => {
-              const count = creativeWorks.filter((work) => work.format === format.id).length;
-              return <li key={format.id} className={count ? 'has-work' : ''}><span>{format.label}</span><small>{count ? `${count} 组` : '待整理'}</small></li>;
-            })}
-          </ul>
-          {creativeWorks.map((work) => (
-            <DoodleReveal key={work.id}>
-              <a className="illustration-feature" href={work.href}>
-                <div className="creative-work-label"><span>{creativeCollection.formats.find((format) => format.id === work.format)?.label}</span><span>{work.process}</span></div>
-                <div className="illustration-preview" aria-hidden="true">
-                  {work.previews.map((image) => <img key={image.src} {...image} alt="" loading="lazy" />)}
-                </div>
-                <div className="illustration-feature-copy">
-                  <div><h3>{work.title}</h3><p>{work.summary}</p></div>
-                  <span>打开作品 <Arrow /></span>
-                </div>
-              </a>
-            </DoodleReveal>
-          ))}
-        </section>
-
-        <section className="doodle-section doodle-writing" id="notes">
           <SectionHeading kicker="随手记" title="一些观察与体验" />
           <div className="doodle-writing-list">
             {notes.map((note, index) => (
@@ -123,6 +103,6 @@ export default function Home() {
           <a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
         </footer>
       </main>
-    </div>
+    </ScrollMood>
   );
 }

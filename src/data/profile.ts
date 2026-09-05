@@ -109,10 +109,3 @@ export const creativeWorks: CreativeWork[] = [
     })),
   },
 ];
-
-export const homeSections = [
-  { id: 'top', label: '开场', mark: '01' },
-  { id: 'projects', label: '项目', mark: '02' },
-  { id: 'ai-creations', label: 'AI 创作', mark: '03' },
-  { id: 'notes', label: '笔记', mark: '04' },
-];
