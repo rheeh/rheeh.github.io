@@ -122,3 +122,55 @@ body{background:var(--studio-paper)}
 @media(prefers-reduced-motion:reduce){
  .personal-home a:hover,.personal-home .doodle-project-card:hover{transform:none}
 }
+
+/* Entrance, section navigation and reading rhythm. */
+html{scroll-behavior:smooth;scroll-padding-bottom:100px}
+.intro-flourish{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.intro-flourish path:first-child{stroke:var(--studio-yellow);stroke-width:24;stroke-linecap:round;opacity:.65}
+.intro-flourish path:last-child{stroke:var(--studio-red);stroke-width:4;stroke-linecap:round}
+.intro-letter{display:inline-block;white-space:pre}
+.personal-home .intro-content h1{white-space:nowrap}
+.section-dock{position:fixed;bottom:max(20px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;display:flex;gap:4px;max-width:calc(100% - 24px);padding:8px;border:1px solid #d7cbb6;border-radius:18px;background:#fffcf7f5;box-shadow:0 8px 30px #30312f18;backdrop-filter:blur(12px)}
+.section-dock a{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;min-width:78px;min-height:44px;padding:8px 13px;border-radius:11px;font-size:13px;color:var(--studio-blue);transition:background .2s,color .2s,transform .2s}
+.section-dock a i{font:10px ui-monospace,monospace;font-style:normal;opacity:.55}
+.section-dock a:hover{background:#eaf0ff;transform:translateY(-2px)}
+.section-dock a[aria-current]{background:var(--studio-blue);color:#fff}
+.section-dock-progress{position:absolute;left:18px;right:18px;top:-1px;height:3px;overflow:hidden}
+.section-dock-progress i{display:block;width:100%;height:100%;transform-origin:left;background:var(--studio-red)}
+.personal-home .doodle-section{scroll-margin-top:30px}
+.doodle-reveal{transform:translateY(36px);transition:opacity .65s ease,transform .75s cubic-bezier(.2,.8,.2,1)}
+.doodle-reveal.is-shown{transform:translateY(0)}
+.doodle-section-heading h2{transition:clip-path .7s ease,transform .7s ease;clip-path:inset(0 0 0 0)}
+.doodle-reveal:not(.is-shown) .doodle-section-heading h2{clip-path:inset(0 0 100% 0);transform:translateY(12px)}
+.doodle-section-heading::after{transform-origin:left;transition:transform .65s .15s ease}
+.doodle-reveal:not(.is-shown) .doodle-section-heading::after{transform:scaleX(0) rotate(-5deg)}
+.doodle-project-card:active,.illustration-feature:active{transform:translateY(1px)}
+.doodle-footer{padding-bottom:120px}
+/* The image itself contains the story: one uninterrupted column, in source order. */
+.illustration-preview{display:flex;flex-direction:column;gap:0;padding:0;max-width:440px;margin:0 auto;background:#fff}
+.illustration-preview img,.illustration-preview img:nth-child(n){display:block;width:100%;height:auto;max-height:none;object-fit:contain;transform:none;box-shadow:none;border:0}
+.illustration-feature{background:#fff;border:1px solid var(--studio-rule);box-shadow:none}
+.illustration-feature-copy{max-width:620px;margin-inline:auto}
+.illustration-page{background:#fff}
+.gallery-heading{max-width:624px;margin-inline:auto}
+.graduate-gallery{display:flex;flex-direction:column;gap:0;max-width:624px;margin-inline:auto;background:#fff;padding-bottom:0}
+.graduate-gallery figure,.graduate-gallery figure:last-child{width:100%;margin:0;grid-column:auto}
+.graduate-gallery figure>a,.graduate-gallery figure>a:hover{border:0;box-shadow:none;border-radius:0;background:#fff}
+.graduate-gallery img{display:block;width:100%;height:auto}
+.illustration-page .gallery-nav{max-width:760px}
+.illustration-page footer{margin-top:50px}
+@media(max-width:600px){
+ .section-dock{bottom:max(12px,env(safe-area-inset-bottom));padding:5px;gap:0}
+ .section-dock a{min-width:65px;padding:8px 11px;font-size:12px}.section-dock a i{display:none}
+ .illustration-feature{padding:16px 0}.creative-work-label,.illustration-feature-copy{margin-inline:16px}
+ .illustration-preview{width:100%;max-width:440px;padding:0;gap:0}
+ .illustration-page .gallery-main{width:100%}.gallery-heading{padding-inline:22px}
+ .graduate-gallery{width:100%}.graduate-gallery figure:last-child{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ .doodle-reveal,.doodle-reveal.is-shown{opacity:1;transform:none;transition:none}
+ .doodle-reveal .doodle-section-heading h2{clip-path:none;transform:none;transition:none}
+ .doodle-reveal .doodle-section-heading::after{transform:rotate(-5deg);transition:none}
+ .section-dock a{transition:none}.section-dock a:hover{transform:none}
+}

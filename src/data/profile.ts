@@ -104,8 +104,15 @@ export const creativeWorks: CreativeWork[] = [
     summary: graduateDay.description,
     process: 'AI 生成',
     href: graduateDay.href,
-    previews: ['01', '02', '05'].map((id) => ({
+    previews: ['01', '02', '03', '04', '05'].map((id) => ({
       src: `/illustrations/graduate-day/${id}.png`, width: 624, height: 1088,
     })),
   },
+];
+
+export const homeSections = [
+  { id: 'top', label: '开场', mark: '01' },
+  { id: 'projects', label: '项目', mark: '02' },
+  { id: 'ai-creations', label: 'AI 创作', mark: '03' },
+  { id: 'notes', label: '笔记', mark: '04' },
 ];

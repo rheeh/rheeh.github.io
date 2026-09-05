@@ -27,7 +27,7 @@ export default function GraduateDayPage() {
               <a href={`/illustrations/graduate-day/${item.id}.png`} target="_blank" rel="noreferrer" aria-label={`查看原图：${item.title}（新窗口）`}>
                 <img src={`/illustrations/graduate-day/${item.id}.png`} alt={item.alt} width="624" height="1088" loading={index < 2 ? 'eager' : 'lazy'} />
               </a>
-              <figcaption><span>{item.id}</span><div><h2>{item.title}</h2><p>{item.caption}</p></div></figcaption>
+              <figcaption className="sr-only"><span>{item.id}</span><div><h2>{item.title}</h2><p>{item.caption}</p></div></figcaption>
             </figure>
           ))}
         </div>

@@ -3,6 +3,7 @@ import { profile, projects, creativeCollection, creativeWorks } from '../src/dat
 import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
+import SectionNav from './SectionNav';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -40,6 +41,7 @@ export default function Home() {
       <a className="skip-link" href="#main">Skip to content</a>
       <main id="main">
         <HomeIntro />
+        <SectionNav />
 
         <section className="doodle-section" id="projects">
           <SectionHeading kicker="vibe coding" title="我做过的小项目" />

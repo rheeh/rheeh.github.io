@@ -14,7 +14,7 @@ export default function DoodleReveal({ children, delay = 0, className = '' }: { 
         setShown(true);
         observer.disconnect();
       }
-    }, { threshold: 0.16 });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
