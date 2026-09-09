@@ -27,7 +27,7 @@ export default function ProjectDisclosure({ id, title, type, index, children }: 
     <article ref={root} id={anchor} className={`project-disclosure${open ? ' is-open' : ''}`}>
       <h3>
         <button id={`${anchor}-trigger`} className="project-trigger" aria-expanded={open} aria-controls={`${anchor}-panel`} onClick={() => setOpen(value => !value)}>
-          <span className="project-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <span className="disclosure-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           <span className="project-name">{title}<small>{type}</small></span>
           <span className="project-toggle" aria-hidden="true"><i /><i /></span>
         </button>

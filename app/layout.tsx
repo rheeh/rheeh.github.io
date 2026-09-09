@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Zoe Zhang的个人主页',
   applicationName: 'Zoe Zhang的个人主页',
   description: 'Zoe Zhang 的个人项目、AI 创作与随手笔记。',
-  icons: { icon: '/favicon.svg' },
+  icons: { icon: [{ url: '/cat-icon.svg', type: 'image/svg+xml' }], shortcut: '/cat-icon.svg' },
   openGraph: {
     title: 'Zoe Zhang的个人主页',
     description: 'Zoe Zhang 的个人项目、AI 创作与随手笔记。',

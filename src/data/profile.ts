@@ -128,3 +128,12 @@ export const creativeWorks: CreativeWork[] = [
     })),
   },
 ];
+
+export const homeIntro = {
+  eyebrow: 'Zoe Zhang / 个人主页',
+  title: ['把想法，', '慢慢做出来。'],
+  description: '做产品、用 AI 创作，也记录研究和生活里的发现。这里放着我的项目，以及一路上的观察与尝试。',
+  image: '/hero/anime-creator.png',
+  imageAlt: '原创二次元创作者角色：短发女孩戴着耳机，抱着画本挥手。',
+  caption: '一点好奇心，一些新尝试。',
+};

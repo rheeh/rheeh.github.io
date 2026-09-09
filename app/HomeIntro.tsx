@@ -1,192 +1,45 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
-import { motion, useReducedMotion, useMotionValue, useSpring } from 'motion/react';
-import { useEffect, useRef, useState } from 'react';
-
-const easeOut = [0.22, 1, 0.36, 1] as const;
-
-function Runner({ reduced, arrived }: { reduced: boolean | null; arrived: boolean }) {
-  const head = useRef<SVGCircleElement>(null);
-  const eyeX = useMotionValue(0);
-  const eyeY = useMotionValue(0);
-  const lookX = useSpring(eyeX, { stiffness: 180, damping: 22 });
-  const lookY = useSpring(eyeY, { stiffness: 180, damping: 22 });
-  useEffect(() => {
-    if (reduced || !arrived || !window.matchMedia('(pointer: fine)').matches) return;
-    const follow = (event: PointerEvent) => {
-      const box = head.current?.getBoundingClientRect();
-      if (!box || box.bottom < 0 || box.top > window.innerHeight) return;
-      eyeX.set(Math.max(-3, Math.min(3, (event.clientX - box.left - box.width / 2) / 90)));
-      eyeY.set(Math.max(-2, Math.min(2, (event.clientY - box.top - box.height / 2) / 100)));
-    };
-    const reset = () => { eyeX.set(0); eyeY.set(0); };
-    window.addEventListener('pointermove', follow, { passive: true });
-    document.documentElement.addEventListener('pointerleave', reset);
-    return () => { window.removeEventListener('pointermove', follow); document.documentElement.removeEventListener('pointerleave', reset); };
-  }, [reduced, arrived, eyeX, eyeY]);
-  const still = reduced
-    ? { initial: false as const, animate: { x: 0 } }
-    : {
-        initial: { x: '-58vw', rotate: -14, scale: 0.85 },
-        animate: { x: ['-58vw', '3vw', '0vw'], rotate: [-14, 8, 0], scale: [0.85, 1.08, 1] },
-      };
-
-  return (
-    <motion.div
-      className="intro-runner"
-      initial={still.initial}
-      animate={still.animate}
-      transition={reduced ? { duration: 0 } : { duration: 1.35, times: [0, 0.78, 1], ease: easeOut }}
-      aria-label="一个跑进画面并挥手的简笔画人物"
-      role="img"
-    >
-      <svg viewBox="0 0 150 190" aria-hidden="true">
-        <motion.g
-          className="runner-body"
-          animate={reduced ? undefined : arrived ? { y: [0, -2, 0] } : { y: [0, -4, 0, -3, 0] }}
-          transition={arrived
-            ? { duration: 1.8, repeat: Infinity, repeatDelay: 0.7, ease: 'easeInOut' }
-            : { duration: 0.42, repeat: 4, ease: 'easeInOut' }}
-        >
-          <circle ref={head} className="runner-head" cx="76" cy="43" r="28" />
-          <g className="runner-eyes">
-            <circle cx="66" cy="39" r="6" fill="white" />
-            <circle cx="86" cy="39" r="6" fill="white" />
-            <motion.g style={{ x: lookX, y: lookY }}>
-              <circle cx="66" cy="39" r="2.5" className="runner-pupil" />
-              <circle cx="86" cy="39" r="2.5" className="runner-pupil" />
-            </motion.g>
-          </g>
-          <circle className="runner-cheek" cx="57" cy="47" r="4" />
-          <circle className="runner-cheek" cx="95" cy="47" r="4" />
-          <path d="M68 52 Q76 59 84 52" />
-          <path d="M75 71 C72 92 74 111 78 132" />
-          <motion.path
-            d="M74 83 Q48 96 36 115"
-            animate={reduced ? undefined : arrived ? { rotate: 0 } : { rotate: [18, -20, 18, -20, 18, 0] }}
-            transition={{ duration: arrived ? 0.2 : 1.35, ease: easeOut }}
-            style={{ transformOrigin: '74px 83px' }}
-          />
-          <motion.path
-            d="M76 83 Q101 96 113 116"
-            animate={reduced ? undefined : arrived
-              ? { rotate: [-42, -62, -34, -58, -42] }
-              : { rotate: [-16, 18, -16, 18, -16, -42] }}
-            transition={arrived
-              ? { duration: 0.72, repeat: Infinity, repeatDelay: 1.65, ease: 'easeInOut' }
-              : { duration: 1.35, ease: easeOut }}
-            style={{ transformOrigin: '76px 83px' }}
-          />
-          <motion.path
-            d="M78 131 Q58 150 53 177"
-            animate={reduced ? undefined : arrived ? { rotate: 0 } : { rotate: [-18, 16, -18, 16, -18, 0] }}
-            transition={{ duration: arrived ? 0.2 : 1.35, ease: easeOut }}
-            style={{ transformOrigin: '78px 131px' }}
-          />
-          <motion.path
-            d="M78 131 Q99 150 103 177"
-            animate={reduced ? undefined : arrived ? { rotate: 0 } : { rotate: [18, -16, 18, -16, 18, 0] }}
-            transition={{ duration: arrived ? 0.2 : 1.35, ease: easeOut }}
-            style={{ transformOrigin: '78px 131px' }}
-          />
-        </motion.g>
-      </svg>
-      <motion.div
-        className="motion-streaks"
-        initial={reduced ? false : { opacity: 1 }}
-        animate={{ opacity: reduced ? 0 : [1, 0.35, 1, 0] }}
-        transition={{ duration: 1.65, ease: 'easeOut' }}
-        aria-hidden="true"
-      ><i /><i /><i /></motion.div>
-    </motion.div>
-  );
-}
-
-function IntroScene() {
-  const reduced = useReducedMotion();
-  const [arrived, setArrived] = useState(false);
-  const reveal = reduced ? 0 : 1.05;
-
-  useEffect(() => {
-    if (reduced) {
-      return;
-    }
-    const timer = window.setTimeout(() => setArrived(true), 1350);
-    return () => window.clearTimeout(timer);
-  }, [reduced]);
-
-  return (
-    <section className="intro-scene" id="top" aria-labelledby="intro-title"
-      onPointerMove={(event) => {
-        if (reduced || event.pointerType !== 'mouse') return;
-        const rect = event.currentTarget.getBoundingClientRect();
-        event.currentTarget.style.setProperty('--pointer-x', `${((event.clientX - rect.left) / rect.width - .5) * 18}px`);
-        event.currentTarget.style.setProperty('--pointer-y', `${((event.clientY - rect.top) / rect.height - .5) * 14}px`);
-      }}
-      onPointerLeave={(event) => {
-        event.currentTarget.style.setProperty('--pointer-x', '0px');
-        event.currentTarget.style.setProperty('--pointer-y', '0px');
-      }}
-    >
-      <div className="intro-doodle intro-star" aria-hidden="true">✦</div>
-      <div className="intro-doodle intro-star-two" aria-hidden="true">✧</div>
-      <div className="intro-doodle intro-star-three" aria-hidden="true">✦</div>
-      <div className="intro-doodle intro-cloud" aria-hidden="true" />
-      <div className="intro-sprout intro-sprout-left" aria-hidden="true"><i /><i /><i /></div>
-      <div className="intro-sprout intro-sprout-right" aria-hidden="true"><i /><i /><i /></div>
-      <div className="intro-stage">
-        <motion.svg className="intro-flourish" viewBox="0 0 700 400" aria-hidden="true">
-          <motion.path d="M90 265 C30 30 620 15 615 195 S205 370 157 262 C118 175 527 109 570 239" fill="none" initial={reduced ? false : { pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: reduced ? 0 : 1.25, delay: reduced ? 0 : 0.15, ease: easeOut }} />
-          <motion.path d="M535 63 l17 -23 M564 78 l27 -8 M99 166 l-23 -13" fill="none" initial={reduced ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: reduced ? 0 : 0.35, delay: reduced ? 0 : 1.2 }} />
-        </motion.svg>
-        <Runner reduced={reduced} arrived={arrived || Boolean(reduced)} />
-        <motion.svg
-          className="intro-ground"
-          viewBox="0 0 760 40"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <motion.path
-            d="M5 24 C120 10 205 33 320 21 S545 10 755 24"
-            initial={reduced ? false : { pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: reduced ? 0 : 0.8, delay: reduced ? 0 : 0.55, ease: easeOut }}
-          />
-        </motion.svg>
-
-        <div className="intro-speech-positioner">
-          <motion.div
-            className="intro-bubble"
-            initial={reduced ? false : { opacity: 0, scale: 0.45, rotate: -7 }}
-            animate={{ opacity: 1, scale: 1, rotate: -1 }}
-            transition={{ delay: reveal, duration: reduced ? 0 : 0.48, type: 'spring', bounce: 0.42 }}
-          >
-            <p>你好，欢迎！</p>
-            <span>Hi, welcome to my little corner</span>
-          </motion.div>
-        </div>
-      </div>
-
-      <motion.div
-        className="intro-content"
-        initial={reduced ? false : { opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: reduced ? 0 : 1.25, duration: reduced ? 0 : 0.5, ease: easeOut }}
-      >
-        <h1 id="intro-title" aria-label="Zoe Zhang">
-          {'Zoe Zhang'.split('').map((letter, i) => <motion.span key={i} aria-hidden="true" className="intro-letter" initial={reduced ? false : { opacity: 0, y: 36, rotate: -10 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ delay: reduced ? 0 : 1.3 + i * 0.055, duration: reduced ? 0 : 0.5, type: 'spring', bounce: 0.35 }}>{letter}</motion.span>)}
-        </h1>
-        <nav aria-label="主页快捷入口">
-          <a href="#projects">项目</a>
-          <a href="#notes">文章</a>
-          <a href="https://github.com/rheeh" target="_blank" rel="noreferrer">GitHub</a>
-        </nav>
-        <a className="intro-scroll" href="#projects">往下看看 ↓</a>
-      </motion.div>
-    </section>
-  );
-}
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
+import { homeIntro, profile } from '../src/data/profile';
 
 export default function HomeIntro() {
-  return <div className="intro-wrap"><IntroScene /></div>;
+  const reduced = useReducedMotion();
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const x = useSpring(pointerX, { stiffness: 100, damping: 24 });
+  const y = useSpring(pointerY, { stiffness: 100, damping: 24 });
+  return (
+    <section className="portrait-hero" id="top" aria-labelledby="intro-title"
+      onPointerMove={event => {
+        if (reduced || event.pointerType !== 'mouse') return;
+        const box = event.currentTarget.getBoundingClientRect();
+        pointerX.set(((event.clientX - box.left) / box.width - .5) * 20);
+        pointerY.set(((event.clientY - box.top) / box.height - .5) * 14);
+      }}
+      onPointerLeave={() => { pointerX.set(0); pointerY.set(0); }}>
+      <nav className="portrait-nav" aria-label="主页快捷入口">
+        <a className="portrait-brand" href="#top"><img src="/cat-icon.svg" width="32" height="32" alt="" />{profile.name}</a>
+        <div><a href="#projects">项目</a><a href="#notes">文章</a><a href={profile.contact.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
+      </nav>
+      <div className="portrait-composition">
+        <div className="portrait-copy">
+          <motion.p className="portrait-eyebrow" initial={reduced ? false : {opacity:0,y:12}} animate={{opacity:1,y:0}}>{homeIntro.eyebrow}</motion.p>
+          <h1 id="intro-title">{homeIntro.title.map((line,index)=><span className="portrait-line" key={line}><motion.span initial={reduced ? false : {y:'110%',rotate:4}} animate={{y:0,rotate:0}} transition={{duration:.8,delay:.15+index*.12,ease:[.22,1,.36,1]}}>{line}</motion.span></span>)}</h1>
+          <motion.div initial={reduced ? false : {opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:reduced?0:.45}}>
+            <p className="portrait-description">{homeIntro.description}</p>
+            <a className="portrait-cta" href="#projects">看看我的项目 <span aria-hidden="true">↘</span></a>
+          </motion.div>
+        </div>
+        <motion.div className="portrait-art" initial={reduced ? false : {opacity:0,y:40,rotate:3}} animate={{opacity:1,y:0,rotate:0}} transition={{duration:1,delay:.15,ease:[.22,1,.36,1]}}>
+          <div className="portrait-paper" aria-hidden="true" />
+          <motion.img className="portrait-character" src={homeIntro.image} alt={homeIntro.imageAlt} width="1024" height="1280" fetchPriority="high" style={reduced?{}:{x,y}} />
+          <span className="portrait-sticker" aria-hidden="true"><img src="/cat-icon.svg" alt="" width="64" height="64" /></span>
+          <p className="portrait-caption">{homeIntro.caption}</p>
+        </motion.div>
+      </div>
+      <a className="portrait-down" href="#projects">往下翻 <span aria-hidden="true">↓</span></a>
+    </section>
+  );
 }
