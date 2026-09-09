@@ -131,8 +131,8 @@ export const filmCollection = {
 export const films: Film[] = [
   { id: 'office', title: '打工人', description: '老板变成了怪物，但他更担心赶不上末班地铁。', kind: '叙事短片', duration: '00:43', orientation: 'portrait', note: 'AI 生成 · 剪辑合辑 · 中文字幕', src: '/films/media/office.mp4', poster: '/films/posters/office.jpg', posterAlt: '深夜办公室里，白衬衫的年轻人顶着黑眼圈。' },
   { id: 'cultivation', title: '悟道', description: '他想斩断所有情感，却先困住了自己。', kind: '叙事短片', duration: '01:26', orientation: 'landscape', note: 'AI 生成 · 精华剪辑 · 中文字幕', src: '/films/media/cultivation.mp4', poster: '/films/posters/cultivation.jpg', posterAlt: '白衣修仙者与红衣心魔，在水面上相对而立。' },
-  { id: 'dinner', title: '晚餐之前', description: '从厨房到餐桌，一段发生在宅邸里的故事。', kind: '叙事片段', duration: '00:52', orientation: 'portrait', note: 'AI 影像', src: '/films/media/dinner.mp4', poster: '/films/posters/dinner.jpg', posterAlt: '穿着围裙的年轻人站在暖色灯光下的厨房里。' },
-  { id: 'ring', title: '一枚戒指', description: '一张纸、一枚戒指，和两个人之间的试探。', kind: '叙事片段', duration: '01:03', orientation: 'landscape', note: 'AI 影像', src: '/films/media/ring.mp4', poster: '/films/posters/ring.jpg', posterAlt: '暖色烛光中，白发少年与黑衣男人隔桌交谈。' },
+  { id: 'dinner', title: '晚餐之前', description: '从厨房到餐桌，一段发生在宅邸里的故事。', kind: '叙事片段', duration: '00:50', orientation: 'portrait', note: 'AI 影像', src: '/films/media/dinner.mp4?v=2', poster: '/films/posters/dinner.jpg', posterAlt: '穿着围裙的年轻人站在暖色灯光下的厨房里。' },
+  { id: 'ring', title: '一枚戒指', description: '一张纸、一枚戒指，和两个人之间的试探。', kind: '叙事片段', duration: '01:01', orientation: 'landscape', note: 'AI 影像', src: '/films/media/ring.mp4?v=2', poster: '/films/posters/ring.jpg', posterAlt: '暖色烛光中，白发少年与黑衣男人隔桌交谈。' },
   { id: 'opening', title: '热血片头', description: '霓虹街道、追逐与交锋，一段快节奏的开场。', kind: '片头练习', duration: '00:15', orientation: 'landscape', note: 'AI 影像', src: '/films/media/opening.mp4', poster: '/films/posters/opening.jpg', posterAlt: '霓虹城市中的动画角色迎着强光出击。' },
   { id: 'stage', title: '舞台片刻', description: '把目光和细小的表情，留在十几秒里。', kind: '人物镜头练习', duration: '00:13', orientation: 'landscape', note: 'AI 影像', src: '/films/media/stage.mp4', poster: '/films/posters/stage.jpg', posterAlt: '蓝色舞台背景前，长发女性面对镜头微笑。' },
 ];
