@@ -115,7 +115,30 @@ export const creativeCollection = {
   ] as const,
 };
 
+export type Film = {
+  id: string; title: string; description: string; kind: string;
+  duration: string; orientation: 'portrait' | 'landscape'; note: string;
+  src: string; poster: string; posterAlt: string;
+};
+
+export const filmCollection = {
+  title: '脑内放映室',
+  description: '修仙、加班，还有一些突然冒出来的故事。',
+  summary: '两部叙事短片，四段影像练习。选一部，坐一会儿。',
+  href: '/films/',
+};
+
+export const films: Film[] = [
+  { id: 'office', title: '打工人', description: '老板变成了怪物，但他更担心赶不上末班地铁。', kind: '叙事短片', duration: '00:43', orientation: 'portrait', note: 'AI 生成 · 剪辑合辑 · 中文字幕', src: '/films/media/office.mp4', poster: '/films/posters/office.jpg', posterAlt: '深夜办公室里，白衬衫的年轻人顶着黑眼圈。' },
+  { id: 'cultivation', title: '悟道', description: '他想斩断所有情感，却先困住了自己。', kind: '叙事短片', duration: '01:26', orientation: 'landscape', note: 'AI 生成 · 精华剪辑 · 中文字幕', src: '/films/media/cultivation.mp4', poster: '/films/posters/cultivation.jpg', posterAlt: '白衣修仙者与红衣心魔，在水面上相对而立。' },
+  { id: 'dinner', title: '晚餐之前', description: '从厨房到餐桌，一段发生在宅邸里的故事。', kind: '叙事片段', duration: '00:52', orientation: 'portrait', note: 'AI 影像', src: '/films/media/dinner.mp4', poster: '/films/posters/dinner.jpg', posterAlt: '穿着围裙的年轻人站在暖色灯光下的厨房里。' },
+  { id: 'ring', title: '一枚戒指', description: '一张纸、一枚戒指，和两个人之间的试探。', kind: '叙事片段', duration: '01:03', orientation: 'landscape', note: 'AI 影像', src: '/films/media/ring.mp4', poster: '/films/posters/ring.jpg', posterAlt: '暖色烛光中，白发少年与黑衣男人隔桌交谈。' },
+  { id: 'opening', title: '热血片头', description: '霓虹街道、追逐与交锋，一段快节奏的开场。', kind: '片头练习', duration: '00:15', orientation: 'landscape', note: 'AI 影像', src: '/films/media/opening.mp4', poster: '/films/posters/opening.jpg', posterAlt: '霓虹城市中的动画角色迎着强光出击。' },
+  { id: 'stage', title: '舞台片刻', description: '把目光和细小的表情，留在十几秒里。', kind: '人物镜头练习', duration: '00:13', orientation: 'landscape', note: 'AI 影像', src: '/films/media/stage.mp4', poster: '/films/posters/stage.jpg', posterAlt: '蓝色舞台背景前，长发女性面对镜头微笑。' },
+];
+
 export const creativeWorks: CreativeWork[] = [
+  { id: 'screening-room', title: filmCollection.title, format: 'video', summary: filmCollection.summary, process: 'AI 影像', href: filmCollection.href, previews: [{ src: '/films/posters/office.jpg', width: 640, height: 400 }] },
   {
     id: 'graduate-day',
     title: graduateDay.title,
@@ -140,10 +163,10 @@ export const homeIntro = {
 
 export const lifeMoments = {
   title: ['项目之间，', '留一点好玩。'],
-  description: '一个工具界面、一张想法草图、一个实验室里的小人。不同方向的创作，先收在这里。',
+  description: '一个工具界面、一段下班奇遇、一个实验室里的小人。不同方向的创作，先收在这里。',
   cards: [
     { title: '让文字有声音', caption: 'Auralis / AI 广播剧', alt: 'Auralis 广播剧工具的界面截图。', src: '/project-assets/auralis-home.jpg', href: 'https://rheeh.github.io/auralis/#/home' },
-    { title: '收藏之后呢？', caption: '关于知识复用的一点观察', alt: '从内容收藏到知识复用的概述图。', src: '/report-assets/knowledge-reuse-overview.png', href: '/reports/knowledge-world/' },
+    { title: '还有三分钟就下班', caption: '打工人 / AI 短片', alt: '打工人短片里，深夜办公室中的白衬衫年轻人。', src: '/films/posters/office.jpg', href: '/films/#office' },
     { title: '今天一定要出结果', caption: '研究生的一天 / AI 插画', alt: '实验仪器之间的小人，来自研究生的一天插画。', src: '/illustrations/graduate-day/02.png', href: '/illustrations/graduate-day/' },
   ],
 };
