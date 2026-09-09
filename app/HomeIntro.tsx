@@ -1,45 +1,53 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 
-import { motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react';
+import { useRef, useState } from 'react';
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { homeIntro, profile } from '../src/data/profile';
 
 export default function HomeIntro() {
+  const root = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const x = useSpring(pointerX, { stiffness: 100, damping: 24 });
-  const y = useSpring(pointerY, { stiffness: 100, damping: 24 });
+  const [greeting, setGreeting] = useState(-1);
+  const pointer = useMotionValue(0);
+  const tilt = useSpring(pointer, { stiffness: 90, damping: 20 });
+  const { scrollYProgress } = useScroll({ target: root, offset: ['start start', 'end end'] });
+  const posterScale = useTransform(scrollYProgress, [0, 1], [1, .9]);
+  const catScale = useTransform(scrollYProgress, [0, 1], [1, .74]);
+  const catTurn = useTransform(scrollYProgress, [0, 1], [-7, 7]);
+  const catY = useTransform(scrollYProgress, [0, 1], ['0%', '7%']);
+  const lettersY = useTransform(scrollYProgress, [0, 1], ['0%', '-16%']);
+  const cardsOpacity = useTransform(scrollYProgress, [0, .25, .85], [0, 0, 1]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [90, 0]);
   return (
-    <section className="portrait-hero" id="top" aria-labelledby="intro-title"
-      onPointerMove={event => {
-        if (reduced || event.pointerType !== 'mouse') return;
-        const box = event.currentTarget.getBoundingClientRect();
-        pointerX.set(((event.clientX - box.left) / box.width - .5) * 20);
-        pointerY.set(((event.clientY - box.top) / box.height - .5) * 14);
-      }}
-      onPointerLeave={() => { pointerX.set(0); pointerY.set(0); }}>
-      <nav className="portrait-nav" aria-label="主页快捷入口">
-        <a className="portrait-brand" href="#top"><img src="/cat-icon.svg" width="32" height="32" alt="" />{profile.name}</a>
-        <div><a href="#projects">项目</a><a href="#notes">文章</a><a href={profile.contact.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
-      </nav>
-      <div className="portrait-composition">
-        <div className="portrait-copy">
-          <motion.p className="portrait-eyebrow" initial={reduced ? false : {opacity:0,y:12}} animate={{opacity:1,y:0}}>{homeIntro.eyebrow}</motion.p>
-          <h1 id="intro-title">{homeIntro.title.map((line,index)=><span className="portrait-line" key={line}><motion.span initial={reduced ? false : {y:'110%',rotate:4}} animate={{y:0,rotate:0}} transition={{duration:.8,delay:.15+index*.12,ease:[.22,1,.36,1]}}>{line}</motion.span></span>)}</h1>
-          <motion.div initial={reduced ? false : {opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.7,delay:reduced?0:.45}}>
-            <p className="portrait-description">{homeIntro.description}</p>
-            <a className="portrait-cta" href="#projects">看看我的项目 <span aria-hidden="true">↘</span></a>
+    <section ref={root} className="ink-opening" id="top" aria-label="Zoe Zhang 的互动视觉海报">
+      <div className="ink-sticky">
+        <motion.div className="ink-poster" style={reduced?{}:{scale:posterScale}}
+          onPointerMove={event=>{
+            if (reduced || event.pointerType!=='mouse') return;
+            const box=event.currentTarget.getBoundingClientRect();
+            pointer.set(((event.clientX-box.left)/box.width-.5)*7);
+          }} onPointerLeave={()=>pointer.set(0)}>
+          <nav className="ink-nav" aria-label="主页快捷入口">
+            <a className="ink-brand" href="#top"><img src="/cat-icon.svg" alt="" width="30" height="30" />{profile.name}</a>
+            <div><a href="#projects">项目</a><a href="#notes">文章</a><a href={profile.contact.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
+          </nav>
+          <p className="ink-edition">{homeIntro.eyebrow}</p>
+          <motion.div className="ink-title-stage" style={reduced?{}:{y:lettersY}}><motion.h1 className="ink-title" initial={reduced?false:{opacity:0,y:70}} animate={{opacity:1,y:0}} transition={{duration:.85,ease:[.22,1,.36,1]}}>{homeIntro.title}</motion.h1></motion.div>
+          <div className="ink-aside"><p>{homeIntro.description}</p><span>产品 · AI 创作 · 研究</span></div>
+          <motion.div className="ink-cat-position" style={reduced?{}:{scale:catScale,rotate:catTurn,y:catY}}>
+            <motion.button className="ink-cat-button" style={reduced?{}:{rotate:tilt}} onClick={()=>setGreeting(value=>(value+1)%homeIntro.greeting.length)} aria-label="戳一下猫，听它说句话"
+              initial={reduced?false:{opacity:0,scale:.88}} animate={{opacity:1,scale:1}}
+              transition={{duration:.85,delay:.15,ease:[.22,1,.36,1]}} whileTap={reduced?{}:{scale:.96}}>
+              <img src={homeIntro.image} alt={homeIntro.imageAlt} width="1122" height="1402" fetchPriority="high" />
+            </motion.button>
           </motion.div>
-        </div>
-        <motion.div className="portrait-art" initial={reduced ? false : {opacity:0,y:40,rotate:3}} animate={{opacity:1,y:0,rotate:0}} transition={{duration:1,delay:.15,ease:[.22,1,.36,1]}}>
-          <div className="portrait-paper" aria-hidden="true" />
-          <motion.img className="portrait-character" src={homeIntro.image} alt={homeIntro.imageAlt} width="1024" height="1280" fetchPriority="high" style={reduced?{}:{x,y}} />
-          <span className="portrait-sticker" aria-hidden="true"><img src="/cat-icon.svg" alt="" width="64" height="64" /></span>
-          <p className="portrait-caption">{homeIntro.caption}</p>
+          <p className={`ink-cat-talk${greeting<0?' is-quiet':''}`} aria-live="polite">{greeting<0?'':homeIntro.greeting[greeting]}</p>
+          <motion.div className="ink-scatter ink-scatter-one" style={reduced?{}:{opacity:cardsOpacity,y:cardsY}} aria-hidden="true"><span>01</span><b>make<br />something.</b></motion.div>
+          <motion.div className="ink-scatter ink-scatter-two" style={reduced?{}:{opacity:cardsOpacity,y:cardsY}} aria-hidden="true"><img src="/project-assets/auralis-home.jpg" alt="" width="280" height="180" /></motion.div>
+          <footer className="ink-poster-foot"><a href="#projects">向下翻，进入我的项目 <span aria-hidden="true">↓</span></a><span>猫可以戳一下 ↗</span></footer>
         </motion.div>
       </div>
-      <a className="portrait-down" href="#projects">往下翻 <span aria-hidden="true">↓</span></a>
     </section>
   );
 }

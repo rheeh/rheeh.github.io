@@ -130,10 +130,20 @@ export const creativeWorks: CreativeWork[] = [
 ];
 
 export const homeIntro = {
-  eyebrow: 'Zoe Zhang / 个人主页',
-  title: ['把想法，', '慢慢做出来。'],
-  description: '做产品、用 AI 创作，也记录研究和生活里的发现。这里放着我的项目，以及一路上的观察与尝试。',
-  image: '/hero/anime-creator.png',
-  imageAlt: '原创二次元创作者角色：短发女孩戴着耳机，抱着画本挥手。',
-  caption: '一点好奇心，一些新尝试。',
+  eyebrow: 'Zoe Zhang / Portfolio & Playground',
+  title: 'ZOE.',
+  description: '做点有用的，也做点好玩的。',
+  image: '/hero/ink-cat.png',
+  imageAlt: '套印版画风格的黑猫：夸张的长身体、芥末黄眼睛和一点朱红色，懒洋洋地探出爪子。',
+  greeting: ['先看看，别急着走。', '喵，灵感还在路上。', '好啦，往下看项目吧。'],
+};
+
+export const lifeMoments = {
+  title: ['项目之间，', '留一点好玩。'],
+  description: '一个工具界面、一张想法草图、一个实验室里的小人。不同方向的创作，先收在这里。',
+  cards: [
+    { title: '让文字有声音', caption: 'Auralis / AI 广播剧', alt: 'Auralis 广播剧工具的界面截图。', src: '/project-assets/auralis-home.jpg', href: 'https://rheeh.github.io/auralis/#/home' },
+    { title: '收藏之后呢？', caption: '关于知识复用的一点观察', alt: '从内容收藏到知识复用的概述图。', src: '/report-assets/knowledge-reuse-overview.png', href: '/reports/knowledge-world/' },
+    { title: '今天一定要出结果', caption: '研究生的一天 / AI 插画', alt: '实验仪器之间的小人，来自研究生的一天插画。', src: '/illustrations/graduate-day/02.png', href: '/illustrations/graduate-day/' },
+  ],
 };

@@ -5,6 +5,7 @@ import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
 import RunningDivider from './RunningDivider';
 import ProjectDisclosure from './ProjectDisclosure';
+import LifeCards from './LifeCards';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -86,6 +87,7 @@ export default function Home() {
           </div>
         </section>
 
+        <LifeCards />
         <RunningDivider />
         <section className="doodle-section doodle-writing" id="notes">
           <span className="section-alias" id="ai-creations" aria-hidden="true" />
