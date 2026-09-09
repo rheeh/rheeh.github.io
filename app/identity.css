@@ -1,11 +1,11 @@
-/* A personal sketchbook: vermilion for gestures, cobalt for navigation, yellow for highlights. */
+/* Warm paper, black ink and vermilion. Legacy accent names share the same palette. */
 :root{
   --studio-paper:#fffcf7;
-  --studio-ink:#30312f;
+  --studio-ink:#242321;
   --studio-muted:#67655f;
   --studio-red:#b93b29;
-  --studio-blue:#244bc1;
-  --studio-yellow:#f2cd4d;
+  --studio-blue:var(--studio-red);
+  --studio-yellow:#efe5d6;
   --studio-rule:#ddd5c8;
   --paper:var(--studio-paper);
   --ink:var(--studio-ink);
@@ -17,7 +17,7 @@ body{background:var(--studio-paper)}
   --home-paper:var(--studio-paper);--home-ink:var(--studio-ink);--home-muted:var(--studio-muted);
   --doodle-paper:var(--studio-paper);--doodle-card:#fffefb;--doodle-ink:var(--studio-ink);
   --doodle-muted:var(--studio-muted);--doodle-soft:#f5efe3;
-  --doodle-coral:#f6c7b7;--doodle-mint:#e9efd9;--doodle-sky:#e4eafd;--doodle-sun:#f8e58e;
+  --doodle-coral:#f6c7b7;--doodle-mint:#e9efd9;--doodle-sky:#eee4d8;--doodle-sun:#f8e58e;
   background:var(--studio-paper);
 }
 .personal-home a:focus-visible,.personal-home button:focus-visible,.illustration-page a:focus-visible{outline:3px solid var(--studio-blue);outline-offset:5px}
@@ -45,19 +45,19 @@ body{background:var(--studio-paper)}
 .doodle-section-heading::after{content:'';width:64px;height:7px;margin-top:15px;border-bottom:3px solid var(--studio-red);border-radius:50%;transform:rotate(-5deg)}
 .doodle-project-card{border:1px solid var(--studio-rule);border-radius:4px;background:#fffefb;box-shadow:3px 4px 0 #ede5d7}
 .doodle-project-card:hover{transform:translateY(-4px);box-shadow:4px 7px 0 #ede5d7;border-color:var(--studio-blue)}
-.doodle-card-top>span:first-child{border:0;border-radius:38% 46% 36% 44%;background:#e4eafd;color:var(--studio-blue);transform:rotate(-7deg)}
+.doodle-card-top>span:first-child{border:0;border-radius:38% 46% 36% 44%;background:#eee4d8;color:var(--studio-blue);transform:rotate(-7deg)}
 .doodle-project-grid>.doodle-reveal:nth-child(even) .doodle-card-top>span:first-child{color:var(--studio-red);background:#fce7dd;transform:rotate(7deg)}
 .doodle-project-card li{background:#f4f0e8;color:#655f53;font-weight:500}
 .doodle-project-links a{border:1px solid var(--studio-rule);border-radius:3px;box-shadow:none;background:transparent;font-weight:600}
 .doodle-project-links a:first-child{background:transparent;color:var(--studio-blue);border-color:var(--studio-blue)}
-.doodle-project-links a:hover{transform:none;background:#e4eafd;box-shadow:none}
+.doodle-project-links a:hover{transform:none;background:#eee4d8;box-shadow:none}
 .doodle-card-summary{color:var(--studio-muted)}
 .creative-section{scroll-margin-top:30px}
 .section-alias{position:absolute;top:0;scroll-margin-top:30px}
 .creative-intro{max-width:600px;font-size:16px;line-height:1.85;color:var(--studio-muted);margin:-18px 0 24px}
 .creative-formats{display:flex;gap:12px;flex-wrap:wrap;list-style:none;padding:0;margin:0 0 35px}
 .creative-formats li{display:flex;align-items:center;gap:12px;border:1px dashed #b7b0a4;border-radius:3px;padding:9px 13px;color:#655f53;font-size:13px}
-.creative-formats li.has-work{border-style:solid;border-color:var(--studio-blue);color:var(--studio-blue);background:#eaf0ff;transform:rotate(-2deg)}
+.creative-formats li.has-work{border-style:solid;border-color:var(--studio-blue);color:var(--studio-blue);background:#f5ece3;transform:rotate(-2deg)}
 .creative-formats small{font-size:11px;color:var(--studio-muted)}
 .creative-formats .has-work small{color:var(--studio-blue)}
 .creative-work-label{display:flex;justify-content:space-between;gap:12px;font:600 12px/1.6 system-ui;color:var(--studio-red);margin-bottom:24px}
@@ -79,8 +79,8 @@ body{background:var(--studio-paper)}
 .doodle-article-row small{background:none;color:var(--studio-blue);padding:0;font:12px/1.6 system-ui}
 .doodle-article-row h3{line-height:1.4}
 .doodle-article-row p{color:var(--studio-muted)}
-.notes-more a{background:transparent;border:1px solid var(--studio-blue);border-radius:3px;box-shadow:3px 3px 0 #e4eafd;color:var(--studio-blue)}
-.notes-more a:hover{transform:translateY(-2px);background:#eaf0ff;box-shadow:3px 4px 0 #d6e0fc}
+.notes-more a{background:transparent;border:1px solid var(--studio-blue);border-radius:3px;box-shadow:3px 3px 0 #eee4d8;color:var(--studio-blue)}
+.notes-more a:hover{transform:translateY(-2px);background:#f5ece3;box-shadow:3px 4px 0 #d6e0fc}
 .doodle-footer>div{background:var(--studio-red);opacity:.8;transform:rotate(-4deg);height:2px}
 .doodle-footer a{color:var(--studio-blue)}
 /* Keep long-form reading calm; identity is carried by titles, rules and links. */
@@ -184,7 +184,7 @@ html{scroll-behavior:smooth;scroll-padding-bottom:100px}
 .story-start span{transition:transform .2s}.story-start:hover span{transform:translateY(4px)}
 .graduate-gallery figcaption{display:block;margin:0;padding:12px 28px 48px}
 .story-caption>span{font:12px/1.6 ui-monospace,monospace;color:var(--studio-red)}
-.story-caption h2{margin:10px 0 8px;display:inline-block;background:linear-gradient(transparent 80%,#f2cd4d70 80%);background-size:0% 100%;background-repeat:no-repeat;transition:background-size .7s .2s}
+.story-caption h2{margin:10px 0 8px;display:inline-block;background:linear-gradient(transparent 80%,#b93b291c 80%);background-size:0% 100%;background-repeat:no-repeat;transition:background-size .7s .2s}
 .story-caption.is-shown h2{background-size:100% 100%}
 .story-caption>span{display:block}
 .story-ending{max-width:568px;margin:30px auto 0;padding:28px 24px;border-top:1px dashed var(--studio-rule);font-size:15px;line-height:1.9}
@@ -208,7 +208,7 @@ html{scroll-behavior:smooth;scroll-padding-bottom:100px}
 .project-framework figure>a{display:block;position:relative;border:1px solid var(--studio-rule);border-radius:3px;overflow:hidden;background:#fff}
 .project-framework img{display:block;width:100%;height:auto}
 .project-framework figure>a>span{display:block;padding:7px 10px;text-align:right;border-top:1px solid var(--studio-rule);font:12px/1.5 system-ui;color:var(--studio-blue);transition:background .2s}
-.project-framework figure>a:hover>span{background:#e4eafd}
+.project-framework figure>a:hover>span{background:#eee4d8}
 .project-framework figcaption{margin-top:8px;font:12px/1.7 system-ui;color:var(--studio-muted)}
 .project-framework dl{margin:20px 0 14px}
 .project-framework dl>div{display:grid;grid-template-columns:4em minmax(0,1fr);gap:12px;margin:12px 0;font-size:13px;line-height:1.8}

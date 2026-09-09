@@ -8,7 +8,7 @@
 .films-heading h1{margin:0;color:var(--studio-blue);font-size:clamp(48px,6.2vw,82px);line-height:1.06;letter-spacing:-.065em;font-weight:800}
 .films-heading h1 span{display:block}
 .films-intro{max-width:540px;font-size:17px;line-height:1.9;color:var(--studio-muted);margin:24px 0 0}
-.films-ticket{display:flex;flex-direction:column;align-items:center;flex:none;padding:24px 28px;border:1px solid var(--studio-ink);border-radius:2px;background:var(--studio-yellow);transform:rotate(7deg);box-shadow:5px 5px 0 var(--studio-ink)}
+.films-ticket{display:flex;flex-direction:column;align-items:center;flex:none;padding:24px 28px;border:1px solid var(--studio-ink);border-radius:2px;background:var(--studio-red);color:var(--studio-paper);transform:rotate(7deg);box-shadow:5px 5px 0 var(--studio-ink)}
 .films-ticket>span{font-size:16px;letter-spacing:.12em;border-bottom:1px dashed currentColor;padding-bottom:15px}
 .films-ticket strong{font-size:76px;line-height:1.15;letter-spacing:-.08em;font-weight:700}
 .films-ticket small{font-size:14px}

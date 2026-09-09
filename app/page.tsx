@@ -6,6 +6,9 @@ import HomeIntro from './HomeIntro';
 import RunningDivider from './RunningDivider';
 import ProjectDisclosure from './ProjectDisclosure';
 import LifeCards from './LifeCards';
+import CatTapes from './CatTapes';
+import ScreeningEntrance from './ScreeningEntrance';
+import './cat-tapes.css';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -24,7 +27,7 @@ function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
 
 export default function Home() {
   const notes = [
-    ...creativeWorks.map((work) => ({
+    ...creativeWorks.filter((work) => work.id !== 'screening-room').map((work) => ({
       title: work.title,
       category: 'AI 创作',
       summary: work.summary,
@@ -47,6 +50,7 @@ export default function Home() {
   return (
     <div className="personal-home">
       <a className="skip-link" href="#main">Skip to content</a>
+      <CatTapes />
       <main id="main">
         <HomeIntro />
         <RunningDivider />
@@ -87,12 +91,12 @@ export default function Home() {
           </div>
         </section>
 
+        <ScreeningEntrance />
         <LifeCards />
         <RunningDivider />
         <section className="doodle-section doodle-writing" id="notes">
           <span className="section-alias" id="ai-creations" aria-hidden="true" />
           <span className="section-alias" id="illustrations" aria-hidden="true" />
-          <span className="section-alias" id="ai-videos" aria-hidden="true" />
           <SectionHeading kicker="随手记" title="一些观察与体验" />
           <div className="doodle-writing-list">
             {notes.map((note, index) => (

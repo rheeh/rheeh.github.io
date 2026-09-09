@@ -3,7 +3,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
-import { homeIntro, profile } from '../src/data/profile';
+import { filmCollection, homeIntro, profile } from '../src/data/profile';
 
 export default function HomeIntro() {
   const root = useRef<HTMLElement>(null);
@@ -30,11 +30,11 @@ export default function HomeIntro() {
           }} onPointerLeave={()=>pointer.set(0)}>
           <nav className="ink-nav" aria-label="主页快捷入口">
             <a className="ink-brand" href="#top"><img src="/cat-icon.svg" alt="" width="30" height="30" />{profile.name}</a>
-            <div><a href="#projects">项目</a><a href="#notes">文章</a><a href={profile.contact.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
+            <div><a href="#projects">项目</a><a className="ink-film-link" href={filmCollection.href}><span aria-hidden="true">▶</span>{filmCollection.title}</a><a href="#notes">文章</a><a href={profile.contact.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
           </nav>
           <p className="ink-edition">{homeIntro.eyebrow}</p>
           <motion.div className="ink-title-stage" style={reduced?{}:{y:lettersY}}><motion.h1 className="ink-title" initial={reduced?false:{opacity:0,y:70}} animate={{opacity:1,y:0}} transition={{duration:.85,ease:[.22,1,.36,1]}}>{homeIntro.title}</motion.h1></motion.div>
-          <div className="ink-aside"><p>{homeIntro.description}</p><span>产品 · AI 创作 · 研究</span></div>
+          <div className="ink-aside"><p>{homeIntro.description.split('，').map((line, index) => <span key={line}>{index > 0 && <br />}{line}{index === 0 ? '，' : ''}</span>)}</p><span>产品 · AI 创作 · 研究</span><a className="ink-screening-link" href={filmCollection.href}>{filmCollection.entrance.heroAction}<span aria-hidden="true">↗</span></a></div>
           <motion.div className="ink-cat-position" style={reduced?{}:{scale:catScale,rotate:catTurn,y:catY}}>
             <motion.button className="ink-cat-button" style={reduced?{}:{rotate:tilt}} onClick={()=>setGreeting(value=>(value+1)%homeIntro.greeting.length)} aria-label="戳一下猫，听它说句话"
               initial={reduced?false:{opacity:0,scale:.88}} animate={{opacity:1,scale:1}}

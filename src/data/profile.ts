@@ -126,6 +126,12 @@ export const filmCollection = {
   description: '修仙、加班，还有一些突然冒出来的故事。',
   summary: '两部叙事短片，四段影像练习。选一部，坐一会儿。',
   href: '/films/',
+  entrance: {
+    eyebrow: 'NOW SHOWING / 随时开场',
+    description: '把脑袋里的奇怪故事，剪成可以播放的几分钟。两部短片，四段镜头练习。',
+    action: '进来选一部',
+    heroAction: '去脑内放映室坐坐',
+  },
 };
 
 export const films: Film[] = [
@@ -156,8 +162,8 @@ export const homeIntro = {
   eyebrow: 'Zoe Zhang / Portfolio & Playground',
   title: 'ZOE.',
   description: '做点有用的，也做点好玩的。',
-  image: '/hero/ink-cat.png',
-  imageAlt: '套印版画风格的黑猫：夸张的长身体、芥末黄眼睛和一点朱红色，懒洋洋地探出爪子。',
+  image: '/hero/ink-cat-vermilion.png',
+  imageAlt: '套印版画风格的黑猫：夸张的长身体、米白色眼睛和一点朱红色，懒洋洋地探出爪子。',
   greeting: ['先看看，别急着走。', '喵，灵感还在路上。', '好啦，往下看项目吧。'],
 };
 

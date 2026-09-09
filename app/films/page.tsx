@@ -14,7 +14,7 @@ export default function FilmsPage() {
     <div className="films-page">
       <a className="skip-link" href="#films-main">跳到影片</a>
       <nav className="films-nav" aria-label="放映室导航">
-        <a href="/#notes">← 回到主页</a><span>Zoe Zhang / AI 创作</span>
+        <a href="/#screening-room">← 回到主页</a><span>Zoe Zhang / AI 创作</span>
       </nav>
       <main id="films-main" className="films-main">
         <header className="films-heading">

@@ -4,6 +4,7 @@
 import { useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { lifeMoments } from '../src/data/profile';
+import StudioDoodle from './StudioDoodle';
 
 export default function LifeCards() {
   const bounds=useRef<HTMLDivElement>(null);
@@ -13,6 +14,7 @@ export default function LifeCards() {
   return (
     <section className="fragment-section" aria-labelledby="fragment-title">
       <div className="fragment-copy">
+        <div className="fragment-doodle" aria-hidden="true"><StudioDoodle kind="sleep" /><StudioDoodle kind="coffee" /></div>
         <p className="fragment-kicker">OFF THE RECORD / 创作切片</p>
         <h2 id="fragment-title">{lifeMoments.title[0]}<br />{lifeMoments.title[1]}</h2>
         <p>{lifeMoments.description}</p>
