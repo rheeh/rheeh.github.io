@@ -4,6 +4,7 @@ import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
 import HomeIntro from './HomeIntro';
 import RunningDivider from './RunningDivider';
+import ProjectDisclosure from './ProjectDisclosure';
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>;
@@ -50,17 +51,11 @@ export default function Home() {
         <RunningDivider />
 
         <section className="doodle-section" id="projects">
-          <SectionHeading kicker="vibe coding" title="我做过的小项目" />
-          <div className="doodle-project-grid">
+          <SectionHeading kicker="做过，也在继续做" title="我的项目" />
+          <div className="project-list">
             {projects.map((project, index) => (
               <DoodleReveal key={project.id} delay={index * 90}>
-                <article className="doodle-project-card" id={`project-${project.id}`}>
-                  <div className="doodle-card-top">
-                    <span>{project.title.slice(0, 1)}</span>
-                    <Arrow />
-                  </div>
-                  <p>{project.type}</p>
-                  <h3>{project.title}</h3>
+                <ProjectDisclosure id={project.id} title={project.title} type={project.type} index={index}>
                   <div className="doodle-card-summary">{project.summary}</div>
                   {project.framework && (
                     <div className="project-framework">
@@ -79,13 +74,13 @@ export default function Home() {
                       <p className="framework-applications">{project.framework.applications}</p>
                     </div>
                   )}
-                  <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  <ul className="project-tags">{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
                   <div className="doodle-project-links">
                     {project.links.map((link) => (
                       <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label} <Arrow /></a>
                     ))}
                   </div>
-                </article>
+                </ProjectDisclosure>
               </DoodleReveal>
             ))}
           </div>

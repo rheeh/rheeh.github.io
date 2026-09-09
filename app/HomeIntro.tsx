@@ -1,11 +1,29 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
-import { useEffect, useState } from 'react';
+import { motion, useReducedMotion, useMotionValue, useSpring } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 
 const easeOut = [0.22, 1, 0.36, 1] as const;
 
 function Runner({ reduced, arrived }: { reduced: boolean | null; arrived: boolean }) {
+  const head = useRef<SVGCircleElement>(null);
+  const eyeX = useMotionValue(0);
+  const eyeY = useMotionValue(0);
+  const lookX = useSpring(eyeX, { stiffness: 180, damping: 22 });
+  const lookY = useSpring(eyeY, { stiffness: 180, damping: 22 });
+  useEffect(() => {
+    if (reduced || !arrived || !window.matchMedia('(pointer: fine)').matches) return;
+    const follow = (event: PointerEvent) => {
+      const box = head.current?.getBoundingClientRect();
+      if (!box || box.bottom < 0 || box.top > window.innerHeight) return;
+      eyeX.set(Math.max(-3, Math.min(3, (event.clientX - box.left - box.width / 2) / 90)));
+      eyeY.set(Math.max(-2, Math.min(2, (event.clientY - box.top - box.height / 2) / 100)));
+    };
+    const reset = () => { eyeX.set(0); eyeY.set(0); };
+    window.addEventListener('pointermove', follow, { passive: true });
+    document.documentElement.addEventListener('pointerleave', reset);
+    return () => { window.removeEventListener('pointermove', follow); document.documentElement.removeEventListener('pointerleave', reset); };
+  }, [reduced, arrived, eyeX, eyeY]);
   const still = reduced
     ? { initial: false as const, animate: { x: 0 } }
     : {
@@ -30,7 +48,15 @@ function Runner({ reduced, arrived }: { reduced: boolean | null; arrived: boolea
             ? { duration: 1.8, repeat: Infinity, repeatDelay: 0.7, ease: 'easeInOut' }
             : { duration: 0.42, repeat: 4, ease: 'easeInOut' }}
         >
-          <circle className="runner-head" cx="76" cy="43" r="28" />
+          <circle ref={head} className="runner-head" cx="76" cy="43" r="28" />
+          <g className="runner-eyes">
+            <circle cx="66" cy="39" r="6" fill="white" />
+            <circle cx="86" cy="39" r="6" fill="white" />
+            <motion.g style={{ x: lookX, y: lookY }}>
+              <circle cx="66" cy="39" r="2.5" className="runner-pupil" />
+              <circle cx="86" cy="39" r="2.5" className="runner-pupil" />
+            </motion.g>
+          </g>
           <circle className="runner-cheek" cx="57" cy="47" r="4" />
           <circle className="runner-cheek" cx="95" cy="47" r="4" />
           <path d="M68 52 Q76 59 84 52" />
@@ -90,7 +116,18 @@ function IntroScene() {
   }, [reduced]);
 
   return (
-    <section className="intro-scene" id="top" aria-labelledby="intro-title">
+    <section className="intro-scene" id="top" aria-labelledby="intro-title"
+      onPointerMove={(event) => {
+        if (reduced || event.pointerType !== 'mouse') return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        event.currentTarget.style.setProperty('--pointer-x', `${((event.clientX - rect.left) / rect.width - .5) * 18}px`);
+        event.currentTarget.style.setProperty('--pointer-y', `${((event.clientY - rect.top) / rect.height - .5) * 14}px`);
+      }}
+      onPointerLeave={(event) => {
+        event.currentTarget.style.setProperty('--pointer-x', '0px');
+        event.currentTarget.style.setProperty('--pointer-y', '0px');
+      }}
+    >
       <div className="intro-doodle intro-star" aria-hidden="true">✦</div>
       <div className="intro-doodle intro-star-two" aria-hidden="true">✧</div>
       <div className="intro-doodle intro-star-three" aria-hidden="true">✦</div>
