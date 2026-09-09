@@ -90,6 +90,9 @@ export const projects: Project[] = [
     tags: ['Python', 'Longformer', 'Bioinformatics'],
     links: [{ label: '查看 GitHub', href: 'https://github.com/rheeh/GeneEmbedLLM', kind: 'source' }],
   },
+];
+
+export const playgroundSites: Project[] = [
   {
     id: 'jujian-studio',
     title: '居间 · 虚拟装修',
@@ -212,8 +215,9 @@ export const homeIntro = {
 };
 
 export const lifeMoments = {
+  sitesLabel: '用 AI 做的小网站',
   title: ['项目之间，', '留一点好玩。'],
-  description: '一个工具界面、一段下班奇遇、一个实验室里的小人。不同方向的创作，先收在这里。',
+  description: '一个工具界面、一段下班奇遇、一个实验室里的小人，还有两个能点着玩的小网站。',
   cards: [
     { title: '让文字有声音', caption: 'Auralis / AI 广播剧', alt: 'Auralis 广播剧工具的界面截图。', src: '/project-assets/auralis-home.jpg', href: 'https://rheeh.github.io/auralis/#/home' },
     { title: '还有三分钟就下班', caption: '打工人 / AI 短片', alt: '打工人短片里，深夜办公室中的白衬衫年轻人。', src: '/films/posters/office.jpg', href: '/films/#office' },

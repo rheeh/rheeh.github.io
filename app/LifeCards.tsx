@@ -1,12 +1,12 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 
-import { useRef, useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { lifeMoments } from '../src/data/profile';
 import StudioDoodle from './StudioDoodle';
 
-export default function LifeCards() {
+export default function LifeCards({ children }: { children?: ReactNode }) {
   const bounds=useRef<HTMLDivElement>(null);
   const [front,setFront]=useState(1);
   const [arrangement,setArrangement]=useState(0);
@@ -24,6 +24,7 @@ export default function LifeCards() {
       <div ref={bounds} className="fragment-table">
         {lifeMoments.cards.map((card,index)=><Fragment key={`${arrangement}-${index}`} card={card} index={index} bounds={bounds} front={front===index} onFront={()=>setFront(index)} reduced={!!reduced} />)}
       </div>
+      {children}
     </section>
   );
 }

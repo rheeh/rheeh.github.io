@@ -6,6 +6,8 @@ import HomeIntro from './HomeIntro';
 import RunningDivider from './RunningDivider';
 import ProjectDisclosure from './ProjectDisclosure';
 import LifeCards from './LifeCards';
+import PlaygroundSites from './PlaygroundSites';
+import './project-folders.css';
 import CatTapes from './CatTapes';
 import ScreeningEntrance from './ScreeningEntrance';
 import './cat-tapes.css';
@@ -62,12 +64,6 @@ export default function Home() {
               <DoodleReveal key={project.id} delay={index * 90}>
                 <ProjectDisclosure id={project.id} title={project.title} type={project.type} index={index}>
                   <div className="doodle-card-summary">{project.summary}</div>
-                  {project.preview && (
-                    <a className="project-site-preview" href={project.links.find((link) => link.kind === 'demo')?.href} target="_blank" rel="noreferrer" aria-label={`${project.title}，打开作品（新窗口）`}>
-                      <img src={project.preview.src} alt={project.preview.alt} width={project.preview.width} height={project.preview.height} loading="lazy" />
-                      <span>打开作品 <Arrow /></span>
-                    </a>
-                  )}
                   {project.highlights && (
                     <ul className="project-highlights">{project.highlights.map((item) => <li key={item}>{item}</li>)}</ul>
                   )}
@@ -101,7 +97,7 @@ export default function Home() {
         </section>
 
         <ScreeningEntrance />
-        <LifeCards />
+        <LifeCards><PlaygroundSites /></LifeCards>
         <RunningDivider />
         <section className="doodle-section doodle-writing" id="notes">
           <span className="section-alias" id="ai-creations" aria-hidden="true" />
