@@ -7,7 +7,7 @@
 .personal-home .doodle-footer{width:100%;max-width:780px}
 .personal-home .ink-poster{background:var(--studio-paper);border-inline:1px solid var(--studio-rule)}
 .personal-home .ink-title{color:var(--studio-red)}
-.personal-home .ink-cat-position{mix-blend-mode:multiply}
+.personal-home .ink-cat-position{mix-blend-mode:normal}
 .personal-home .ink-cat-button>img{filter:none}
 .personal-home .ink-nav{padding-inline:30px}
 .personal-home .ink-nav>div{align-items:center;gap:23px}
@@ -100,3 +100,14 @@
  .screening-ticket,.screening-drawing,.screening-cta>span,.ink-screening-link>span{transition:none}
  .screening-ticket:hover,.screening-ticket:hover .screening-cta>span,.ink-screening-link:hover>span{transform:none}
 }
+
+/* Project evidence stays inside each disclosure. */
+.project-site-preview{display:block;margin-top:22px;overflow:hidden;border:1px solid var(--studio-rule);border-radius:3px;background:var(--studio-paper)}
+.project-site-preview img{display:block;width:100%;height:auto}
+.project-site-preview>span{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-top:1px solid var(--studio-rule);color:var(--studio-red);font:500 12px/1.6 system-ui;transition:background .2s}
+.project-site-preview:hover>span{background:#f2e8dd}
+.project-highlights{list-style:none;margin:20px 0;padding:0;max-width:740px}
+.project-highlights li{position:relative;margin:9px 0;padding-left:18px;font:400 14px/1.85 system-ui;color:var(--studio-muted)}
+.project-highlights li:before{content:'';position:absolute;left:1px;top:.8em;width:5px;height:5px;border-radius:50%;background:var(--studio-red)}
+@media(max-width:600px){.project-highlights li{font-size:13px}.project-site-preview{margin-top:18px}}
+@media(prefers-reduced-motion:reduce){.project-site-preview>span{transition:none}}

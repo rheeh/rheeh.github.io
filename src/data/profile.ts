@@ -11,6 +11,8 @@ export type Project = {
   summary: string;
   tags: string[];
   links: ProjectLink[];
+  highlights?: string[];
+  preview?: { src: string; alt: string; width: number; height: number };
   framework?: {
     src: string;
     alt: string;
@@ -34,9 +36,14 @@ export const projects: Project[] = [
     title: 'Auralis',
     type: 'AI 广播剧制作工作台',
     summary: '从小说解析、人物确认、台本审阅到逐句配音，把生成过程做成可以反复编辑的生产流程。',
+    highlights: [
+      '确认台本后再写入正式项目，支持针对人物、场景和台词的定向修改。',
+      '逐句比较配音版本，在四轨时间线上编排音效、音乐与淡入淡出。',
+      '公开 Demo 可以试听《雨夜来件》、更换预置声音、添加音效并导出 WAV。',
+    ],
     tags: ['Vue', 'FastAPI', 'LLM / TTS'],
     links: [
-      { label: '体验 Demo', href: 'https://rheeh.github.io/auralis/#/home', kind: 'demo' },
+      { label: '体验导演 Demo', href: 'https://rheeh.github.io/auralis/#/demo', kind: 'demo' },
       { label: '查看 GitHub', href: 'https://github.com/rheeh/auralis', kind: 'source' },
     ],
   },
@@ -44,7 +51,11 @@ export const projects: Project[] = [
     id: 'ttt',
     title: '知行股研',
     type: '个人 A 股研究工具',
-    summary: '把自选池、规则评分、技术指标、研究快照和后续表现核验放进一套本地工作流。',
+    summary: '从个股走势和评分依据，到股票对比、行业观察与历史盲练，把研究判断和后续复盘连起来。',
+    highlights: [
+      '查看评分因子与触发原因，保留数据来源和研究快照。',
+      '在共同交易日对比 2–3 只股票，用历史 K 线逐日模拟决策、回看记录。',
+    ],
     tags: ['React', 'FastAPI', 'SQLite'],
     links: [{ label: '查看 GitHub', href: 'https://github.com/rheeh/ttt', kind: 'source' }],
   },
@@ -53,6 +64,10 @@ export const projects: Project[] = [
     title: '门店求职助手',
     type: '面向服务岗位的简历产品',
     summary: '通过三步问答生成一页简历、招聘平台自我介绍、岗位匹配建议和面试准备材料。',
+    highlights: [
+      '针对奶茶店、餐饮、收银、便利店和导购岗位，采集排班、证书与期望工作区域。',
+      '缺少证书或经历时提出补充问题；模型不可用时提供规则生成的基础版本。',
+    ],
     tags: ['Vue', 'Django', 'AI Workflow'],
     links: [{ label: '查看 GitHub', href: 'https://github.com/rheeh/resume-assistant', kind: 'source' }],
   },
@@ -74,6 +89,35 @@ export const projects: Project[] = [
     },
     tags: ['Python', 'Longformer', 'Bioinformatics'],
     links: [{ label: '查看 GitHub', href: 'https://github.com/rheeh/GeneEmbedLLM', kind: 'source' }],
+  },
+  {
+    id: 'jujian-studio',
+    title: '居间 · 虚拟装修',
+    type: '户型方案与空间交互实验',
+    summary: '在同一套户型里尝试不同的装修风格、材质和光照，从俯视方案到室内视角，看看空间会变成什么样。',
+    highlights: [
+      '提供一室一厅、三室两厅两套参考户型，以及原木、中古、极简三种风格。',
+      '在三维预览、俯视户型和室内漫游之间切换，另有高清效果图库。',
+    ],
+    preview: { src: '/project-assets/jujian-studio.jpg', alt: '居间的发布预览：左侧房间视角列表，以及自然光下的客厅效果图。', width: 1200, height: 750 },
+    tags: ['ChatGPT Sites', '虚拟装修', '3D 交互'],
+    links: [
+      { label: '体验装修工作台', href: 'https://jujian-interior-studio.gogottt121.chatgpt.site/interactive', kind: 'demo' },
+      { label: '查看高清效果', href: 'https://jujian-interior-studio.gogottt121.chatgpt.site/gallery/', kind: 'demo' },
+    ],
+  },
+  {
+    id: 'noir-one',
+    title: 'NOIR ONE',
+    type: '耳机概念产品与佩戴体验',
+    summary: '把一副概念耳机做成可以转动、换色和查看上耳效果的产品页面，串起外观、材质细节与日常佩戴场景。',
+    highlights: [
+      '拖动查看三维耳机，切换六套整机配色，并放大查看材质细节。',
+      '用 AI 佩戴场景呈现不同颜色与日常风格的搭配；作品为概念设计展示。',
+    ],
+    preview: { src: '/project-assets/noir-one.jpg', alt: 'NOIR ONE 的实际网页：深色页面上的银灰色耳机与六套配色入口。', width: 1440, height: 960 },
+    tags: ['ChatGPT Sites', '3D 产品展示', 'AI 视觉'],
+    links: [{ label: '体验产品页面', href: 'https://noir-one-film.gogottt121.chatgpt.site/', kind: 'demo' }],
   },
 ];
 
@@ -162,8 +206,8 @@ export const homeIntro = {
   eyebrow: 'Zoe Zhang / Portfolio & Playground',
   title: 'ZOE.',
   description: '做点有用的，也做点好玩的。',
-  image: '/hero/ink-cat-vermilion.png',
-  imageAlt: '套印版画风格的黑猫：夸张的长身体、米白色眼睛和一点朱红色，懒洋洋地探出爪子。',
+  image: '/hero/ink-cat.png',
+  imageAlt: '套印版画风格的黑猫：夸张的长身体、芥末黄眼睛和一点朱红色，懒洋洋地探出爪子。',
   greeting: ['先看看，别急着走。', '喵，灵感还在路上。', '好啦，往下看项目吧。'],
 };
 
