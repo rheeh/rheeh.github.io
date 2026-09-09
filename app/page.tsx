@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { profile, projects, creativeWorks } from '../src/data/profile';
 import { analysisShowcases, reports } from '../src/data/reports';
 import DoodleReveal from './DoodleReveal';
@@ -53,7 +54,7 @@ export default function Home() {
           <div className="doodle-project-grid">
             {projects.map((project, index) => (
               <DoodleReveal key={project.id} delay={index * 90}>
-                <article className="doodle-project-card">
+                <article className="doodle-project-card" id={`project-${project.id}`}>
                   <div className="doodle-card-top">
                     <span>{project.title.slice(0, 1)}</span>
                     <Arrow />
@@ -61,6 +62,23 @@ export default function Home() {
                   <p>{project.type}</p>
                   <h3>{project.title}</h3>
                   <div className="doodle-card-summary">{project.summary}</div>
+                  {project.framework && (
+                    <div className="project-framework">
+                      <figure>
+                        <a href={project.framework.src} target="_blank" rel="noreferrer" aria-label={`${project.title} 论文框架图，查看原图（新窗口）`}>
+                          <img src={project.framework.src} alt={project.framework.alt} width="1672" height="941" loading="lazy" />
+                          <span>查看大图 ↗</span>
+                        </a>
+                        <figcaption>{project.framework.caption}</figcaption>
+                      </figure>
+                      <dl>
+                        {project.framework.steps.map((step) => (
+                          <div key={step.title}><dt>{step.title}</dt><dd>{step.description}</dd></div>
+                        ))}
+                      </dl>
+                      <p className="framework-applications">{project.framework.applications}</p>
+                    </div>
+                  )}
                   <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
                   <div className="doodle-project-links">
                     {project.links.map((link) => (

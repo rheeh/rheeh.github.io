@@ -11,6 +11,13 @@ export type Project = {
   summary: string;
   tags: string[];
   links: ProjectLink[];
+  framework?: {
+    src: string;
+    alt: string;
+    caption: string;
+    steps: { title: string; description: string }[];
+    applications: string;
+  };
 };
 
 export const profile = {
@@ -53,7 +60,18 @@ export const projects: Project[] = [
     id: 'geneembedllm',
     title: 'GeneEmbedLLM',
     type: '基因语义表示研究',
-    summary: '整合多源生物医学语料，训练面向下游发现的基因向量，并明确区分候选召回与疾病证据。',
+    summary: '把分散在不同数据库里的基因功能、通路和组织表达信息整理成文本，再学习为可比较的基因向量，用于研究基因之间的关联。',
+    framework: {
+      src: '/projects/geneembedllm/framework.png',
+      alt: 'GeneEmbedLLM 论文框架：整合多源基因属性，构建结构化文本与增强视图，通过 Longformer、属性感知注意力池化和对比学习生成基因向量。',
+      caption: '论文框架 · 从基因属性到语义向量',
+      steps: [
+        { title: '整合数据', description: '汇集 Harmonizome、OmniPath、Ensembl、NCBI Gene 和 Human Protein Atlas，清洗并统一基因属性。' },
+        { title: '组织文本', description: '把功能、通路、组织等属性写入统一模板，构造增强文本，并逐步引入更难区分的负样本。' },
+        { title: '学习表示', description: '结合 Longformer、属性感知注意力池化与对比学习，将基因文本编码为向量。' },
+      ],
+      applications: '下游任务：基因／蛋白质相互作用预测、功能属性预测与通路一致性分析。',
+    },
     tags: ['Python', 'Longformer', 'Bioinformatics'],
     links: [{ label: '查看 GitHub', href: 'https://github.com/rheeh/GeneEmbedLLM', kind: 'source' }],
   },

@@ -201,3 +201,17 @@ html{scroll-behavior:smooth;scroll-padding-bottom:100px}
  .story-caption h2{background-size:100% 100%;transition:none}
  .story-start span,.story-ending summary span{transition:none}
 }
+
+/* The paper framework belongs to the research project, with its original aspect ratio. */
+.project-framework{margin:22px 0 18px}
+.project-framework figure{margin:0}
+.project-framework figure>a{display:block;position:relative;border:1px solid var(--studio-rule);border-radius:3px;overflow:hidden;background:#fff}
+.project-framework img{display:block;width:100%;height:auto}
+.project-framework figure>a>span{display:block;padding:7px 10px;text-align:right;border-top:1px solid var(--studio-rule);font:12px/1.5 system-ui;color:var(--studio-blue);transition:background .2s}
+.project-framework figure>a:hover>span{background:#e4eafd}
+.project-framework figcaption{margin-top:8px;font:12px/1.7 system-ui;color:var(--studio-muted)}
+.project-framework dl{margin:20px 0 14px}
+.project-framework dl>div{display:grid;grid-template-columns:4em minmax(0,1fr);gap:12px;margin:12px 0;font-size:13px;line-height:1.8}
+.project-framework dt{font-weight:600;color:var(--studio-ink)}
+.project-framework dd{margin:0;color:var(--studio-muted)}
+.doodle-project-card .framework-applications{font-size:12px;line-height:1.8;color:var(--studio-muted);margin:0;padding-top:12px;border-top:1px dashed var(--studio-rule)}
