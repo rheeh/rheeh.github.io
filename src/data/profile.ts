@@ -94,6 +94,19 @@ export const projects: Project[] = [
 
 export const playgroundSites: Project[] = [
   {
+    id: 'moss-and-mayhem',
+    title: '苔原大作战',
+    type: '童话森林 · 2.5D 涂地射击',
+    summary: '和 AI 队友走进蘑菇森林，用连续喷射和孢子爆弹争夺林地。90 秒一局，以涂色面积定胜负；也可以先看一场自动对战。',
+    preview: { src: '/project-assets/moss-and-mayhem.jpg', alt: '苔原大作战实机画面：薄荷绿与莓果粉两队在童话森林中喷射颜料、争夺领地。', width: 1200, height: 800 },
+    tags: ['Three.js', 'Blender', '浏览器游戏'],
+    links: [
+      { label: '在线试玩', href: 'https://rheeh.github.io/moss-and-mayhem/', kind: 'demo' },
+      { label: '观看自动演示', href: 'https://rheeh.github.io/moss-and-mayhem/?demo=1', kind: 'demo' },
+      { label: '查看 GitHub', href: 'https://github.com/rheeh/moss-and-mayhem', kind: 'source' },
+    ],
+  },
+  {
     id: 'jujian-studio',
     title: '居间 · 虚拟装修',
     type: '户型方案与空间交互实验',
@@ -215,9 +228,9 @@ export const homeIntro = {
 };
 
 export const lifeMoments = {
-  sitesLabel: '用 AI 做的小网站',
+  sitesLabel: '用 AI 做的交互作品',
   title: ['项目之间，', '留一点好玩。'],
-  description: '一个工具界面、一段下班奇遇、一个实验室里的小人，还有两个能点着玩的小网站。',
+  description: '一个工具界面、一段下班奇遇、一个实验室里的小人，还有一些能亲手体验的交互作品。',
   cards: [
     { title: '让文字有声音', caption: 'Auralis / AI 广播剧', alt: 'Auralis 广播剧工具的界面截图。', src: '/project-assets/auralis-home.jpg', href: 'https://rheeh.github.io/auralis/#/home' },
     { title: '还有三分钟就下班', caption: '打工人 / AI 短片', alt: '打工人短片里，深夜办公室中的白衬衫年轻人。', src: '/films/posters/office.jpg', href: '/films/#office' },
